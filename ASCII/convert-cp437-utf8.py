@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def convertCP437toUTF8(inputFile, outputFile):
     f = open(inputFile,encoding='cp437',mode='r')
     original = f.read()
