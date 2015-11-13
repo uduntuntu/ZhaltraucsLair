@@ -1,4 +1,4 @@
-# -*- coding: utf-8
+# -*- coding: utf-8 -*-
 import yaml
 import mysql.connector
 from mysql.connector import errorcode
