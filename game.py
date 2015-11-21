@@ -7,7 +7,7 @@ print(f.read())
 f.close()
 
 print("You stand in a start of dungeon. You see a torch.")
-c = input(">>> ").split()
+c = input(">>> ").lower().split()
 
 while c[0] != "exit":
     if (command.isValid(c)):
