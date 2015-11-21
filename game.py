@@ -11,10 +11,7 @@ c = input(">>> ").split()
 
 while c[0] != "exit":
     if (command.isValid(c)):
-        if c[0] == "go" or c[0] == "turn":
-            command.go(c)
-        elif c[0] == "help":
-            command.help()
+        command.execute(c)
     else:
         print('Invalid command. Write "help" to get list of available commands.')
     c = input(">>> ").split()
