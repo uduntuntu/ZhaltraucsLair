@@ -55,7 +55,11 @@ def go(command):
         print("go", directions)
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
-            print('moving to direction "{0:s}" is not implemented yet.')
+            print(
+                'moving to direction "{0:s}" is not implemented yet.'.format(
+                    command[1]
+                    )
+            )
         else:
             print(
                 "Invalid direction. You can use only directions in list below:"
@@ -73,7 +77,7 @@ def help(command="none"):
     elif command in commands:
         print('help for "{0:s}" is not implemented yet.'.format(command))
     else:
-        print('No help for "{0:s}". It is invalid command.'.format(command))
+        print('No help for "{0:s}". It is an invalid command.'.format(command))
 
 def doMenu(selection=0):
     if selection == 0:
