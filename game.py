@@ -9,6 +9,7 @@ view = {
 }
 
 position = '1.0'
+c = 0
 
 f = open('ASCII/otsikko_unicode.asc', 'r')
 print(f.read())
@@ -38,4 +39,4 @@ while c[0] != "exit":
         print(
             'Invalid command. Write "help" to get list of available commands.'
         )
-    c = input(prompt).lower.split()
+    c = input(prompt).lower().split()
