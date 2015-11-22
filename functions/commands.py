@@ -3,8 +3,17 @@
 commands = {
     'go' : 2,
     'turn' : 1,
+    'pick' : 2,
+    'use' : 2,
+    'push' : 2,
+    'pull' : 2,
+    'talk' : 2,
+    'fight' : 2,
     'help' : 2,
-    'exit' : 1
+    'menu' : 1,
+    'inventory' : 1,
+    'look' : 1,
+    'quit' : 1
 }
 
 directions = (
@@ -37,6 +46,8 @@ def execute(command):
             help()
         else:
             help(command[1])
+    elif command[0] in commands:
+        print('Command "{0:s}" is not implemented yet.'.format(command[0]))
 
 
 def go(command):
@@ -44,19 +55,21 @@ def go(command):
         print("go", directions)
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
-            print(command)
+            print('moving to direction "{0:s}" is not implemented yet.')
         else:
             print(
                 "Invalid direction. You can use only directions in list below:"
             )
-            print(directions)
+            print("go", directions)
     elif len(command) == 1 and command[0] == "turn":
-        print(command)
+        print('Turning around is not implemented yet.')
 
 def help(command="none"):
     if command == "none":
         print("List of available commands:")
-        print(commands.keys())
+        for c in commands.keys():
+            print("\t* {0:s}".format(c))
+        print('For more information, please write "help [command]".')
     elif command in commands:
         print('help for "{0:s}" is not implemented yet.'.format(command))
     else:

@@ -32,9 +32,10 @@ while not menuSelectionIsValid:
 print(view[position])
 c = input(prompt).lower().split()
 
-while c[0] != "exit":
+while c[0] != "quit":
     if (command.isValid(c)):
         command.execute(c)
+        print(view[position])
     else:
         print(
             'Invalid command. Write "help" to get list of available commands.'
