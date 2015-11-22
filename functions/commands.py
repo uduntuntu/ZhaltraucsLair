@@ -18,7 +18,8 @@ directions = (
 menu = {
     1 : 'Start a new game.',
     2 : 'Load a saved game.',
-    3 : 'Quit game'
+    3 : 'Save a game.',
+    4 : 'Quit game'
 }
 
 def isValid(command):
@@ -57,15 +58,19 @@ def help(command="none"):
         print("List of available commands:")
         print(commands.keys())
     elif command in commands:
-        print(command)
+        print('help for "{0:s}" is not implemented yet.'.format(command))
     else:
-        print('No help for "{0:s}".'.format(command))
+        print('No help for "{0:s}". It is invalid command.'.format(command))
 
 def doMenu(selection=0):
     if selection == 0:
         print(menu)
-    elif selection in menu:
+    elif selection == 1:
         print (menu[selection])
+    elif selection == 4:
+        raise SystemExit
+    elif selection in menu:
+        print ("Menu item {0} not implemented yet.".format(selection))
     else:
         print(menu)
         raise ValueError('Invalid selection {0:d}.'.format(selection))
