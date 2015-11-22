@@ -15,6 +15,11 @@ directions = (
     'down'
 )
 
+menu = {
+    1 : 'Start a new game.',
+    2 : 'Load a saved game.',
+    3 : 'Quit game'
+}
 
 def isValid(command):
     if command[0] in commands and len(command) <= commands[command[0]]:
@@ -55,3 +60,12 @@ def help(command="none"):
         print(command)
     else:
         print('No help for "{0:s}".'.format(command))
+
+def doMenu(selection=0):
+    if selection == 0:
+        print(menu)
+    elif selection in menu:
+        print (menu[selection])
+    else:
+        print(menu)
+        raise ValueError('Invalid selection {0:d}.'.format(selection))
