@@ -7,11 +7,9 @@ from mysql.connector import errorcode
 with open("config.yaml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
-TABLES = []
+TABLES = {}
 
-TABLES.append(
-    (
-    'ZL_Room',
+TABLES['ZL_Room'] = (
     "CREATE TABLE `ZL_Room` ("
     "   `ID` SMALLINT NOT NULL,"
     "   `Description` VARCHAR(2000),"
@@ -19,12 +17,9 @@ TABLES.append(
     "   `PointsModifier` TINYINT,"
     "   PRIMARY KEY (`ID`)"
     ")"
-    )
 )
 
-TABLES.append(
-    (
-    'ZL_Player',
+TABLES['ZL_Player'] = (
     "CREATE TABLE `ZL_Player` ("
     "   `Name` VARCHAR(40) NOT NULL,"
     "   `HP` TINYINT NOT NULL,"
@@ -33,16 +28,11 @@ TABLES.append(
     "   `Agility` TINYINT NOT NULL,"
     "   `Intelligence` TINYINT NOT NULL,"
     "   `Strength` TINYINT NOT NULL,"
-    "   PRIMARY KEY(`Name`),"
-    "   CONSTRAINT `RoomID_ibfk_1` FOREIGN KEY (`RoomID`) "
-    "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
+    "   PRIMARY KEY(`Name`)"
     ")"
-    )
 )
 
-TABLES.append(
-    (
-    'ZL_NPC',
+TABLES['ZL_NPC'] = (
     "CREATE TABLE `ZL_NPC` ("
     "   `ID` SMALLINT NOT NULL,"
     "   `HP` TINYINT NOT NULL,"
@@ -50,16 +40,11 @@ TABLES.append(
     "   `Strength` TINYINT NOT NULL,"
     "   `RoomID` SMALLINT,"
     "   `PointModifier` TINYINT,"
-    "   PRIMARY KEY(`ID`),"
-    "   CONSTRAINT `NPC_ibfk_1` FOREIGN KEY (`RoomID`) "
-    "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
+    "   PRIMARY KEY(`ID`)"
     ")"
-    )
 )
 
-TABLES.append(
-    (
-    'ZL_Item',
+TABLES['ZL_Item'] = (
     "CREATE TABLE `ZL_Item` ("
     "   `ID` SMALLINT NOT NULL,"
     "   `Name` VARCHAR(40) NOT NULL,"
@@ -70,36 +55,22 @@ TABLES.append(
     "   `DefenceModifier` TINYINT,"
     "   `NPCID` SMALLINT,"
     "   `PlayerName` VARCHAR(40),"
-    "   PRIMARY KEY(`ID`),"
-    "   CONSTRAINT `Iten_ibfk_1` FOREIGN KEY (`RoomID`) "
-    "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE,"
-    "   CONSTRAINT `Iten_ibfk_2` FOREIGN KEY (`NPCID`) "
-    "       REFERENCES `ZL_NPC` (`ID`) ON DELETE CASCADE,"
-    "   CONSTRAINT `Item_ibfk_3` FOREIGN KEY (`NPCID`) "
-    "       REFERENCES `ZL_NPC` (`ID`) ON DELETE CASCADE"
+    "   PRIMARY KEY(`ID`)"
     ")"
-    )
 )
 
-TABLES.append(
-    (
-    'ZL_HallOfFame',
+TABLES['ZL_HallOfFame'] = (
     "CREATE TABLE `ZL_HallOfFame` ("
     "   `ID` SMALLINT NOT NULL,"
     "   `Timestamp` DATETIME,"
     "   `PlayerName` VARCHAR(40) NOT NULL,"
     "   `Class` VARCHAR(25) NOT NULL,"
     "   `Points` INT NOT NULL,"
-    "   PRIMARY KEY(`ID`),"
-    "   CONSTRAINT `HallOfFame_ibfk_1` FOREIGN KEY (`PlayerName`) "
-    "       REFERENCES `ZL_Player` (`Name`) ON DELETE CASCADE"
+    "   PRIMARY KEY(`ID`)"
     ")"
-    )
 )
 
-TABLES.append(
-    (
-    'ZL_Movement',
+TABLES['ZL_Movement'] = (
     "CREATE TABLE `ZL_Movement` ("
     "   `Door` SMALLINT NOT NULL,"
     "   `RoomInLeft` SMALLINT,"
@@ -108,21 +79,54 @@ TABLES.append(
     "   `RoomInBack` SMALLINT,"
     "   `RoomInUp` SMALLINT,"
     "   `RoomInDown` SMALLINT,"
-    "   PRIMARY KEY(`Door`),"
-    "   CONSTRAINT `Movement_ibfk_1` FOREIGN KEY (`RoomInLeft`) "
-    "       REFERENCES `ZL_Room` (`ID`),"
-    "   CONSTRAINT `Movement_ibfk_2` FOREIGN KEY (`RoomInRight`) "
-    "       REFERENCES `ZL_Room` (`ID`),"
-    "   CONSTRAINT `Movement_ibfk_3` FOREIGN KEY (`RoomInFront`) "
-    "       REFERENCES `ZL_Room` (`ID`),"
-    "   CONSTRAINT `Movement_ibfk_4` FOREIGN KEY (`RoomInBack`) "
-    "       REFERENCES `ZL_Room` (`ID`),"
-    "   CONSTRAINT `Movement_ibfk_5` FOREIGN KEY (`RoomInUp`) "
-    "       REFERENCES `ZL_Room` (`ID`),"
-    "   CONSTRAINT `Movement_ibfk_6` FOREIGN KEY (`RoomInDown`) "
-    "       REFERENCES `ZL_Room` (`ID`)"
+    "   PRIMARY KEY(`Door`)"
     ")"
-    )
+)
+
+CONSTRAINTS = {}
+
+CONSTRAINTS['ZL_Player'] = (
+    "ALTER TABLE `ZL_Player`"
+    "   ADD CONSTRAINT `fk_RoomID_1` FOREIGN KEY (`RoomID`) "
+    "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
+)
+
+CONSTRAINTS['ZL_NPC'] = (
+    "ALTER TABLE `ZL_NPC`"
+    "   ADD CONSTRAINT `fk_RoomID_2` FOREIGN KEY (`RoomID`) "
+    "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
+)
+
+CONSTRAINTS['ZL_Item'] = (
+    "ALTER TABLE `ZL_Item`"
+    "   ADD CONSTRAINT `fk_RoomID_3` FOREIGN KEY (`RoomID`) "
+    "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE,"
+    "   ADD CONSTRAINT `fk_NPCID` FOREIGN KEY (`NPCID`) "
+    "       REFERENCES `ZL_NPC` (`ID`) ON DELETE CASCADE,"
+    "   ADD CONSTRAINT `fk_PlayerName_1` FOREIGN KEY (`PlayerName`) "
+    "       REFERENCES `ZL_Player` (`Name`) ON DELETE CASCADE"
+)
+
+CONSTRAINTS['ZL_HallOfFame'] = (
+    "ALTER TABLE `ZL_HallOfFame`"
+    "   add CONSTRAINT `fk_PlayerName_2` FOREIGN KEY (`PlayerName`) "
+    "       REFERENCES `ZL_Player` (`Name`) ON DELETE CASCADE"
+)
+
+CONSTRAINTS['ZL_Movement'] = (
+    "ALTER TABLE `ZL_Movement`"
+    "   ADD CONSTRAINT `fk_RoomInLeft_1` FOREIGN KEY (`RoomInLeft`) "
+    "       REFERENCES `ZL_Room` (`ID`),"
+    "   ADD CONSTRAINT `fk_RoomInRight_1` FOREIGN KEY (`RoomInRight`) "
+    "       REFERENCES `ZL_Room` (`ID`),"
+    "   ADD CONSTRAINT `fk_RoomInFront_1` FOREIGN KEY (`RoomInFront`) "
+    "       REFERENCES `ZL_Room` (`ID`),"
+    "   ADD CONSTRAINT `fk_RoomInBack` FOREIGN KEY (`RoomInBack`) "
+    "       REFERENCES `ZL_Room` (`ID`),"
+    "   ADD CONSTRAINT `fk_RoomInUp` FOREIGN KEY (`RoomInUp`) "
+    "       REFERENCES `ZL_Room` (`ID`),"
+    "   ADD CONSTRAINT `fk_RoomInDown` FOREIGN KEY (`RoomInDown`) "
+    "       REFERENCES `ZL_Room` (`ID`)"
 )
 
 def testConnection():
@@ -150,15 +154,24 @@ def initializeDatabase():
                                       database=cfg['MariaDB']['db'])
     cursor = cnx.cursor()
 
-    for name, ddl in TABLES:
+    for name, creationLine in TABLES.items():
         try:
             print("Creating table {}: ".format(name), end='')
-            cursor.execute(ddl)
+            cursor.execute(creationLine)
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
                 print("already exists.")
             else:
                 print(err.msg)
+        else:
+            print("OK")
+
+    for name, constraintLine in CONSTRAINTS.items():
+        try:
+            print("Adding constraint for table {}: ".format(name), end='')
+            cursor.execute(constraintLine)
+        except mysql.connector.Error as err:
+            print(err.msg)
         else:
             print("OK")
 
