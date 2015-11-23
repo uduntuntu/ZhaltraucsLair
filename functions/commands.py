@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import functions.database as db
+
 commands = {
     'go' : 2,
     'turn' : 1,
@@ -83,7 +85,7 @@ def doMenu(selection=0):
     if selection == 0:
         print(menu)
     elif selection == 1:
-        print (menu[selection])
+        db.initializeDatabase()
     elif selection == 4:
         raise SystemExit
     elif selection in menu:
