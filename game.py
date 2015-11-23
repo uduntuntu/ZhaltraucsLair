@@ -17,7 +17,7 @@ f.close()
 
 menuSelectionIsValid = False
 
-command.doMenu(0)
+command.doMenu()
 
 while not menuSelectionIsValid:
     try:
@@ -29,13 +29,13 @@ while not menuSelectionIsValid:
     if c in command.menu:
         menuSelectionIsValid = True
 
-print(view[position])
+print("--\n{}".format(view[position]))
 c = input(prompt).lower().split()
 
 while c[0] != "quit":
     if (command.isValid(c)):
         command.execute(c)
-        print(view[position])
+        print("--\n{}".format(view[position]))
     else:
         print(
             'Invalid command. Write "help" to get list of available commands.'
