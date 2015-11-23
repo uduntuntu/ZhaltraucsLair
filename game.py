@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import functions.commands as command
-import functions.database as db
 
 prompt = ">>> "
 view = {
@@ -29,8 +28,6 @@ while not menuSelectionIsValid:
 
     if c in command.menu:
         menuSelectionIsValid = True
-
-db.initializeDatabase()
 
 print(view[position])
 c = input(prompt).lower().split()
