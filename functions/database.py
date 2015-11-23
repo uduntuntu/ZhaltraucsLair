@@ -86,8 +86,7 @@ TABLES.append(
     'ZL_HallOfFame',
     "CREATE TABLE `ZL_HallOfFame` ("
     "   `ID` SMALLINT NOT NULL,"
-    "   `Timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP "
-    "       ON UPDATE CURRENT_TIMESTAMP,"
+    "   `Timestamp` DATETIME,"
     "   `PlayerName` VARCHAR(40) NOT NULL,"
     "   `Class` VARCHAR(25) NOT NULL,"
     "   `Points` INT NOT NULL,"
@@ -150,12 +149,6 @@ def initializeDatabase():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cursor = cnx.cursor()
-
-    for name, ddl in TABLES:
-        try:
-            cursor.execute("DROP TABLE IF EXISTS {0:s}".format(name))
-        except mysql.connector.Error as err:
-            print(err.msg)
 
     for name, ddl in TABLES:
         try:
