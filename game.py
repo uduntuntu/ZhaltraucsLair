@@ -9,7 +9,6 @@ view = {
 }
 
 position = '1.0'
-c = 0
 
 f = open('ASCII/otsikko_unicode.asc', 'r')
 print(f.read())
@@ -17,6 +16,11 @@ f.close()
 
 
 while True:
+    '''
+    You can end loop by selecting 5 in main context or write
+    "quit" in game context.
+    '''
+
     context = command.doMenu()
 
     while context == 0:
@@ -27,10 +31,7 @@ while True:
         except ValueError as e:
             print(e)
 
-        if c in command.menu:
-            menuSelectionIsValid = True
-
-    while context in (1,2):
+    while context == 1:
         prompt = "(game) >>> "
 
         print("--\n{}".format(view[position]))

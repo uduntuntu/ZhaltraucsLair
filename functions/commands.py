@@ -43,22 +43,25 @@ def isValid(command):
 
 
 def execute(command):
+    """
+    :param command: only valid commands came in from isValid(command)
+    :return: 0 if main menu, 1 if continue playing.
+    """
+
     if command[0] in ("go", "turn"):
         go(command)
-        return 2
     elif command[0] == "help":
         if len(command) == 1:
             help()
-            return 2
         else:
             help(command[1])
-            return 2
     elif command[0] == "menu":
         return 0
     elif command[0] == "quit":
         raise SystemExit
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
+    return 1
 
 
 def go(command):
@@ -91,10 +94,16 @@ def help(command="none"):
 
 
 def doMenu(selection=0):
+    '''
+    :param selection: int 1-5
+    :return: 0 if no parameter is given, otherwise 1 if not terminated before
+    '''
+
     if selection == 0:
         print("Main menu:")
         for key, value in menu.items():
             print("{} = {}".format(key, value))
+        return 0
     elif selection == 1:
         db.initializeDatabase()
     elif selection == 2:
@@ -108,4 +117,4 @@ def doMenu(selection=0):
             print("{} = {}".format(key, value))
         raise ValueError('Invalid selection {0:d}.'.format(selection))
 
-    return selection
+    return 1
