@@ -83,21 +83,21 @@ TABLES['ZL_Movement'] = (
     ")"
 )
 
-CONSTRAINTS = {}
+CONSTRAINTS_ADD = {}
 
-CONSTRAINTS['ZL_Player'] = (
+CONSTRAINTS_ADD['ZL_Player'] = (
     "ALTER TABLE `ZL_Player`"
     "   ADD CONSTRAINT `fk_RoomID_1` FOREIGN KEY (`RoomID`) "
     "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
 )
 
-CONSTRAINTS['ZL_NPC'] = (
+CONSTRAINTS_ADD['ZL_NPC'] = (
     "ALTER TABLE `ZL_NPC`"
     "   ADD CONSTRAINT `fk_RoomID_2` FOREIGN KEY (`RoomID`) "
     "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
 )
 
-CONSTRAINTS['ZL_Item'] = (
+CONSTRAINTS_ADD['ZL_Item'] = (
     "ALTER TABLE `ZL_Item`"
     "   ADD CONSTRAINT `fk_RoomID_3` FOREIGN KEY (`RoomID`) "
     "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE,"
@@ -107,13 +107,13 @@ CONSTRAINTS['ZL_Item'] = (
     "       REFERENCES `ZL_Player` (`Name`) ON DELETE CASCADE"
 )
 
-CONSTRAINTS['ZL_HallOfFame'] = (
+CONSTRAINTS_ADD['ZL_HallOfFame'] = (
     "ALTER TABLE `ZL_HallOfFame`"
     "   add CONSTRAINT `fk_PlayerName_2` FOREIGN KEY (`PlayerName`) "
     "       REFERENCES `ZL_Player` (`Name`) ON DELETE CASCADE"
 )
 
-CONSTRAINTS['ZL_Movement'] = (
+CONSTRAINTS_ADD['ZL_Movement'] = (
     "ALTER TABLE `ZL_Movement`"
     "   ADD CONSTRAINT `fk_RoomInLeft_1` FOREIGN KEY (`RoomInLeft`) "
     "       REFERENCES `ZL_Room` (`ID`),"
@@ -128,6 +128,41 @@ CONSTRAINTS['ZL_Movement'] = (
     "   ADD CONSTRAINT `fk_RoomInDown` FOREIGN KEY (`RoomInDown`) "
     "       REFERENCES `ZL_Room` (`ID`)"
 )
+
+CONSTRAINTS_DROP = {}
+
+CONSTRAINTS_DROP['ZL_Player'] = (
+    "ALTER TABLE `ZL_Player`"
+    "   DROP FOREIGN KEY `fk_RoomID_1`"
+)
+
+CONSTRAINTS_DROP['ZL_NPC'] = (
+    "ALTER TABLE `ZL_NPC`"
+    "   DROP FOREIGN KEY `fk_RoomID_2`"
+)
+
+CONSTRAINTS_DROP['ZL_Item'] = (
+    "ALTER TABLE `ZL_Item`"
+    "   DROP FOREIGN KEY `fk_RoomID_3`,"
+    "   DROP FOREIGN KEY `fk_NPCID`,"
+    "   DROP FOREIGN KEY `fk_PlayerName_1`"
+)
+
+CONSTRAINTS_DROP['ZL_HallOfFame'] = (
+    "ALTER TABLE `ZL_HallOfFame`"
+    "   DROP FOREIGN KEY `fk_PlayerName_2`"
+)
+
+CONSTRAINTS_DROP['ZL_Movement'] = (
+    "ALTER TABLE `ZL_Movement`"
+    "   DROP FOREIGN KEY `fk_RoomInLeft_1`,"
+    "   DROP FOREIGN KEY `fk_RoomInRight_1`,"
+    "   DROP FOREIGN KEY `fk_RoomInFront_1`,"
+    "   DROP FOREIGN KEY `fk_RoomInBack`,"
+    "   DROP FOREIGN KEY `fk_RoomInUp`,"
+    "   DROP FOREIGN KEY `fk_RoomInDown`"
+)
+
 
 def testConnection():
     try:
@@ -154,6 +189,25 @@ def initializeDatabase():
                                       database=cfg['MariaDB']['db'])
     cursor = cnx.cursor()
 
+    for name, dropConstraintLine in CONSTRAINTS_DROP.items():
+        try:
+            print("Dropping constraints for table {}: ".format(name), end='')
+            cursor.execute(dropConstraintLine)
+        except mysql.connector.Error as err:
+            print(err.msg)
+        else:
+            print("OK")
+
+    for name in TABLES.keys():
+        try:
+            print("Dropping table {}: ".format(name), end='')
+            cursor.execute("DROP TABLE IF EXISTS {}".format(name))
+        except mysql.connector.Error as err:
+            print(err.msg)
+        else:
+            print("OK")
+
+
     for name, creationLine in TABLES.items():
         try:
             print("Creating table {}: ".format(name), end='')
@@ -166,9 +220,9 @@ def initializeDatabase():
         else:
             print("OK")
 
-    for name, constraintLine in CONSTRAINTS.items():
+    for name, constraintLine in CONSTRAINTS_ADD.items():
         try:
-            print("Adding constraint for table {}: ".format(name), end='')
+            print("Adding constraints for table {}: ".format(name), end='')
             cursor.execute(constraintLine)
         except mysql.connector.Error as err:
             print(err.msg)
