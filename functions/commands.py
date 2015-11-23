@@ -69,13 +69,15 @@ def go(command):
         print("go", directions)
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
-            print('moving to direction "{0:s}" '
-                  'is not implemented yet.'.format(command[1])
-                  )
+            print(
+                'moving to direction "{0:s}" '
+                'is not implemented yet.'.format(command[1])
+            )
         else:
-            print("Invalid direction. You can use "
-                  "only directions in list below:"
-                  )
+            print(
+                "Invalid direction. You can use "
+                "only directions in list below:"
+            )
             print("go", directions)
     elif len(command) == 1 and command[0] == "turn":
         print('Turning around is not implemented yet.')
