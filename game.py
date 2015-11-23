@@ -23,7 +23,7 @@ while True:
 
     context = command.doMenu()
 
-    while context == 0:
+    while context == "main":
         prompt = "(main) >>> "
         try:
             c = int(input(prompt))
@@ -31,7 +31,7 @@ while True:
         except ValueError as e:
             print(e)
 
-    while context == 1:
+    while context == "game":
         prompt = "(game) >>> "
 
         print("--\n{}".format(view[position]))
