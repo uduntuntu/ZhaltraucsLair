@@ -15,29 +15,31 @@ f = open('ASCII/otsikko_unicode.asc', 'r')
 print(f.read())
 f.close()
 
-menuSelectionIsValid = False
 
-command.doMenu()
+while True:
+    context = command.doMenu()
 
-while not menuSelectionIsValid:
-    try:
-        c = int(input(prompt))
-        command.doMenu(c)
-    except ValueError as e:
-        print(e)
+    while context == 0:
+        prompt = "(main) >>> "
+        try:
+            c = int(input(prompt))
+            context = command.doMenu(c)
+        except ValueError as e:
+            print(e)
 
-    if c in command.menu:
-        menuSelectionIsValid = True
+        if c in command.menu:
+            menuSelectionIsValid = True
 
-print("--\n{}".format(view[position]))
-c = input(prompt).lower().split()
+    while context in (1,2):
+        prompt = "(game) >>> "
 
-while c[0] != "quit":
-    if (command.isValid(c)):
-        command.execute(c)
         print("--\n{}".format(view[position]))
-    else:
-        print(
-            'Invalid command. Write "help" to get list of available commands.'
-        )
-    c = input(prompt).lower().split()
+        c = input(prompt).lower().split()
+
+        if (command.isValid(c)):
+            context = command.execute(c)
+        else:
+            print('Invalid command. '
+                'Write "help" to get list of available commands.'
+            )
+

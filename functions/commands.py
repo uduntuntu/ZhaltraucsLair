@@ -45,11 +45,18 @@ def isValid(command):
 def execute(command):
     if command[0] in ("go", "turn"):
         go(command)
+        return 2
     elif command[0] == "help":
         if len(command) == 1:
             help()
+            return 2
         else:
             help(command[1])
+            return 2
+    elif command[0] == "menu":
+        return 0
+    elif command[0] == "quit":
+        raise SystemExit
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
 
@@ -100,3 +107,5 @@ def doMenu(selection=0):
         for key, value in menu.items():
             print("{} = {}".format(key, value))
         raise ValueError('Invalid selection {0:d}.'.format(selection))
+
+    return selection
