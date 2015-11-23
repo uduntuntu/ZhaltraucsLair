@@ -1,10 +1,11 @@
-# coding=cp1252
-import math
+# -*- coding: utf-8 -*-
+""" Basic combat experiment. Rat vs. Conan the Barbarian."""
 import random
-noppa=random.randrange(1,11,1)
+def dice(slices):
+    return random.randint(1,slices)
 
-#BARBAARI
-barNimi=("Counän")
+#BARBARIAN
+barName=("Conan")
 barHp=28
 barS=18
 barI=8
@@ -15,73 +16,71 @@ barA=2
 #Leather, Chainmail; 1 armor, worn, 10 coins, 1 weight
 barArmor=1
 
-barBd=random.randrange(1,11,1)+3
+barBd=dice(10)+3
 barPiercing=0
 
-#ROTTA
+#RAT
 # (d6 damage 1 piercing); 7 HP; 1 Armor
-rotNimi="Cave Rat"
-rotHp=7
-rotArmor=0
+ratName="Cave Rat"
+ratHp=7
+ratArmor=0
 
-rotBd=random.randrange(1,7,1)
-rotPiercing=1
+ratBd=dice(6)
+ratPiercing=1
 
-def lyönti(rotHp):
-    print(barNimi+" attacks the "+rotNimi+" !")
-    diecast=barS+noppa
+def hit(ratHp):
+    print(barName+" attacks the "+ratName+" !")
+    diecast=barS+dice(10)
     if diecast>10:
-        print (barNimi+" strikes the "+rotNimi+" succesfully!")
-        isku=barBd-(rotArmor-barPiercing)
-        rotHp-=isku
-        isku=str(isku)
-        print (barNimi+" does "+isku+" damage!")
-        input(rotNimi+" shrieks in pain!")
-        return rotHp
+        print (barName+" strikes the "+ratName+" succesfully!")
+        attack=barBd-(ratArmor-barPiercing)
+        ratHp-=attack
+        attack=str(attack)
+        print (barName+" does "+attack+" damage!")
+        input(ratName+" shrieks in pain!")
+        return ratHp
 
     if diecast==(7<9):
-        print (barNimi+" strikes the "+rotNimi+" but the "+rotNimi+" counters!")
-        isku=barBd/2-(rotArmor-barPiercing)
-        rotHp-=isku
-        isku=str(isku)
-        print (barNimi+" does "+isku+" damage!")
-        input(rotNimi+" shrieks in pain!")
-        return rotHp
+        print (barName+" strikes the "+ratName+" but the "+ratName+" counters!")
+        attack=barBd/2-(ratArmor-barPiercing)
+        ratHp-=attack
+        attack=str(attack)
+        print (barName+" does "+attack+" damage!")
+        input(ratName+" shrieks in pain!")
+        return ratHp
 
 
 
 
-def taistelu(barHp,rotHp):
+def combat(barHp,ratHp):
     print("Combat!")
-    while rotHp>0 and barHp>0:
-        (rotNimi+" attacks!")
-        rollDefy=barA+noppa
+    while ratHp>0 and barHp>0:
+        (ratName+" attacks!")
+        rollDefy=barA+dice(10)
         if rollDefy>=10:
-            print(barNimi+" dodges!")
-            rotHp=lyönti(rotHp)
+            print(barName+" dodges!")
+            ratHp=hit(ratHp)
 
         elif rollDefy==(7<9):
-            print(barNimi+" partially dodges!")
-            print(rotNimi+" does half damage!")
-            input (barNimi+" grunts in pain!")
-            hploss=rotBd/2-(barArmor+rotPiercing)
+            print(barName+" partially dodges!")
+            print(ratName+" does half damage!")
+            input (barName+" grunts in pain!")
+            hploss=ratBd/2-(barArmor+ratPiercing)
             barHp-=hploss
-            print(barNimi+" loses "+hploss+" hitpoints!")
-            input (barNimi+" howls in pain!")
-            input(barNimi+" has "+barHp+" hitpoints left!")
-            rotHp=lyönti(rotHp)
+            print(barName+" loses "+hploss+" hitpoints!")
+            input (barName+" howls in pain!")
+            input(barName+" has "+barHp+" hitpoints left!")
+            ratHp=hit(ratHp)
         else:
-            print (rotNimi+" strikes the "+barNimi+" succesfully!")
-            isku=rotBd-(barArmor-rotPiercing)
-            barHp-=isku
-            isku=str(isku)
-            print (rotNimi+" does "+isku+" damage!")
-            input (barNimi+" howls in pain!")
-            rotHp=lyönti(rotHp)
+            print (ratName+" strikes the "+barName+" succesfully!")
+            attack=ratBd-(barArmor-ratPiercing)
+            barHp-=attack
+            attack=str(attack)
+            print (ratName+" does "+attack+" damage!")
+            input (barName+" howls in pain!")
+            ratHp=hit(ratHp)
 
-    print(rotNimi+" has died!")
+    print(ratName+" has died!")
 
 
-taistelu(barHp,rotHp)
-
-exit()
+combat(barHp,ratHp)
