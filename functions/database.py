@@ -266,10 +266,9 @@ def createPlayer():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "INSERT into ZL_Player " \
-          "(`Name`,`HP`,`Class`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`) values " \
-          "('Conan', 50, 'Barbarian', 1, 0, 5, 1, 9)," \
-          "('Aladdin', 40, 'Thief', null, 0, 9, 8, 4)"
+    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_Player " \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
+          "".format(cfg['Datafiles']['ZL_Player'])
     try:
         print("Populating table ZL_Player: ", end='')
         cur.execute(sql)
@@ -289,12 +288,9 @@ def createNPC():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "INSERT into ZL_NPC" \
-          "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`,`Description`) values " \
-          "('A Rat', 1, 10, 5, 2, 1, 5, null)," \
-          "('An Orc', 2, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
-          "('An Orc', 3, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
-          "('An Orc', 4, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')"
+    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_NPC " \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
+          "".format(cfg['Datafiles']['ZL_NPC'])
     try:
         print("Populating table ZL_NPC: ", end='')
         cur.execute(sql)
@@ -314,18 +310,9 @@ def createRoom():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "INSERT into ZL_Room " \
-          "(`ID`,`Description`,`State`,`PointsModifier`) values " \
-          "(1, " \
-            "'Finally you are here. It''s the afternoon, and the " \
-            "surroundings don''t seem as bleak as you had expected. The forrest " \
-            "you had treked through seemed lush and full of life, alltough you " \
-            "did notice it getting quieter as you made your way through. The " \
-            "trees came to a halt at the base of a large hill and you finally " \
-            "see it. The entrance to the lair. The forest around you is " \
-            "allmost eeriely silent now.', null, 1" \
-          ")," \
-          "(2, 'It''s dark. You can''t see anything.', null, 1)"
+    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_Room " \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
+          "".format(cfg['Datafiles']['ZL_Room'])
 
     try:
         print("Populating table ZL_Room: ", end='')
@@ -346,12 +333,9 @@ def createRoomState():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "INSERT into ZL_RoomState " \
-          "(`ID`,`RoomID`,`Description`) values " \
-          "(0, 2, " \
-            "'You fumble around in the dark and find a wall. " \
-            "You may follow the wall left or right.'" \
-          ")"
+    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_RoomState " \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
+          "".format(cfg['Datafiles']['ZL_RoomState'])
     try:
         print("Populating table ZL_RoomState: ", end='')
         cur.execute(sql)
@@ -371,9 +355,9 @@ def createItem():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "INSERT into ZL_Item " \
-          "(`ID`,`Name`,`RoomID`,`Description`,`PointsModifier`,`AttackModifier`,`DefenceModifier`,`NPCID`,`PlayerName`) values " \
-          "(1, 'Torch', 1, null, 15, null, null, null, null)"
+    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_Item " \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
+          "".format(cfg['Datafiles']['ZL_Item'])
     try:
         print("Populating table ZL_Item: ", end='')
         cur.execute(sql)
