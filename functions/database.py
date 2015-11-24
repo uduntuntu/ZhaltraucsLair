@@ -255,11 +255,8 @@ def createPlayer():
     cur = cnx.cursor()
     sql = "INSERT into ZL_Player " \
           "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`)" \
-          "values ('Barbarian', 50, null, 0, 5, 1, 9)"
-    cur.execute(sql)
-    sql = "INSERT into ZL_Player  " \
-          "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`)" \
-          "values ('Thief', 40, null, 0, 9, 8, 4)"
+          "values ('Barbarian', 50, null, 0, 5, 1, 9)," \
+          "('Thief', 40, null, 0, 9, 8, 4)"
     cur.execute(sql)
     cur.close()
     cnx.commit()
@@ -273,11 +270,8 @@ def createNPC():
     cur = cnx.cursor()
     sql = "INSERT into ZL_NPC" \
           "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`) " \
-          "values ('A Rat', 1, 10, 5, 2, 1, 5)"
-    cur.execute(sql)
-    sql = "INSERT into ZL_NPC" \
-          "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`) " \
-          "values ('An Orc', 2, 15, 2, 5, null, 10)"
+          "values ('A Rat', 1, 10, 5, 2, 1, 5)," \
+          "('An Orc', 2, 15, 2, 5, null, 10)"
     cur.execute(sql)
     cur.close()
     cnx.commit()
