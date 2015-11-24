@@ -1,2 +1,2 @@
-"Aladdin";40;"Thief";\N;0;9;8;4
-"Conan";50;"Barbarian";1;0;5;1;9
+Aladdin;40;Thief;\N;0;9;8;4
+Conan;50;Barbarian;1;0;5;1;9

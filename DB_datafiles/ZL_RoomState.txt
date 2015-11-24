@@ -1,2 +1,2 @@
-0;2;"You fumble around in the dark and find a wall. You may follow the wall left or right."
-1;2;"You have entered the lair. The air smells damp and moldy. You hear water dripping in the darkness. Two corridors, carved into the rock, open up on each side of you."
+0;2;You fumble around in the dark and find a wall. You may follow the wall left or right.
+1;2;You have entered the lair. The air smells damp and moldy. You hear water dripping in the darkness. Two corridors, carved into the rock, open up on each side of you.
