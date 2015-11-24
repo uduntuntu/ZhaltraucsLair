@@ -240,6 +240,20 @@ def createPlayer():
     cur = cnx.cursor()
     sql = "INSERT into ZL_Player values ('Barbarian', 50, null, 0, 5, 1, 9)"
     cur.execute(sql)
+    sql = "INSERT into ZL_Player values ('Thief', 40, null, 0, 9, 8, 4)"
+    cur.execute(sql)
+    cur.close()
+    cnx.commit()
+    cnx.close()
+
+def createNPC():
+    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
+                                      password=cfg['MariaDB']['passwd'],
+                                      host=cfg['MariaDB']['host'],
+                                      database=cfg['MariaDB']['db'])
+    cur = cnx.cursor()
+    sql = "INSERT into ZL_NPC values ('A Rat', 50, null, 0, 5, 1, 9)"
+    cur.execute(sql)
     cur.close()
     cnx.commit()
     cnx.close()
