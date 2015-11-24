@@ -10,3 +10,5 @@ Datafiles:
     ZL_Player: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_Player.txt
     ZL_NPC: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_NPC.txt
     ZL_Item: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_Item.txt
+    ZL_HallOfFame: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_HallOfFame.txt
+    ZL_Movement: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_Movement.txt
