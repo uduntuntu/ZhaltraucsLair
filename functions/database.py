@@ -255,8 +255,8 @@ def createPlayer():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "INSERT into ZL_Player " \
-          "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`)" \
-          "values ('Barbarian', 50, null, 0, 5, 1, 9)," \
+          "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`) values " \
+          "('Barbarian', 50, null, 0, 5, 1, 9)," \
           "('Thief', 40, null, 0, 9, 8, 4)"
     cur.execute(sql)
     cur.close()
@@ -270,8 +270,8 @@ def createNPC():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "INSERT into ZL_NPC" \
-          "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`,`Description`) " \
-          "values ('A Rat', 1, 10, 5, 2, 1, 5, null)," \
+          "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`,`Description`) values " \
+          "('A Rat', 1, 10, 5, 2, 1, 5, null)," \
           "('An Orc', 2, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
           "('An Orc', 3, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
           "('An Orc', 4, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')"
@@ -287,8 +287,8 @@ def createRoom():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "INSERT into ZL_Room " \
-          "(`ID`,`Description`,`State`,`PointsModifier`)" \
-          "values (0, 'Tutorial. You see a rat attacking you, fight!', null, 1)," \
+          "(`ID`,`Description`,`State`,`PointsModifier`) values " \
+          "(0, 'Tutorial. You see a rat attacking you, fight!', null, 1)," \
           "(1, 'You stand in a start of dungeon. You see a torch.', null, 1)"
     cur.execute(sql)
     cur.close()
@@ -302,8 +302,8 @@ def createItem():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "INSERT into ZL_Item " \
-          "(`ID`,`Name`,`RoomID`,`Description`,`PointsModifier`,`AttackModifier`,`DefenceModifier`,`NPCID`,`PlayerName`) " \
-          "values (1, 'Torch', 1, 'A flaming torch', 15, null, null, null, null)"
+          "(`ID`,`Name`,`RoomID`,`Description`,`PointsModifier`,`AttackModifier`,`DefenceModifier`,`NPCID`,`PlayerName`) values " \
+          "(1, 'Torch', 1, 'A flaming torch', 15, null, null, null, null)"
     cur.execute(sql)
     cur.close()
     cnx.commit()
