@@ -260,7 +260,24 @@ def createNPC():
     sql = "INSERT into ZL_NPC" \
           "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`) " \
           "values ('A Rat', 1, 10, 5, 2, null, 5)"
-    print(sql)
+    cur.execute(sql)
+    sql = "INSERT into ZL_NPC" \
+          "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`) " \
+          "values ('An Orc', 2, 15, 2, 5, null, 10)"
+    cur.execute(sql)
+    cur.close()
+    cnx.commit()
+    cnx.close()
+
+def createRoom():
+    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
+                                      password=cfg['MariaDB']['passwd'],
+                                      host=cfg['MariaDB']['host'],
+                                      database=cfg['MariaDB']['db'])
+    cur = cnx.cursor()
+    sql = "INSERT into ZL_Room " \
+          "(`ID`,`Description`,`State`,`PointsModifier`)" \
+          "values (1, 'You stand in a start of dungeon. You see a torch.', null, 1)"
     cur.execute(sql)
     cur.close()
     cnx.commit()
