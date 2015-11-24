@@ -32,6 +32,7 @@ TABLES['ZL_Player'] = (
     "CREATE TABLE `ZL_Player` ("
     "   `Name` VARCHAR(40) NOT NULL,"
     "   `HP` TINYINT NOT NULL,"
+    "   `Class` VARCHAR(25) NOT NULL,"
     "   `RoomID` SMALLINT,"
     "   `Points` INT NOT NULL,"
     "   `Agility` TINYINT NOT NULL,"
@@ -60,7 +61,7 @@ TABLES['ZL_Item'] = (
     "   `ID` SMALLINT NOT NULL,"
     "   `Name` VARCHAR(40) NOT NULL,"
     "   `RoomID` SMALLINT,"
-    "   `Description` VARCHAR(2000) NOT NULL,"
+    "   `Description` VARCHAR(2000),"
     "   `PointsModifier` TINYINT,"
     "   `AttackModifier` TINYINT,"
     "   `DefenceModifier` TINYINT,"
@@ -258,6 +259,7 @@ def initializeDatabase():
     cursor.close()
     cnx.close()
 
+
 def createPlayer():
     cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
                                       password=cfg['MariaDB']['passwd'],
@@ -265,9 +267,9 @@ def createPlayer():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "INSERT into ZL_Player " \
-          "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`) values " \
-          "('Barbarian', 50, null, 0, 5, 1, 9)," \
-          "('Thief', 40, null, 0, 9, 8, 4)"
+          "(`Name`,`HP`,`Class`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`) values " \
+          "('Conan', 50, 'Barbarian', 1, 0, 5, 1, 9)," \
+          "('Aladdin', 40, 'Thief', null, 0, 9, 8, 4)"
     try:
         print("Populating table ZL_Player: ", end='')
         cur.execute(sql)
@@ -279,6 +281,7 @@ def createPlayer():
     cur.close()
     cnx.commit()
     cnx.close()
+
 
 def createNPC():
     cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
@@ -304,6 +307,7 @@ def createNPC():
     cnx.commit()
     cnx.close()
 
+
 def createRoom():
     cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
                                       password=cfg['MariaDB']['passwd'],
@@ -312,8 +316,17 @@ def createRoom():
     cur = cnx.cursor()
     sql = "INSERT into ZL_Room " \
           "(`ID`,`Description`,`State`,`PointsModifier`) values " \
-          "(0, 'Tutorial. You see a rat attacking you, fight!', null, 1)," \
-          "(1, 'You stand in a start of dungeon. You see a torch.', null, 1)"
+          "(1, " \
+            "'Finally you are here. It''s the afternoon, and the " \
+            "surroundings don''t seem as bleak as you had expected. The forrest " \
+            "you had treked through seemed lush and full of life, alltough you " \
+            "did notice it getting quieter as you made your way through. The " \
+            "trees came to a halt at the base of a large hill and you finally " \
+            "see it. The entrance to the lair. The forest around you is " \
+            "allmost eeriely silent now.', null, 1" \
+          ")," \
+          "(2, 'It''s dark. You can''t see anything.', null, 1)"
+
     try:
         print("Populating table ZL_Room: ", end='')
         cur.execute(sql)
@@ -326,6 +339,32 @@ def createRoom():
     cnx.commit()
     cnx.close()
 
+
+def createRoomState():
+    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
+                                      password=cfg['MariaDB']['passwd'],
+                                      host=cfg['MariaDB']['host'],
+                                      database=cfg['MariaDB']['db'])
+    cur = cnx.cursor()
+    sql = "INSERT into ZL_RoomState " \
+          "(`ID`,`RoomID`,`Description`) values " \
+          "(0, 2, " \
+            "'You fumble around in the dark and find a wall. " \
+            "You may follow the wall left or right.'" \
+          ")"
+    try:
+        print("Populating table ZL_RoomState: ", end='')
+        cur.execute(sql)
+    except mysql.connector.Error as err:
+            print(err.msg)
+    else:
+        print("OK")
+
+    cur.close()
+    cnx.commit()
+    cnx.close()
+
+
 def createItem():
     cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
                                       password=cfg['MariaDB']['passwd'],
@@ -334,7 +373,7 @@ def createItem():
     cur = cnx.cursor()
     sql = "INSERT into ZL_Item " \
           "(`ID`,`Name`,`RoomID`,`Description`,`PointsModifier`,`AttackModifier`,`DefenceModifier`,`NPCID`,`PlayerName`) values " \
-          "(1, 'Torch', 1, 'A flaming torch', 15, null, null, null, null)"
+          "(1, 'Torch', 1, null, 15, null, null, null, null)"
     try:
         print("Populating table ZL_Item: ", end='')
         cur.execute(sql)
