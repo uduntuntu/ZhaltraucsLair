@@ -34,6 +34,7 @@ TABLES['ZL_Player'] = (
 
 TABLES['ZL_NPC'] = (
     "CREATE TABLE `ZL_NPC` ("
+    "   `Name` VARCHAR(40) NOT NULL"
     "   `ID` SMALLINT NOT NULL,"
     "   `HP` TINYINT NOT NULL,"
     "   `Agility` TINYINT NOT NULL,"
