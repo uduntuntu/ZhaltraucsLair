@@ -274,7 +274,7 @@ def createNPC():
           "values ('A Rat', 1, 10, 5, 2, 1, 5, null)," \
           "('An Orc', 2, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
           "('An Orc', 3, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
-          "('An Orc', 3, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')"
+          "('An Orc', 4, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')"
     cur.execute(sql)
     cur.close()
     cnx.commit()
