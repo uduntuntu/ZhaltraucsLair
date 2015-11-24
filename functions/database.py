@@ -239,9 +239,13 @@ def createPlayer():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "INSERT into ZL_Player values ('Barbarian', 50, null, 0, 5, 1, 9)"
+    sql = "INSERT into ZL_Player " \
+          "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`)" \
+          "values ('Barbarian', 50, null, 0, 5, 1, 9)"
     cur.execute(sql)
-    sql = "INSERT into ZL_Player values ('Thief', 40, null, 0, 9, 8, 4)"
+    sql = "INSERT into ZL_Player  " \
+          "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`)" \
+          "values ('Thief', 40, null, 0, 9, 8, 4)"
     cur.execute(sql)
     cur.close()
     cnx.commit()
