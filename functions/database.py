@@ -258,7 +258,14 @@ def createPlayer():
           "(`Name`,`HP`,`RoomID`,`Points`,`Agility`,`Intelligence`,`Strength`) values " \
           "('Barbarian', 50, null, 0, 5, 1, 9)," \
           "('Thief', 40, null, 0, 9, 8, 4)"
-    cur.execute(sql)
+    try:
+        print("Populating table ZL_Player: ", end='')
+        cur.execute(sql)
+    except mysql.connector.Error as err:
+            print(err.msg)
+    else:
+        print("OK")
+
     cur.close()
     cnx.commit()
     cnx.close()
@@ -275,7 +282,14 @@ def createNPC():
           "('An Orc', 2, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
           "('An Orc', 3, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')," \
           "('An Orc', 4, 15, 2, 5, null, 10, 'A green, snout nosed, nasty looking Orc.')"
-    cur.execute(sql)
+    try:
+        print("Populating table ZL_NPC: ", end='')
+        cur.execute(sql)
+    except mysql.connector.Error as err:
+            print(err.msg)
+    else:
+        print("OK")
+
     cur.close()
     cnx.commit()
     cnx.close()
@@ -290,7 +304,14 @@ def createRoom():
           "(`ID`,`Description`,`State`,`PointsModifier`) values " \
           "(0, 'Tutorial. You see a rat attacking you, fight!', null, 1)," \
           "(1, 'You stand in a start of dungeon. You see a torch.', null, 1)"
-    cur.execute(sql)
+    try:
+        print("Populating table ZL_Room: ", end='')
+        cur.execute(sql)
+    except mysql.connector.Error as err:
+            print(err.msg)
+    else:
+        print("OK")
+
     cur.close()
     cnx.commit()
     cnx.close()
@@ -304,7 +325,14 @@ def createItem():
     sql = "INSERT into ZL_Item " \
           "(`ID`,`Name`,`RoomID`,`Description`,`PointsModifier`,`AttackModifier`,`DefenceModifier`,`NPCID`,`PlayerName`) values " \
           "(1, 'Torch', 1, 'A flaming torch', 15, null, null, null, null)"
-    cur.execute(sql)
+    try:
+        print("Populating table ZL_Item: ", end='')
+        cur.execute(sql)
+    except mysql.connector.Error as err:
+            print(err.msg)
+    else:
+        print("OK")
+
     cur.close()
     cnx.commit()
     cnx.close()
