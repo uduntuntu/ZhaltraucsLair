@@ -22,8 +22,9 @@ TABLES['ZL_Room'] = (
 TABLES['ZL_RoomState'] = (
     "CREATE TABLE `ZL_RoomState` ("
     "   `ID` SMALLINT NOT NULL,"
+    "   `RoomID` SMALLINT NOT NULL,"
     "   `Description` VARCHAR(2000),"
-    "   PRIMARY KEY (`ID`)"
+    "   PRIMARY KEY (`ID`,`RoomID`)"
     ")"
 )
 
@@ -83,13 +84,14 @@ TABLES['ZL_HallOfFame'] = (
 TABLES['ZL_Movement'] = (
     "CREATE TABLE `ZL_Movement` ("
     "   `Door` SMALLINT NOT NULL,"
+    "   `RoomID` SMALLINT NOT NULL,"
     "   `RoomInLeft` SMALLINT,"
     "   `RoomInRight` SMALLINT,"
     "   `RoomInFront` SMALLINT,"
     "   `RoomInBack` SMALLINT,"
     "   `RoomInUp` SMALLINT,"
     "   `RoomInDown` SMALLINT,"
-    "   PRIMARY KEY(`Door`)"
+    "   PRIMARY KEY(`Door`, `RoomID`)"
     ")"
 )
 
@@ -99,12 +101,6 @@ CONSTRAINTS_ADD['ZL_Player'] = (
     "ALTER TABLE `ZL_Player`"
     "   ADD CONSTRAINT `fk_RoomID_1` FOREIGN KEY (`RoomID`) "
     "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
-)
-
-CONSTRAINTS_ADD['ZL_Room'] = (
-    "ALTER TABLE `ZL_Room`"
-    "   ADD CONSTRAINT `fk_RoomStateID_1` FOREIGN KEY (`State`) "
-    "       REFERENCES `ZL_RoomState` (`ID`) ON DELETE CASCADE"
 )
 
 CONSTRAINTS_ADD['ZL_NPC'] = (
@@ -131,6 +127,8 @@ CONSTRAINTS_ADD['ZL_HallOfFame'] = (
 
 CONSTRAINTS_ADD['ZL_Movement'] = (
     "ALTER TABLE `ZL_Movement`"
+    "   ADD CONSTRAINT `fk_RoomID_4` FOREIGN KEY (`RoomID`) "
+    "       REFERENCES `ZL_Room` (`ID`),"
     "   ADD CONSTRAINT `fk_RoomInLeft_1` FOREIGN KEY (`RoomInLeft`) "
     "       REFERENCES `ZL_Room` (`ID`),"
     "   ADD CONSTRAINT `fk_RoomInRight_1` FOREIGN KEY (`RoomInRight`) "
@@ -143,6 +141,12 @@ CONSTRAINTS_ADD['ZL_Movement'] = (
     "       REFERENCES `ZL_Room` (`ID`),"
     "   ADD CONSTRAINT `fk_RoomInDown` FOREIGN KEY (`RoomInDown`) "
     "       REFERENCES `ZL_Room` (`ID`)"
+)
+
+CONSTRAINTS_ADD['ZL_RoomState'] = (
+    "ALTER TABLE `ZL_RoomState`"
+    "   add CONSTRAINT `fk_RoomID_5` FOREIGN KEY (`RoomID`) "
+    "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
 )
 
 CONSTRAINTS_DROP = {}
@@ -171,12 +175,18 @@ CONSTRAINTS_DROP['ZL_HallOfFame'] = (
 
 CONSTRAINTS_DROP['ZL_Movement'] = (
     "ALTER TABLE `ZL_Movement`"
+    "   DROP FOREIGN KEY `fk_RoomID_4`,"
     "   DROP FOREIGN KEY `fk_RoomInLeft_1`,"
     "   DROP FOREIGN KEY `fk_RoomInRight_1`,"
     "   DROP FOREIGN KEY `fk_RoomInFront_1`,"
     "   DROP FOREIGN KEY `fk_RoomInBack`,"
     "   DROP FOREIGN KEY `fk_RoomInUp`,"
     "   DROP FOREIGN KEY `fk_RoomInDown`"
+)
+
+CONSTRAINTS_DROP['ZL_RoomState'] = (
+    "ALTER TABLE `ZL_RoomState`"
+    "   DROP FOREIGN KEY `fk_RoomID_5`"
 )
 
 
