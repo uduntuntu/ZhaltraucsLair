@@ -49,6 +49,7 @@ TABLES['ZL_NPC'] = (
     "   `Strength` TINYINT NOT NULL,"
     "   `RoomID` SMALLINT,"
     "   `PointModifier` TINYINT,"
+    "   `Description` VARCHAR(50),"
     "   PRIMARY KEY(`ID`)"
     ")"
 )
@@ -269,9 +270,9 @@ def createNPC():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "INSERT into ZL_NPC" \
-          "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`) " \
-          "values ('A Rat', 1, 10, 5, 2, 1, 5)," \
-          "('An Orc', 2, 15, 2, 5, null, 10)"
+          "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`,`Description`) " \
+          "values ('A Rat', 1, 10, 5, 2, 1, 5, null)," \
+          "('An Orc', 2, 15, 2, 5, null, 10, null)"
     cur.execute(sql)
     cur.close()
     cnx.commit()
