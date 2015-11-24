@@ -231,3 +231,15 @@ def initializeDatabase():
 
     cursor.close()
     cnx.close()
+
+def createPlayer():
+    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
+                                      password=cfg['MariaDB']['passwd'],
+                                      host=cfg['MariaDB']['host'],
+                                      database=cfg['MariaDB']['db'])
+    cur = cnx.cursor()
+    sql = "INSERT into ZL_Player values ('Barbarian', 50, null, 0, 5, 1, 9)"
+    cur.execute(sql)
+    cur.close()
+    cnx.commit()
+    cnx.close()
