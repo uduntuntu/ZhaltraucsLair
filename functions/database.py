@@ -13,8 +13,16 @@ TABLES['ZL_Room'] = (
     "CREATE TABLE `ZL_Room` ("
     "   `ID` SMALLINT NOT NULL,"
     "   `Description` VARCHAR(2000),"
-    "   `State` TINYINT,"
+    "   `State` SMALLINT,"
     "   `PointsModifier` TINYINT,"
+    "   PRIMARY KEY (`ID`)"
+    ")"
+)
+
+TABLES['ZL_RoomState'] = (
+    "CREATE TABLE `ZL_RoomState` ("
+    "   `ID` SMALLINT NOT NULL,"
+    "   `Description` VARCHAR(2000),"
     "   PRIMARY KEY (`ID`)"
     ")"
 )
@@ -90,6 +98,12 @@ CONSTRAINTS_ADD['ZL_Player'] = (
     "ALTER TABLE `ZL_Player`"
     "   ADD CONSTRAINT `fk_RoomID_1` FOREIGN KEY (`RoomID`) "
     "       REFERENCES `ZL_Room` (`ID`) ON DELETE CASCADE"
+)
+
+CONSTRAINTS_ADD['ZL_Room'] = (
+    "ALTER TABLE `ZL_Room`"
+    "   ADD CONSTRAINT `fk_RoomStateID_1` FOREIGN KEY (`State`) "
+    "       REFERENCES `ZL_RoomState` (`ID`) ON DELETE CASCADE"
 )
 
 CONSTRAINTS_ADD['ZL_NPC'] = (
@@ -259,7 +273,7 @@ def createNPC():
     cur = cnx.cursor()
     sql = "INSERT into ZL_NPC" \
           "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`) " \
-          "values ('A Rat', 1, 10, 5, 2, null, 5)"
+          "values ('A Rat', 1, 10, 5, 2, 1, 5)"
     cur.execute(sql)
     sql = "INSERT into ZL_NPC" \
           "(`Name`,`ID`,`HP`,`Agility`,`Strength`,`RoomID`,`PointModifier`) " \
@@ -277,7 +291,8 @@ def createRoom():
     cur = cnx.cursor()
     sql = "INSERT into ZL_Room " \
           "(`ID`,`Description`,`State`,`PointsModifier`)" \
-          "values (1, 'You stand in a start of dungeon. You see a torch.', null, 1)"
+          "values (0, 'Tutorial. You see a rat attacking you, fight!', null, 1)," \
+          "(1, 'You stand in a start of dungeon. You see a torch.', null, 1)"
     cur.execute(sql)
     cur.close()
     cnx.commit()
