@@ -109,6 +109,7 @@ def doMenu(selection=0):
     elif selection == 1:
         db.initializeDatabase()
         db.createPlayer()
+        db.createNPC()
         return "game"
     elif selection == 2:
         return "game"
