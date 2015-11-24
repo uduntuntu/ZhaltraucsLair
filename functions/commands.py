@@ -21,7 +21,7 @@ commands = {
 directions = (
     'left',
     'right',
-    'front',
+    'forward',
     'up',
     'down'
 )

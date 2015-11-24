@@ -1,5 +1,0 @@
-MariaDB:
-    host: db_host
-    user: db_user
-    passwd: db_password
-    db: db_name
