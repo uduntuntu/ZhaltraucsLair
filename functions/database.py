@@ -292,3 +292,17 @@ def createRoom():
     cur.close()
     cnx.commit()
     cnx.close()
+
+def createItem():
+    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
+                                      password=cfg['MariaDB']['passwd'],
+                                      host=cfg['MariaDB']['host'],
+                                      database=cfg['MariaDB']['db'])
+    cur = cnx.cursor()
+    sql = "INSERT into ZL_Item " \
+          "(`ID`,`Name`,`RoomID`,`Description`,`PointsModifier`,`AttackModifier`,`DefenceModifier`,`NPCID`,`PlayerName`) " \
+          "values (1, 'Torch', 1, 'A flaming torch', 15, null, null, null, null)"
+    cur.execute(sql)
+    cur.close()
+    cnx.commit()
+    cnx.close()
