@@ -10,4 +10,4 @@ def convertCP437toUTF8(inputFile, outputFile):
     f.close()
     return
 
-convertCP437toUTF8('Otsikko_test.asc','otsikko_unicode.asc')
+convertCP437toUTF8('StartScreen.asc','StartScreen_UTF-8.asc')

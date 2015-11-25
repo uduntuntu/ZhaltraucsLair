@@ -3,7 +3,7 @@
 import functions.commands as command
 import functions.database as db
 
-f = open('ASCII/otsikko_unicode.asc', 'r')
+f = open('ASCII/StartScreen_UTF-8.asc', 'r')
 print(f.read())
 f.close()
 
