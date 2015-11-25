@@ -266,7 +266,7 @@ def createPlayer():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_Player " \
+    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Player " \
           "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_Player'])
     try:
@@ -288,7 +288,7 @@ def createNPC():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_NPC " \
+    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_NPC " \
           "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_NPC'])
     try:
@@ -310,7 +310,7 @@ def createRoom():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_Room " \
+    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Room " \
           "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_Room'])
 
@@ -333,7 +333,7 @@ def createRoomState():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_RoomState " \
+    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_RoomState " \
           "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_RoomState'])
     try:
@@ -355,7 +355,7 @@ def createItem():
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "LOAD DATA INFILE '{}' INTO TABLE ZL_Item " \
+    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Item " \
           "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_Item'])
     try:
