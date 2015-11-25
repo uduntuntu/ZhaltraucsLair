@@ -274,8 +274,9 @@ def populateTables():
                                       database=cfg['MariaDB']['db'])
         cur = cnx.cursor()
 
-        sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE {} IGNORE 1 LINES " \
-              "FIELDS TERMINATED BY ';' LINES TERMINATED BY '{}'" \
+        sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE {} " \
+              "FIELDS TERMINATED BY ';' LINES TERMINATED BY '{}' " \
+              "IGNORE 1 LINES" \
               "".format(cfg['Datafiles'][table], table, lineEnding)
 
         try:
