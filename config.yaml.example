@@ -12,3 +12,5 @@ Datafiles:
     ZL_Item: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_Item.txt
     ZL_HallOfFame: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_HallOfFame.txt
     ZL_Movement: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_Movement.txt
+
+OS: Linux
