@@ -1,3 +1,4 @@
+Name;ID;HP;Agility;Strength;RoomID;PointModifier;Description
 Rat;1;10;5;2;1;5;\N
 Orc;2;15;2;5;\N;10;A green, snout nosed, nasty looking Orc.
 Orc;3;15;2;5;\N;10;A green, snout nosed, nasty looking Orc.

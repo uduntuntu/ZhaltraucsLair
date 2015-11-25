@@ -1,0 +1,4 @@
+ID;RoomID;RoomInNorth;RoomInSouth;RoomInEast;RoomInWest;RoomInUp;RoomInDown
+1;1;2;\N;\N;\N;\N;\N
+1;2;\N;1;3;5;\N;\N
+1;3;\N;\N;4;2;\N;\N

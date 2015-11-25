@@ -205,7 +205,7 @@ def testConnection():
         else:
             print(err)
     else:
-        print("Connection complete.")
+        print("Connection to database complete.")
         cnx.close()
 
 
@@ -274,9 +274,9 @@ def populateTables():
                                       database=cfg['MariaDB']['db'])
         cur = cnx.cursor()
 
-        sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE {} " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '{}'" \
-          "".format(cfg['Datafiles'][table], table, lineEnding)
+        sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE {} IGNORE 1 LINES " \
+              "FIELDS TERMINATED BY ';' LINES TERMINATED BY '{}'" \
+              "".format(cfg['Datafiles'][table], table, lineEnding)
 
         try:
             print("Populating table {}: ".format(table), end='')
