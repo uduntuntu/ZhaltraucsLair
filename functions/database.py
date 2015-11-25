@@ -261,115 +261,34 @@ def initializeDatabase():
     cnx.close()
 
 
-def createPlayer():
-    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
+def populateTables():
+    if cfg['OS'] == "Windows":
+        lineEnding = '\r\n'
+    elif cfg['OS'] == "Linux":
+        lineEnding = '\n'
+
+    for table in ('ZL_Room','ZL_RoomState','ZL_Player','ZL_NPC','ZL_Item','ZL_HallOfFame','ZL_Movement'):
+        cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
                                       password=cfg['MariaDB']['passwd'],
                                       host=cfg['MariaDB']['host'],
                                       database=cfg['MariaDB']['db'])
-    cur = cnx.cursor()
-    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Player " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
-          "".format(cfg['Datafiles']['ZL_Player'])
-    try:
-        print("Populating table ZL_Player: ", end='')
-        cur.execute(sql)
-    except mysql.connector.Error as err:
-            print(err.msg)
-    else:
-        print("OK")
+        cur = cnx.cursor()
 
-    cur.close()
-    cnx.commit()
-    cnx.close()
+        sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE {} " \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '{}'" \
+          "".format(cfg['Datafiles'][table], table, lineEnding)
 
+        try:
+            print("Populating table {}: ".format(table), end='')
+            cur.execute(sql)
+        except mysql.connector.Error as err:
+                print(err.msg)
+        else:
+            print("OK")
 
-def createNPC():
-    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
-                                      password=cfg['MariaDB']['passwd'],
-                                      host=cfg['MariaDB']['host'],
-                                      database=cfg['MariaDB']['db'])
-    cur = cnx.cursor()
-    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_NPC " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
-          "".format(cfg['Datafiles']['ZL_NPC'])
-    try:
-        print("Populating table ZL_NPC: ", end='')
-        cur.execute(sql)
-    except mysql.connector.Error as err:
-            print(err.msg)
-    else:
-        print("OK")
-
-    cur.close()
-    cnx.commit()
-    cnx.close()
-
-
-def createRoom():
-    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
-                                      password=cfg['MariaDB']['passwd'],
-                                      host=cfg['MariaDB']['host'],
-                                      database=cfg['MariaDB']['db'])
-    cur = cnx.cursor()
-    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Room " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
-          "".format(cfg['Datafiles']['ZL_Room'])
-
-    try:
-        print("Populating table ZL_Room: ", end='')
-        cur.execute(sql)
-    except mysql.connector.Error as err:
-            print(err.msg)
-    else:
-        print("OK")
-
-    cur.close()
-    cnx.commit()
-    cnx.close()
-
-
-def createRoomState():
-    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
-                                      password=cfg['MariaDB']['passwd'],
-                                      host=cfg['MariaDB']['host'],
-                                      database=cfg['MariaDB']['db'])
-    cur = cnx.cursor()
-    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_RoomState " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
-          "".format(cfg['Datafiles']['ZL_RoomState'])
-    try:
-        print("Populating table ZL_RoomState: ", end='')
-        cur.execute(sql)
-    except mysql.connector.Error as err:
-            print(err.msg)
-    else:
-        print("OK")
-
-    cur.close()
-    cnx.commit()
-    cnx.close()
-
-
-def createItem():
-    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
-                                      password=cfg['MariaDB']['passwd'],
-                                      host=cfg['MariaDB']['host'],
-                                      database=cfg['MariaDB']['db'])
-    cur = cnx.cursor()
-    sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Item " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
-          "".format(cfg['Datafiles']['ZL_Item'])
-    try:
-        print("Populating table ZL_Item: ", end='')
-        cur.execute(sql)
-    except mysql.connector.Error as err:
-            print(err.msg)
-    else:
-        print("OK")
-
-    cur.close()
-    cnx.commit()
-    cnx.close()
+        cur.close()
+        cnx.commit()
+        cnx.close()
 
 
 def getPosition():
@@ -388,8 +307,6 @@ def getPosition():
         return result[0]
     except mysql.connector.Error as err:
             print(err.msg)
-    else:
-        print("OK")
 
     cur.close()
     cnx.commit()
