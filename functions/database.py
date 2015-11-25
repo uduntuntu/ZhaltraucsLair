@@ -268,7 +268,7 @@ def createPlayer():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Player " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'" \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_Player'])
     try:
         print("Populating table ZL_Player: ", end='')
@@ -290,7 +290,7 @@ def createNPC():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_NPC " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'" \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_NPC'])
     try:
         print("Populating table ZL_NPC: ", end='')
@@ -312,7 +312,7 @@ def createRoom():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Room " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'" \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_Room'])
 
     try:
@@ -335,7 +335,7 @@ def createRoomState():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_RoomState " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'" \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_RoomState'])
     try:
         print("Populating table ZL_RoomState: ", end='')
@@ -357,7 +357,7 @@ def createItem():
                                       database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
     sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE ZL_Item " \
-          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'" \
+          "FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'" \
           "".format(cfg['Datafiles']['ZL_Item'])
     try:
         print("Populating table ZL_Item: ", end='')
