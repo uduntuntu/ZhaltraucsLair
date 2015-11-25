@@ -5,10 +5,10 @@ MariaDB:
     db: db_name
 
 Datafiles:
-    ZL_Room: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_Room.txt
-    ZL_RoomState: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_RoomState.txt
-    ZL_Player: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_Player.txt
-    ZL_NPC: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_NPC.txt
-    ZL_Item: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_Item.txt
-    ZL_HallOfFame: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_HallOfFame.txt
-    ZL_Movement: C:/Users/arimartti/PycharmProjects/ZhaltraucsLair/DB_datafiles/ZL_Movement.txt
+    ZL_Room: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_Room.txt
+    ZL_RoomState: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_RoomState.txt
+    ZL_Player: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_Player.txt
+    ZL_NPC: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_NPC.txt
+    ZL_Item: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_Item.txt
+    ZL_HallOfFame: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_HallOfFame.txt
+    ZL_Movement: <path_to_ZhaltraucsLair>/DB_datafiles/ZL_Movement.txt
