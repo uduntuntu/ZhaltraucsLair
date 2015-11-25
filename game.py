@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import functions.commands as command
+import functions.database as db
 
 prompt = ">>> "
 view = {
@@ -32,9 +33,10 @@ while True:
             print(e)
 
     while context == "game":
+        position = db.getPosition()
         prompt = "(game) >>> "
 
-        print("--\n{}".format(view[position]))
+        print("--\n{}".format(position))
         c = input(prompt).lower().split()
 
         if (command.isValid(c)):
@@ -43,4 +45,3 @@ while True:
             print('Invalid command. '
                 'Write "help" to get list of available commands.'
             )
-

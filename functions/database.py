@@ -370,3 +370,27 @@ def createItem():
     cur.close()
     cnx.commit()
     cnx.close()
+
+
+def getPosition():
+    cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
+                                      password=cfg['MariaDB']['passwd'],
+                                      host=cfg['MariaDB']['host'],
+                                      database=cfg['MariaDB']['db'])
+    cur = cnx.cursor()
+    sql = "SELECT ZL_Room.Description " \
+          "FROM ZL_Room " \
+          "INNER JOIN ZL_Player " \
+          "ON ZL_Room.ID = ZL_Player.RoomID;"
+    try:
+        cur.execute(sql)
+        result = cur.fetchone()
+        return result[0]
+    except mysql.connector.Error as err:
+            print(err.msg)
+    else:
+        print("OK")
+
+    cur.close()
+    cnx.commit()
+    cnx.close()
