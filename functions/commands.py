@@ -102,7 +102,7 @@ def doMenu(selection=0):
     '''
 
     if selection == 0:
-        print("Main menu:")
+        print("--\nMain menu:")
         for key, value in menu.items():
             print("{} = {}".format(key, value))
         return "main"
