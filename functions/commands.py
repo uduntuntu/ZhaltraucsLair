@@ -36,7 +36,9 @@ menu = {
 
 
 def isValid(command):
-    if command[0] in commands and len(command) <= commands[command[0]]:
+    if len(command) == 0:
+        return False
+    elif command[0] in commands and len(command) <= commands[command[0]]:
         return True
     else:
         return False
