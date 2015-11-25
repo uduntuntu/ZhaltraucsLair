@@ -4,7 +4,6 @@ import functions.database as db
 
 commands = {
     'go': 2,
-    'turn': 1,
     'pick': 2,
     'use': 2,
     'push': 2,
@@ -19,11 +18,12 @@ commands = {
 }
 
 directions = (
-    'left',
-    'right',
-    'forward',
-    'up',
-    'down'
+    'north', 'n',
+    'south', 's',
+    'east', 'e',
+    'west', 'w',
+    'up', 'u',
+    'down', 'd'
 )
 
 menu = {
@@ -50,7 +50,7 @@ def execute(command):
     :return: "main" if switch context to "main", "game" if keep playing.
     '''
 
-    if command[0] in ("go", "turn"):
+    if command[0] == "go":
         go(command)
     elif command[0] == "help":
         if len(command) == 1:
@@ -72,7 +72,7 @@ def go(command):
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
             print(
-                'moving to direction "{0:s}" '
+                'moving to "{0:s}" '
                 'is not implemented yet.'.format(command[1])
             )
         else:
@@ -81,8 +81,6 @@ def go(command):
                 "only directions in list below:"
             )
             print("go", directions)
-    elif len(command) == 1 and command[0] == "turn":
-        print('Turning around is not implemented yet.')
 
 
 def help(command="none"):
