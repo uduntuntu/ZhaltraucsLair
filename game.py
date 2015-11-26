@@ -26,7 +26,7 @@ while True:
     while context == "game":
         prompt = "(game) >>> "
 
-        # update player object and if doesn't exest yet create it
+        # update player object and if doesn't exist yet create it
         player = db.getPlayer()
 
         # get and print room description

@@ -369,8 +369,12 @@ def createPlayer():
 def getPlayer():
     sql = "SELECT Name,Class,RoomID FROM ZL_Player"
     result = doQuery(sql)
+
+    # Because our database is initialized when starting new game, we can't have
+    # more than one player in database. In case something is gone wrong in
+    # player creation process, result can be empty.
     if len(result) == 1:
-        player = Player(result[0][0],result[0][1],result[0][2])
+        player = Player(result[0][0], result[0][1], result[0][2])
 
         return player
 
