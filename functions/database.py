@@ -379,3 +379,25 @@ def getPlayer():
         player = Player(result[0][0],result[0][1])
 
         return player
+
+
+def getDirections(roomID):
+    sql = "SELECT RoomInNorth,RoomInSouth,RoomInEast,RoomInWest," \
+          "RoomInUp,RoomInDown FROM ZL_Movement WHERE RoomID = {}" \
+          "".format(roomID)
+    result = doQuery(sql)
+    directions = {}
+    if result[0][0] is not None:
+        directions['north'] = result[0][0]
+    if result[0][1] is not None:
+        directions['south'] = result[0][1]
+    if result[0][2] is not None:
+        directions['east'] = result[0][2]
+    if result[0][3] is not None:
+        directions['west'] = result[0][3]
+    if result[0][4] is not None:
+        directions['up'] = result[0][4]
+    if result[0][5] is not None:
+        directions['down'] = result[0][5]
+
+    return directions
