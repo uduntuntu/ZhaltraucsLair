@@ -317,10 +317,10 @@ def getRoomDescription(playerRoom):
 
 
 class Player:
-    def __init__(self, playerName, playerClass):
+    def __init__(self, playerName, playerClass, roomID=1):
         self.playerName = playerName
         self.playerClass = playerClass
-        self.roomID = 1
+        self.roomID = roomID
         self.points = 0
         self.inventory = []
 
@@ -367,10 +367,10 @@ def createPlayer():
 
 
 def getPlayer():
-    sql = "SELECT Name,Class FROM ZL_Player"
+    sql = "SELECT Name,Class,RoomID FROM ZL_Player"
     result = doQuery(sql)
     if len(result) == 1:
-        player = Player(result[0][0], result[0][1])
+        player = Player(result[0][0],result[0][1],result[0][2])
 
         return player
 
