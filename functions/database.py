@@ -211,9 +211,9 @@ def testConnection():
 
 def initializeDatabase():
     cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
-                                      password=cfg['MariaDB']['passwd'],
-                                      host=cfg['MariaDB']['host'],
-                                      database=cfg['MariaDB']['db'])
+                                  password=cfg['MariaDB']['passwd'],
+                                  host=cfg['MariaDB']['host'],
+                                  database=cfg['MariaDB']['db'])
     cursor = cnx.cursor()
 
     for name, dropConstraintLine in CONSTRAINTS_DROP.items():
@@ -233,7 +233,6 @@ def initializeDatabase():
             print(err.msg)
         else:
             print("OK")
-
 
     for name, creationLine in TABLES.items():
         try:
@@ -267,7 +266,8 @@ def populateTables():
     elif cfg['OS'] == "Linux":
         lineEnding = '\n'
 
-    for table in ('ZL_Room','ZL_RoomState','ZL_Player','ZL_NPC','ZL_Item','ZL_HallOfFame','ZL_Movement'):
+    for table in ('ZL_Room', 'ZL_RoomState', 'ZL_Player', 'ZL_NPC', 'ZL_Item',
+                  'ZL_HallOfFame', 'ZL_Movement'):
         cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
                                       password=cfg['MariaDB']['passwd'],
                                       host=cfg['MariaDB']['host'],
@@ -283,7 +283,7 @@ def populateTables():
             print("Populating table {}: ".format(table), end='')
             cur.execute(sql)
         except mysql.connector.Error as err:
-                print(err.msg)
+            print(err.msg)
         else:
             print("OK")
 
@@ -292,23 +292,90 @@ def populateTables():
         cnx.close()
 
 
-def getPosition():
+def doQuery(sql):
     cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
-                                      password=cfg['MariaDB']['passwd'],
-                                      host=cfg['MariaDB']['host'],
-                                      database=cfg['MariaDB']['db'])
+                                  password=cfg['MariaDB']['passwd'],
+                                  host=cfg['MariaDB']['host'],
+                                  database=cfg['MariaDB']['db'])
     cur = cnx.cursor()
-    sql = "SELECT ZL_Room.Description " \
-          "FROM ZL_Room " \
-          "INNER JOIN ZL_Player " \
-          "ON ZL_Room.ID = ZL_Player.RoomID;"
+
+    result = []
     try:
         cur.execute(sql)
-        result = cur.fetchone()
-        return result[0]
+        result = cur.fetchall()
     except mysql.connector.Error as err:
-            print(err.msg)
+        print(err.msg)
 
     cur.close()
     cnx.commit()
     cnx.close()
+
+    return result
+
+
+def getPosition(playerRoom):
+    sql = "SELECT ZL_Room.Description " \
+          "FROM ZL_Room " \
+          "WHERE ZL_Room.ID = {}".format(playerRoom)
+    result = doQuery(sql)
+    if len(result) == 1:
+        return result[0][0]
+
+
+class Player:
+    def __init__(self, playerName, playerClass):
+        self.playerName = playerName
+        self.playerClass = playerClass
+        self.roomID = 1
+        self.points = 0
+        self.inventory = []
+
+        if self.playerClass == "barbarian":
+            self.HP = 50
+            self.agility = 5
+            self.intelligence = 1
+            self.strength = 4
+        elif self.playerClass == "thief":
+            self.HP = 40
+            self.agility = 9
+            self.intelligence = 8
+            self.strength = 4
+
+
+def createPlayer():
+    playerName = input("What's your name? ")
+    playerClass = input("Do you want to be a Barbarian or a Thief? ").lower()
+    while playerClass not in ("barbarian", "thief"):
+        playerClass = input(
+            "Do you want to be a Barbarian or a Thief? ").lower()
+    player = Player(playerName, playerClass)
+
+    sql = "SELECT Name FROM ZL_Player WHERE Name = '{}'" \
+          "".format(player.playerName)
+    result = doQuery(sql)
+    if len(result) > 0:
+        print("Player exists. Cannot create player")
+    else:
+        sql = "INSERT INTO `ZL_Player` " \
+              "(Name, HP, Class,RoomID,Points,Agility,Intelligence,Strength) " \
+              "VALUES ('{}',{},'{}',{},{},{},{},{})".format(player.playerName,
+                                                            player.HP,
+                                                            player.playerClass,
+                                                            player.roomID,
+                                                            player.points,
+                                                            player.agility,
+                                                            player.intelligence,
+                                                            player.strength
+                                                            )
+        result = doQuery(sql)
+
+    return player
+
+
+def getPlayer():
+    sql = "SELECT Name,Class FROM ZL_Player"
+    result = doQuery(sql)
+    if len(result) == 1:
+        player = Player(result[0][0],result[0][1])
+
+        return player

@@ -7,7 +7,6 @@ f = open('ASCII/StartScreen_UTF-8.asc', 'r')
 print(f.read())
 f.close()
 
-
 while True:
     '''
     You can end loop by selecting 5 in main context or write
@@ -25,7 +24,8 @@ while True:
             print(e)
 
     while context == "game":
-        position = db.getPosition()
+        player = db.getPlayer()
+        position = db.getPosition(player.roomID)
         prompt = "(game) >>> "
 
         print("--\n{}".format(position))
