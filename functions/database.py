@@ -313,7 +313,7 @@ def doQuery(sql):
     return result
 
 
-def getPosition(playerRoom):
+def getRoomDescription(playerRoom):
     sql = "SELECT ZL_Room.Description " \
           "FROM ZL_Room " \
           "WHERE ZL_Room.ID = {}".format(playerRoom)
