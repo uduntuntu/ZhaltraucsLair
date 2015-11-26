@@ -292,6 +292,7 @@ def doQuery(sql):
         result = cur.fetchall()
     except mysql.connector.Error as err:
         ## By next statement we can catch "No result set to fetch from." error.
+        ## errno is so general that we don't want catch it during development.
         # if err.errno == -1:
         #     pass
         # else:
