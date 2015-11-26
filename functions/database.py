@@ -218,42 +218,32 @@ def initializeDatabase():
 
     for name, dropConstraintLine in CONSTRAINTS_DROP.items():
         try:
-            print("Dropping constraints for table {}: ".format(name), end='')
             cursor.execute(dropConstraintLine)
         except mysql.connector.Error as err:
-            print(err.msg)
-        else:
-            print("OK")
+            print("Error when dropping constraints for table {}: {}"
+                  "".format(name, err.msg))
 
     for name in TABLES.keys():
         try:
-            print("Dropping table {}: ".format(name), end='')
             cursor.execute("DROP TABLE IF EXISTS {}".format(name))
         except mysql.connector.Error as err:
-            print(err.msg)
-        else:
-            print("OK")
+            print("Error when Dropping table {}: {}".format(name, err.msg))
 
     for name, creationLine in TABLES.items():
         try:
-            print("Creating table {}: ".format(name), end='')
             cursor.execute(creationLine)
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-                print("already exists.")
+                print("Table {} already exists.".format(name))
             else:
-                print(err.msg)
-        else:
-            print("OK")
+                print("Error when creating table {}: {}".format(name, err.msg))
 
     for name, constraintLine in CONSTRAINTS_ADD.items():
         try:
-            print("Adding constraints for table {}: ".format(name), end='')
             cursor.execute(constraintLine)
         except mysql.connector.Error as err:
-            print(err.msg)
-        else:
-            print("OK")
+            print("Error when adding constraints for table {}: {}"
+                  "".format(name, err.msg))
 
     cursor.close()
     cnx.commit()
@@ -280,12 +270,9 @@ def populateTables():
               "".format(cfg['Datafiles'][table], table, lineEnding)
 
         try:
-            print("Populating table {}: ".format(table), end='')
             cur.execute(sql)
         except mysql.connector.Error as err:
-            print(err.msg)
-        else:
-            print("OK")
+            print("Error when populating table {}: ".format(table, err.msg))
 
         cur.close()
         cnx.commit()
@@ -304,7 +291,13 @@ def doQuery(sql):
         cur.execute(sql)
         result = cur.fetchall()
     except mysql.connector.Error as err:
-        print(err.msg)
+        ## By next statement we can catch "No result set to fetch from." error.
+        # if err.errno == -1:
+        #     pass
+        # else:
+        print('Error in query "{}": ({}) {}'
+              ''.format(sql, err.errno, err.msg)
+              )
 
     cur.close()
     cnx.commit()
@@ -376,6 +369,6 @@ def getPlayer():
     sql = "SELECT Name,Class FROM ZL_Player"
     result = doQuery(sql)
     if len(result) == 1:
-        player = Player(result[0][0],result[0][1])
+        player = Player(result[0][0], result[0][1])
 
         return player
