@@ -5,6 +5,7 @@ import functions.database as db
 commands = {
     'go': 2,
     'pick': 2,
+    'drop': 2,
     'use': 2,
     'push': 2,
     'pull': 2,
