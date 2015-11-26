@@ -18,15 +18,6 @@ commands = {
     'quit': 1
 }
 
-directions = (
-    'north', 'n',
-    'south', 's',
-    'east', 'e',
-    'west', 'w',
-    'up', 'u',
-    'down', 'd'
-)
-
 menu = {
     1: 'Start a new game.',
     2: 'Continue playing.',
@@ -45,43 +36,52 @@ def isValid(command):
         return False
 
 
-def execute(command):
+def execute(command, directions, player):
     '''
     :param command: only valid commands came in from isValid(command)
     :return: "main" if switch context to "main", "game" if keep playing.
     '''
 
     if command[0] == "go":
-        go(command)
+        go(command, directions, player)
+
     elif command[0] == "help":
         if len(command) == 1:
             help()
+
         else:
             help(command[1])
+
     elif command[0] == "menu":
         return "main"
+
     elif command[0] == "quit":
         raise SystemExit
+
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
+
     return "game"
 
 
-def go(command):
+def go(command, directions, player):
     if command[0] == "go" and len(command) == 1:
-        print("go", directions)
+        print("You can go: ")
+        for direction in directions.keys():
+                print("\t* {}".format(direction))
+
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
-            print(
-                'moving to "{0:s}" '
-                'is not implemented yet.'.format(command[1])
-            )
+            print(directions[command[1]])
+            player.roomID = directions[command[1]]
+            db.setPlayerRoomID(player.roomID)
         else:
             print(
                 "Invalid direction. You can use "
                 "only directions in list below:"
             )
-            print("go", directions)
+            for direction in directions.keys():
+                print("\t* {}".format(direction))
 
 
 def help(command="none"):
@@ -90,8 +90,10 @@ def help(command="none"):
         for c in commands.keys():
             print("\t* {0:s}".format(c))
         print('For more information, please write "help [command]".')
+
     elif command in commands:
         print('help for "{0:s}" is not implemented yet.'.format(command))
+
     else:
         print('No help for "{0:s}". It is an invalid command.'.format(command))
 
@@ -107,18 +109,23 @@ def doMenu(selection=0):
         for key, value in menu.items():
             print("{} = {}".format(key, value))
         return "main"
+
     elif selection == 1:
         db.initializeDatabase()
         db.populateTables()
         db.createPlayer()
         return "game"
+
     elif selection == 2:
         return "game"
+
     elif selection == 5:
         raise SystemExit
+
     elif selection in menu:
         print("Menu item {0} not implemented yet.".format(selection))
         return "main"
+
     else:
         for key, value in menu.items():
             print("{} = {}".format(key, value))
