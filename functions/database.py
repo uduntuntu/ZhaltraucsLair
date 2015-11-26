@@ -323,10 +323,10 @@ def getRoomDescription(playerRoom):
 
 
 class Player:
-    def __init__(self, playerName, playerClass):
+    def __init__(self, playerName, playerClass, roomID=1):
         self.playerName = playerName
         self.playerClass = playerClass
-        self.roomID = 1
+        self.roomID = roomID
         self.points = 0
         self.inventory = []
 
@@ -373,10 +373,10 @@ def createPlayer():
 
 
 def getPlayer():
-    sql = "SELECT Name,Class FROM ZL_Player"
+    sql = "SELECT Name,Class,RoomID FROM ZL_Player"
     result = doQuery(sql)
     if len(result) == 1:
-        player = Player(result[0][0],result[0][1])
+        player = Player(result[0][0],result[0][1],result[0][2])
 
         return player
 
@@ -387,17 +387,24 @@ def getDirections(roomID):
           "".format(roomID)
     result = doQuery(sql)
     directions = {}
-    if result[0][0] is not None:
-        directions['north'] = result[0][0]
-    if result[0][1] is not None:
-        directions['south'] = result[0][1]
-    if result[0][2] is not None:
-        directions['east'] = result[0][2]
-    if result[0][3] is not None:
-        directions['west'] = result[0][3]
-    if result[0][4] is not None:
-        directions['up'] = result[0][4]
-    if result[0][5] is not None:
-        directions['down'] = result[0][5]
-
+    if result != []:
+        if result[0][0] is not None:
+            directions['north'] = result[0][0]
+        if result[0][1] is not None:
+            directions['south'] = result[0][1]
+        if result[0][2] is not None:
+            directions['east'] = result[0][2]
+        if result[0][3] is not None:
+            directions['west'] = result[0][3]
+        if result[0][4] is not None:
+            directions['up'] = result[0][4]
+        if result[0][5] is not None:
+            directions['down'] = result[0][5]
+    else:
+        print("No movement set in database for this room.")
     return directions
+
+
+def setPlayerRoomID(roomID):
+    sql = "UPDATE ZL_Player SET RoomID = {}".format(roomID)
+    doQuery(sql)

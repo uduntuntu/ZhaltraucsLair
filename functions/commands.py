@@ -36,14 +36,14 @@ def isValid(command):
         return False
 
 
-def execute(command, directions):
+def execute(command, directions, player):
     '''
     :param command: only valid commands came in from isValid(command)
     :return: "main" if switch context to "main", "game" if keep playing.
     '''
 
     if command[0] == "go":
-        go(command, directions)
+        go(command, directions, player)
 
     elif command[0] == "help":
         if len(command) == 1:
@@ -64,7 +64,7 @@ def execute(command, directions):
     return "game"
 
 
-def go(command, directions):
+def go(command, directions, player):
     if command[0] == "go" and len(command) == 1:
         print("You can go: ")
         for direction in directions.keys():
@@ -72,11 +72,9 @@ def go(command, directions):
 
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
-            print(
-                'moving to "{0:s}" '
-                'is not implemented yet.'.format(command[1])
-            )
-
+            print(directions[command[1]])
+            player.roomID = directions[command[1]]
+            db.setPlayerRoomID(player.roomID)
         else:
             print(
                 "Invalid direction. You can use "

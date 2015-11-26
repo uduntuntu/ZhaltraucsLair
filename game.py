@@ -43,7 +43,7 @@ while True:
         c = input(prompt).lower().split()
 
         if (command.isValid(c)):
-            context = command.execute(c, directions)
+            context = command.execute(c, directions, player)
         else:
             print('Invalid command. '
                 'Write "help" to get list of available commands.'
