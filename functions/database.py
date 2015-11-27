@@ -316,6 +316,20 @@ def getRoomDescription(playerRoom):
         return result[0][0]
 
 
+def getRoomState(playerRoom):
+    sql = "SELECT ZL_RoomState.Description " \
+          "FROM ZL_RoomState " \
+          "INNER JOIN ZL_Room " \
+          "ON ZL_RoomState.ID = ZL_Room.State " \
+          "AND ZL_Room.State = ZL_RoomState.ID " \
+          "WHERE ZL_Room.ID = {}".format(playerRoom)
+    result = doQuery(sql)
+    if len(result) == 1:
+        return result[0][0]
+    else:
+        return None
+
+
 class Player:
     def __init__(self, playerName, playerClass, roomID=1):
         self.playerName = playerName

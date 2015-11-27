@@ -29,9 +29,14 @@ while True:
         # update player object and if doesn't exist yet create it
         player = db.getPlayer()
 
-        # get and print room description
-        roomDescription = db.getRoomDescription(player.roomID)
-        print("--\n{}".format(roomDescription))
+        # get and print room description or state
+        roomState = db.getRoomState(player.roomID)
+        if roomState is not None:
+            print("--\n{}".format(roomState))
+        else:
+            roomDescription = db.getRoomDescription(player.roomID)
+            print("--\n{}".format(roomDescription))
+
 
         # get and print directions player can go
         directions = db.getDirections(player.roomID)
