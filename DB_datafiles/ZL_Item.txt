@@ -1,2 +1,2 @@
 ID;Name;RoomID;Description;PointsModifier;AttackModifier;DefenceModifier;NPCID;PlayerName
-1;Torch;1;\N;15;\N;\N;\N;\N
+1;torch;1;\N;15;\N;\N;\N;\N
