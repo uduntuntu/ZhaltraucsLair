@@ -14,7 +14,7 @@ commands = {
     'help': 2,
     'menu': 1,
     'inventory': 1,
-    'look': 1,
+    'look': 2,
     'quit': 1
 }
 
@@ -36,7 +36,7 @@ def isValid(command):
         return False
 
 
-def execute(command, directions, player):
+def execute(command, directions, items, player):
     '''
     :param command: only valid commands came in from isValid(command)
     :return: "main" if switch context to "main", "game" if keep playing.
@@ -60,9 +60,9 @@ def execute(command, directions, player):
 
     elif command[0] == "look":
         if len(command) == 1:
-            look(player)
+            look(items)
         else:
-            look(player, command[1])
+            look(items, command[1])
 
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
@@ -137,12 +137,22 @@ def help(command=None):
         print('No help for "{0:s}". It is an invalid command.'.format(command))
 
 
-def look(player,command=None):
-    if command == None:
-        itemsInRoom = db.getItemsInRoom(player.roomID)
-        if itemsInRoom != None:
+def look(items,item=None):
+    print("{} {}".format(items,item))
+    if item == None:
+        if items != None:
             print("There is follow items in room:")
-            for item in itemsInRoom:
+            for item in items:
                 print("\t* {}".format(item))
         else:
             print("There is no items in room.")
+    elif item in items:
+        sql = "SELECT ZL_Item.Description FROM ZL_Item " \
+              "WHERE ZL_Item.Name = '{}'".format(item)
+        result = db.doQuery(sql)
+        if result[0][0] != None:
+            print(result[0][0])
+        else:
+            print('Item "{}" doesn\'t have a description'.format(item))
+    else:
+        print('Item "{}" not found.'.format(item))

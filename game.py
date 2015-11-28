@@ -41,16 +41,19 @@ while True:
             print("--\n{}".format(roomDescription))
 
 
-        # get and print directions player can go
+        # get directions player can go
         directions = db.getDirections(player.roomID)
+
+        # get items in room player can pick
+        items = db.getItemsInRoom(player.roomID)
 
         # ask a command from player
         c = input(prompt).lower().split()
 
-        # pass a command, possible directions and the player object to
-        # command parser
+        # pass a command, possible directions, items in room and the player
+        # object to command parser
         if (command.isValid(c)):
-            context = command.execute(c, directions, player)
+            context = command.execute(c, directions, items, player)
         else:
             print('Invalid command. '
                 'Write "help" to get list of available commands.'
