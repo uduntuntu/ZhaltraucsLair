@@ -14,3 +14,4 @@ ID;Description;State;PointsModifier
 13;You hear noises of a scuffle ahead. ;0;1
 14;Stairs leading to the next level of this underground lair open up before you, an arching doorway like a gaping maw swallowing the descending steps. You may enter the next level or move either east or west. ;\N;1
 15;You feel a breeze across your face. ;0;1
+16;Entrance to second level;\N;1
