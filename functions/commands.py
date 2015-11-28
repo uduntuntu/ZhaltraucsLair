@@ -58,43 +58,16 @@ def execute(command, directions, player):
     elif command[0] == "quit":
         raise SystemExit
 
+    elif command[0] == "look":
+        if len(command) == 1:
+            look(player)
+        else:
+            look(player, command[1])
+
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
 
     return "game"
-
-
-def go(command, directions, player):
-    if command[0] == "go" and len(command) == 1:
-        print("You can go: ")
-        for direction in directions.keys():
-                print("\t* {}".format(direction))
-
-    elif command[0] == "go" and len(command) == 2:
-        if command[1] in directions:
-            player.roomID = directions[command[1]]
-            db.setPlayerRoomID(player.roomID)
-        else:
-            print(
-                "Invalid direction. You can use "
-                "only directions in list below:"
-            )
-            for direction in directions.keys():
-                print("\t* {}".format(direction))
-
-
-def help(command="none"):
-    if command == "none":
-        print("List of available commands:")
-        for c in commands.keys():
-            print("\t* {0:s}".format(c))
-        print('For more information, please write "help [command]".')
-
-    elif command in commands:
-        print('help for "{0:s}" is not implemented yet.'.format(command))
-
-    else:
-        print('No help for "{0:s}". It is an invalid command.'.format(command))
 
 
 def doMenu(selection=0):
@@ -129,3 +102,47 @@ def doMenu(selection=0):
         for key, value in menu.items():
             print("{} = {}".format(key, value))
         raise ValueError('Invalid selection {0:d}.'.format(selection))
+
+
+def go(command, directions, player):
+    if command[0] == "go" and len(command) == 1:
+        print("You can go: ")
+        for direction in directions.keys():
+                print("\t* {}".format(direction))
+
+    elif command[0] == "go" and len(command) == 2:
+        if command[1] in directions:
+            player.roomID = directions[command[1]]
+            db.setPlayerRoomID(player.roomID)
+        else:
+            print(
+                "Invalid direction. You can use "
+                "only directions in list below:"
+            )
+            for direction in directions.keys():
+                print("\t* {}".format(direction))
+
+
+def help(command=None):
+    if command == None:
+        print("List of available commands:")
+        for c in commands.keys():
+            print("\t* {0:s}".format(c))
+        print('For more information, please write "help [command]".')
+
+    elif command in commands:
+        print('help for "{0:s}" is not implemented yet.'.format(command))
+
+    else:
+        print('No help for "{0:s}". It is an invalid command.'.format(command))
+
+
+def look(player,command=None):
+    if command == None:
+        itemsInRoom = db.getItemsInRoom(player.roomID)
+        if itemsInRoom != None:
+            print("There is follow items in room:")
+            for item in itemsInRoom:
+                print("\t* {}".format(item))
+        else:
+            print("There is no items in room.")

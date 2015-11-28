@@ -420,3 +420,18 @@ def getDirections(roomID):
 def setPlayerRoomID(roomID):
     sql = "UPDATE ZL_Player SET RoomID = {}".format(roomID)
     doQuery(sql)
+
+def getItemsInRoom(roomID):
+    sql = "SELECT ZL_Item.Name " \
+          "FROM ZL_Item " \
+          "INNER JOIN ZL_Room " \
+          "ON ZL_Item.RoomID = ZL_Room.ID " \
+          "WHERE ZL_Item.RoomID = {}".format(roomID)
+    result = doQuery(sql)
+    items = []
+    if result != []:
+        for i in range(0,len(result)):
+            items.append(result[i][0])
+        return items
+    else:
+        return None
