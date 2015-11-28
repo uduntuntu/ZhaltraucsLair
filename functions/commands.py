@@ -138,7 +138,6 @@ def help(command=None):
 
 
 def look(items,item=None):
-    print("{} {}".format(items,item))
     if item == None:
         if items != None:
             print("There is follow items in room:")
