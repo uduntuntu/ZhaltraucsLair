@@ -272,7 +272,7 @@ def populateTables():
         try:
             cur.execute(sql)
         except mysql.connector.Error as err:
-            print("Error when populating table {}: ".format(table, err.msg))
+            print("Error when populating table {}: {}".format(table, err.msg))
 
         cur.close()
         cnx.commit()
@@ -291,14 +291,14 @@ def doQuery(sql):
         cur.execute(sql)
         result = cur.fetchall()
     except mysql.connector.Error as err:
-        ## By next statement we can catch "No result set to fetch from." error.
-        ## errno is so general that we don't want catch it during development.
-        # if err.errno == -1:
-        #     pass
-        # else:
-        print('Error in query "{}": ({}) {}'
-              ''.format(sql, err.errno, err.msg)
-              )
+        # Discartd error: "(-1) No result set to fetch from."
+        # when doing import or update query.
+        if err.errno == -1:
+            pass
+        else:
+            print('Error in query "{}": ({}) {}'
+                  ''.format(sql, err.errno, err.msg)
+                  )
 
     cur.close()
     cnx.commit()

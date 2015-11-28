@@ -72,7 +72,6 @@ def go(command, directions, player):
 
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
-            print(directions[command[1]])
             player.roomID = directions[command[1]]
             db.setPlayerRoomID(player.roomID)
         else:

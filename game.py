@@ -16,14 +16,17 @@ while True:
     context = command.doMenu()
 
     while context == "main":
+        # validate to player that we are in correct context
         prompt = "(main) >>> "
         try:
+            # in main menu context we catch only integers as commands
             c = int(input(prompt))
             context = command.doMenu(c)
         except ValueError as e:
             print(e)
 
     while context == "game":
+        # validate to player that we are in correct context
         prompt = "(game) >>> "
 
         # update player object and if doesn't exist yet create it
@@ -40,13 +43,12 @@ while True:
 
         # get and print directions player can go
         directions = db.getDirections(player.roomID)
-        print("Directions you can go:")
-        for direction in directions.keys():
-            print("\t* {}".format(direction))
 
-        #
+        # ask a command from player
         c = input(prompt).lower().split()
 
+        # pass a command, possible directions and the player object to
+        # command parser
         if (command.isValid(c)):
             context = command.execute(c, directions, player)
         else:
