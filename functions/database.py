@@ -331,12 +331,12 @@ def getRoomState(playerRoom):
 
 
 class Player:
-    def __init__(self, playerName, playerClass, roomID=1):
+    def __init__(self, playerName, playerClass, roomID=1,inventory=[]):
         self.playerName = playerName
         self.playerClass = playerClass
         self.roomID = roomID
         self.points = 0
-        self.inventory = []
+        self.inventory = inventory
 
         if self.playerClass == "barbarian":
             self.HP = 50
@@ -383,12 +383,17 @@ def createPlayer():
 def getPlayer():
     sql = "SELECT Name,Class,RoomID FROM ZL_Player"
     result = doQuery(sql)
-
+    sql = "Select ZL_Item.Name FROM ZL_Item " \
+          "WHERE ZL_Item.PlayerName = '{}'".format(result[0][0])
+    inv = doQuery(sql)
+    inventory = []
+    for i in range(0,len(inv)):
+        inventory.append(inv[i][0])
     # Because our database is initialized when starting new game, we can't have
     # more than one player in database. In case something is gone wrong in
     # player creation process, result can be empty.
     if len(result) == 1:
-        player = Player(result[0][0], result[0][1], result[0][2])
+        player = Player(result[0][0], result[0][1], result[0][2],inventory)
 
         return player
 
@@ -421,6 +426,7 @@ def setPlayerRoomID(roomID):
     sql = "UPDATE ZL_Player SET RoomID = {}".format(roomID)
     doQuery(sql)
 
+
 def getItemsInRoom(roomID):
     sql = "SELECT ZL_Item.Name " \
           "FROM ZL_Item " \
@@ -435,3 +441,20 @@ def getItemsInRoom(roomID):
         return items
     else:
         return None
+
+
+def getItemDescription(item):
+    sql = "SELECT ZL_Item.Description FROM ZL_Item " \
+              "WHERE ZL_Item.Name = '{}'".format(item)
+    result = doQuery(sql)
+    if result[0][0] != None:
+        return result[0][0]
+    else:
+        return ('Item "{}" doesn\'t have a description'.format(item))
+
+
+def pickItem(item,player):
+    sql = "UPDATE ZL_Item SET PlayerName='{}', " \
+          "RoomID = NULL " \
+          "WHERE ZL_Item.Name = '{}'".format(player.playerName,item)
+    doQuery(sql)

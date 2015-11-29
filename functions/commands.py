@@ -64,6 +64,15 @@ def execute(command, directions, items, player):
         else:
             look(items, command[1])
 
+    elif command[0] == "pick":
+        if len(command) == 1:
+            pick(items)
+        else:
+            pick(items, player, command[1])
+
+    elif command[0] == "inventory":
+        print(player.inventory)
+
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
 
@@ -146,12 +155,22 @@ def look(items,item=None):
         else:
             print("There is no items in room.")
     elif item in items:
-        sql = "SELECT ZL_Item.Description FROM ZL_Item " \
-              "WHERE ZL_Item.Name = '{}'".format(item)
-        result = db.doQuery(sql)
-        if result[0][0] != None:
-            print(result[0][0])
-        else:
-            print('Item "{}" doesn\'t have a description'.format(item))
+        print(db.getItemDescription(item))
     else:
         print('Item "{}" not found.'.format(item))
+
+
+def pick(items, player=None, item=None):
+    if item == None:
+        if items != None:
+            print("You can pick items below:")
+            for item in items:
+                print("\t* {}".format(item))
+        else:
+            print("There is no items in room.")
+    elif item in items:
+        db.pickItem(item,player)
+        print('You picked up item "{}".'.format(item))
+        player.inventory.append(item)
+    else:
+        print('Cannot pick up item "{}".'.format(item))
