@@ -73,6 +73,12 @@ def execute(command, directions, items, player):
     elif command[0] == "inventory":
         print(player.inventory)
 
+    elif command[0] == "drop":
+        if len(command) == 1:
+            drop(player)
+        else:
+            drop(player, command[1])
+
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
 
@@ -174,3 +180,19 @@ def pick(items, player=None, item=None):
         player.inventory.append(item)
     else:
         print('Cannot pick up item "{}".'.format(item))
+
+
+def drop(player=None, item=None):
+    if item == None:
+        if player.inventory != []:
+            print("You can drop items below:")
+            for item in player.inventory:
+                print("\t* {}".format(item))
+        else:
+            print("There is no items in inventory to drop.")
+    elif item in player.inventory:
+        db.dropItem(item,player)
+        print('You dropped item "{}".'.format(item))
+        player.inventory.remove(item)
+    else:
+        print('Cannot drop item "{}".'.format(item))

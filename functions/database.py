@@ -458,3 +458,10 @@ def pickItem(item,player):
           "RoomID = NULL " \
           "WHERE ZL_Item.Name = '{}'".format(player.playerName,item)
     doQuery(sql)
+
+
+def dropItem(item,player):
+    sql = "UPDATE ZL_Item SET PlayerName=NULL," \
+          "RoomID = {} WHERE ZL_Item.Name='{}'" \
+          "".format(player.roomID,item)
+    doQuery(sql)
