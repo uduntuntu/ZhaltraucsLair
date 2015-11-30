@@ -242,10 +242,9 @@ def use(player=None, item=None):
                 print("\t* {}".format(item))
         else:
             print("There is no items in inventory to use.")
-    elif item == 'torch' and player.roomID == 2:
-        for roomID in (2,3,5):
-            db.useItem(item, roomID, 1)
+
     elif item in player.inventory:
         print("Using item {} doesn't make sense.")
+
     else:
         print('Cannot use item "{}".'.format(item))
