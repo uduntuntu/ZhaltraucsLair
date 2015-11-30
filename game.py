@@ -3,6 +3,8 @@
 import functions.commands as command
 import functions.database as db
 
+player = db.getPlayer()
+
 f = open('ASCII/StartScreen_UTF-8.asc', 'r')
 print(f.read())
 f.close()
@@ -30,7 +32,7 @@ while True:
         prompt = "(game) >>> "
 
         # update player object and if doesn't exist yet create it
-        player = db.getPlayer()
+        player = db.updatePlayer(player)
 
         # get and print room description or state
         roomState = db.getRoomState(player.roomID)

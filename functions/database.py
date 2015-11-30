@@ -398,6 +398,21 @@ def getPlayer():
         return player
 
 
+def updatePlayer(player):
+    sql = "SELECT RoomID, Points FROM ZL_Player"
+    result = doQuery(sql)
+    sql = "Select ZL_Item.Name FROM ZL_Item " \
+          "WHERE ZL_Item.PlayerName = '{}'".format(result[0][0])
+    inv = doQuery(sql)
+    player.roomID = result[0][0]
+    player.points = result[0][1]
+    inventory = []
+    for i in range(0,len(inv)):
+        inventory.append(inv[i][0])
+    player.inventory = inventory
+
+    return player
+
 def getDirections(roomID):
     sql = "SELECT RoomInNorth,RoomInSouth,RoomInEast,RoomInWest," \
           "RoomInUp,RoomInDown FROM ZL_Movement WHERE RoomID = {}" \
