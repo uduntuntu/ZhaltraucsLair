@@ -52,16 +52,17 @@ while True:
 
         # get NPCs in room player can action (talk or fight)
         npcs = db.getNPCsInRoom(player.roomID)
-        print("There is following NPCs in room:")
-        for npc in npcs:
-            print("\t{} = {}".format(npc.ID, npc.NPCName))
+        if npcs != []:
+            print("There is following NPCs in room:")
+            for key, npc in npcs.items():
+                print("\t{} = {} {}".format(key, npc.NPCName, npc.ID))
         # ask a command from player
         c = input(prompt).lower().split()
 
         # pass a command, possible directions, items in room and the player
         # object to command parser
         if (command.isValid(c)):
-            context = command.execute(c, directions, items, player)
+            context = command.execute(c, directions, items, npcs, player)
         else:
             print('Invalid command. '
                 'Write "help" to get list of available commands.'

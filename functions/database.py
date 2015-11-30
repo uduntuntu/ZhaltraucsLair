@@ -500,7 +500,7 @@ def getNPCsInRoom(roomID):
           "ON ZL_NPC.RoomID = ZL_Room.ID " \
           "WHERE ZL_NPC.RoomID = {}".format(roomID)
     result = doQuery(sql)
-    npcs = []
+    npcs = {}
     if result != []:
         for i in range(0,len(result)):
             npc = NPC(result[i][0],
@@ -511,7 +511,7 @@ def getNPCsInRoom(roomID):
                       result[i][5],
                       result[i][6]
                       )
-            npcs.append(npc)
+            npcs[i] = (npc)
 
     return npcs
 

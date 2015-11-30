@@ -38,7 +38,7 @@ def isValid(command):
         return False
 
 
-def execute(command, directions, items, player):
+def execute(command, directions, items, npcs, player):
     '''
     :param command: only valid commands came in from isValid(command)
     :return: "main" if switch context to "main", "game" if keep playing.
@@ -163,6 +163,9 @@ def go(command, directions, player):
         if command[1] in directions:
             player.roomID = directions[command[1]]
             db.setPlayerRoomID(player.roomID)
+            if player.roomID == 2 and 'torch' in player.inventory:
+                for i in (2,3,5):
+                    db.updateRoomState(i,1)
         else:
             print(
                 "Invalid direction. You can use "
