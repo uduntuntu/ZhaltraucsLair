@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import functions.database as db
+import functions.actions as action
 
 commands = {
     'go': 2,
     'pick': 2,
     'drop': 2,
     'use': 2,
+    'jump': 1,
     'push': 2,
     'pull': 2,
     'talk': 2,
@@ -84,6 +86,32 @@ def execute(command, directions, items, player):
             use(player)
         else:
             use(player, command[1])
+
+    elif command[0] == "jump":
+        if player.roomID == 3:
+            success = action.jump(player)
+            if success == 2:
+                db.updateRoomState(player.roomID,2)
+                if 'west' in directions:
+                    db.updateMovements(player,'NULL','NULL',4,'NULL','NULL','NULL')
+                    print(db.getRoomState(player.roomID))
+                    db.updateRoomState(player.roomID,1)
+                else:
+                    db.updateMovements(player,'NULL','NULL','NULL',2,'NULL','NULL')
+                    print(db.getRoomState(player.roomID))
+                    db.updateRoomState(player.roomID,1)
+            elif success == 1:
+                db.updateRoomState(player.roomID,3)
+                if 'west' in directions:
+                    db.updateMovements(player,'NULL','NULL',4,'NULL','NULL','NULL')
+                else:
+                    db.updateMovements(player,'NULL','NULL','NULL',2,'NULL','NULL')
+            else:
+                db.updateRoomState(player.roomID,4)
+                print(db.getRoomState(player.roomID))
+                raise SystemExit
+        else:
+            print("There is no reason to jump.")
 
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))

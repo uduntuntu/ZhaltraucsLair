@@ -475,3 +475,22 @@ def useItem(item,roomID,stateToDo):
           "WHERE Name = '{}'" \
           "".format(item)
     doQuery(sql)
+
+
+def updateRoomState(roomID,stateToDo):
+    sql = "UPDATE ZL_Room SET State = {} WHERE ID = {}" \
+          "".format(stateToDo,roomID)
+    doQuery(sql)
+
+
+def updateMovements(player,north, south, east, west, up, down):
+    sql = "UPDATE ZL_Movement SET " \
+          "RoomInNorth={}," \
+          "RoomInSouth={}," \
+          "RoomInEast={}," \
+          "RoomInWest={}," \
+          "RoomInUp={}," \
+          "RoomInDown={} " \
+          "WHERE ZL_Movement.RoomID={}" \
+          "".format(north, south, east, west, up, down,player.roomID)
+    doQuery(sql)
