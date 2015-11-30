@@ -18,4 +18,4 @@ Orc;16;15;2;5;\N;10;swamp green and snout nosed, nasty looking Orc.
 Dragon;17;99;15;30;\N;20;yes, a dragon. This huge fire breathing beast loves only gold more than murdering mayhem. You feel like passing this fight.
 Cyclop;18;25;4;6;\N;10;one huge bulky lidless eye stares back at you. There's something mesmerizing in it's horrible stare. The cyclop roars and prepares his attack.
 Mage;19;15;5;3;\N;8;hooded figure stands like frozen statue on the bridge blocking your way. You can feel the powerful magical aura as you approach.
-Zhaltrauc;20;50;10;10;\N;20;evil lich king waked by the creed of men. You feel the world spinning and the geometry to fail around you by the power of evil in front of you.
+Zhaltrauc;20;50;10;10;\N;20;evil lich king awoken by the creed of men. You feel the world spinning and the geometry to fail around you by the power of evil in front of you.
