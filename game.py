@@ -3,7 +3,8 @@
 import functions.commands as command
 import functions.database as db
 
-player = db.getPlayer()
+if db.testConnection():
+    player = db.getPlayer()
 
 f = open('ASCII/StartScreen_UTF-8.asc', 'r')
 print(f.read())
