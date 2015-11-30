@@ -399,11 +399,13 @@ def getPlayer():
     # Because our database is initialized when starting new game, we can't have
     # more than one player in database. In case something is gone wrong in
     # player creation process, result can be empty.
-    if len(result) == 1:
+    if len(result) != 0:
         player = Player(result[0][0], result[0][1], result[0][2],inventory)
 
         return player
     else:
+        initializeDatabase()
+        populateTables()
         player = createPlayer()
         return player
 
@@ -463,9 +465,8 @@ def getItemsInRoom(roomID):
     if result != []:
         for i in range(0,len(result)):
             items.append(result[i][0])
-        return items
-    else:
-        return None
+
+    return items
 
 
 def getItemDescription(item):

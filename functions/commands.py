@@ -171,7 +171,6 @@ def go(command, directions, player):
             for direction in directions.keys():
                 print("\t* {}".format(direction))
 
-
 def help(command=None):
     if command == None:
         print("List of available commands:")
@@ -188,7 +187,7 @@ def help(command=None):
 
 def look(items,item=None):
     if item == None:
-        if items != None:
+        if items != []:
             print("There is follow items in room:")
             for item in items:
                 print("\t* {}".format(item))
@@ -202,7 +201,7 @@ def look(items,item=None):
 
 def take(items, player=None, item=None):
     if item == None:
-        if items != None:
+        if items != []:
             print("You can take items below:")
             for item in items:
                 print("\t* {}".format(item))
