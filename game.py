@@ -47,8 +47,10 @@ while True:
         # get directions player can go
         directions = db.getDirections(player.roomID)
 
-        # get items in room player can pick
+        # get items in room player can take
         items = db.getItemsInRoom(player.roomID)
+
+        # get NPCs in room player can action (talk or fight)
         npcs = db.getNPCsInRoom(player.roomID)
         print("There is following NPCs in room:")
         for npc in npcs:

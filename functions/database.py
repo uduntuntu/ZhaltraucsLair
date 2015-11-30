@@ -355,7 +355,15 @@ class Player:
 
 
 class NPC:
-    def __init__(self, NPCName, HP, Agility, Strength, Pointsmodifier, roomID, ID):
+    def __init__(self,
+                 NPCName,
+                 HP,
+                 Agility,
+                 Strength,
+                 Pointsmodifier,
+                 roomID,
+                 ID
+                 ):
         self.NPCName = NPCName
         self.roomID = roomID
         self.HP = HP
@@ -480,7 +488,13 @@ def getItemsInRoom(roomID):
     return items
 
 def getNPCsInRoom(roomID):
-    sql = "SELECT ZL_NPC.Name, ZL_NPC.HP, ZL_NPC.Agility, ZL_NPC.Strength, ZL_NPC.RoomID, ZL_NPC.PointModifier, ZL_NPC.ID " \
+    sql = "SELECT ZL_NPC.Name," \
+          " ZL_NPC.HP, " \
+          "ZL_NPC.Agility, " \
+          "ZL_NPC.Strength, " \
+          "ZL_NPC.RoomID, " \
+          "ZL_NPC.PointModifier, " \
+          "ZL_NPC.ID " \
           "FROM ZL_NPC " \
           "INNER JOIN ZL_Room " \
           "ON ZL_NPC.RoomID = ZL_Room.ID " \
@@ -489,7 +503,14 @@ def getNPCsInRoom(roomID):
     npcs = []
     if result != []:
         for i in range(0,len(result)):
-            npc = NPC(result[i][0],result[i][1],result[i][2],result[i][3],result[i][4],result[i][5],result[i][6])
+            npc = NPC(result[i][0],
+                      result[i][1],
+                      result[i][2],
+                      result[i][3],
+                      result[i][4],
+                      result[i][5],
+                      result[i][6]
+                      )
             npcs.append(npc)
 
     return npcs
