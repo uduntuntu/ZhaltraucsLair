@@ -79,6 +79,12 @@ def execute(command, directions, items, player):
         else:
             drop(player, command[1])
 
+    elif command[0] == "use":
+        if len(command) == 1:
+            use(player)
+        else:
+            use(player, command[1])
+
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
 
@@ -196,3 +202,19 @@ def drop(player=None, item=None):
         player.inventory.remove(item)
     else:
         print('Cannot drop item "{}".'.format(item))
+
+
+def use(player=None, item=None):
+    if item == None:
+        if player.inventory != []:
+            print("You can use items below:")
+            for item in player.inventory:
+                print("\t* {}".format(item))
+        else:
+            print("There is no items in inventory to use.")
+    elif item == 'torch' and player.roomID == 2:
+        db.useItem(item, player, 1)
+    elif item in player.inventory:
+        print("Using item {} doesn't make sense.")
+    else:
+        print('Cannot use item "{}".'.format(item))

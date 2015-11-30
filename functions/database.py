@@ -317,12 +317,11 @@ def getRoomDescription(playerRoom):
 
 
 def getRoomState(playerRoom):
-    sql = "SELECT ZL_RoomState.Description " \
-          "FROM ZL_RoomState " \
-          "INNER JOIN ZL_Room " \
-          "ON ZL_RoomState.ID = ZL_Room.State " \
-          "AND ZL_Room.State = ZL_RoomState.ID " \
-          "WHERE ZL_Room.ID = {}".format(playerRoom)
+    sql = "SELECT ZL_RoomState.Description, ZL_Room.ID " \
+          "FROM ZL_RoomState INNER JOIN ZL_Room " \
+          "ON ZL_Room.State = ZL_RoomState.ID " \
+          "WHERE ZL_RoomState.RoomID = {} " \
+          "AND ZL_Room.ID = {}".format(playerRoom,playerRoom)
     result = doQuery(sql)
     if len(result) == 1:
         return result[0][0]
@@ -331,7 +330,8 @@ def getRoomState(playerRoom):
 
 
 class Player:
-    def __init__(self, playerName, playerClass, roomID=1,inventory=[]):
+    def __init__(self, playerName, playerClass,
+                 roomID=1, points=0, inventory=[]):
         self.playerName = playerName
         self.playerClass = playerClass
         self.roomID = roomID
@@ -464,4 +464,14 @@ def dropItem(item,player):
     sql = "UPDATE ZL_Item SET PlayerName=NULL," \
           "RoomID = {} WHERE ZL_Item.Name='{}'" \
           "".format(player.roomID,item)
+    doQuery(sql)
+
+
+def useItem(item,player,stateToDo):
+    sql = "UPDATE ZL_Room SET State = {} WHERE ID = {}" \
+          "".format(stateToDo,player.roomID)
+    doQuery(sql)
+    sql = "UPDATE ZL_Item SET PlayerName = NULL " \
+          "WHERE Name = '{}'" \
+          "".format(item)
     doQuery(sql)
