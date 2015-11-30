@@ -467,9 +467,9 @@ def dropItem(item,player):
     doQuery(sql)
 
 
-def useItem(item,player,stateToDo):
+def useItem(item,roomID,stateToDo):
     sql = "UPDATE ZL_Room SET State = {} WHERE ID = {}" \
-          "".format(stateToDo,player.roomID)
+          "".format(stateToDo,roomID)
     doQuery(sql)
     sql = "UPDATE ZL_Item SET PlayerName = NULL " \
           "WHERE Name = '{}'" \
