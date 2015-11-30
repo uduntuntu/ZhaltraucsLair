@@ -12,3 +12,13 @@ def jump(player):
         return 1
     else:
         return 0
+
+
+def throwIntelligence(player):
+    throw = dice(10)
+    if player.intelligence + throw >= 12:
+        return 2
+    elif player.intelligence + throw >= 10:
+        return 1
+    else:
+        return 0

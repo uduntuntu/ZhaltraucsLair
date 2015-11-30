@@ -166,6 +166,34 @@ def go(command, directions, player):
             if player.roomID == 2 and 'torch' in player.inventory:
                 for i in (2,3,5):
                     db.updateRoomState(i,1)
+            elif player.roomID in (3,5) and 'torch' not in player.inventory:
+                print(db.getRoomState(player.roomID))
+                raise SystemExit
+            elif player.roomID == 7:
+                success = action.throwIntelligence(player)
+                if success == 2:
+                    db.updateRoomState(player.roomID,0)
+                elif success == 1:
+                    db.updateRoomState(player.roomID,1)
+                else:
+                    db.updateRoomState(player.roomID,2)
+            elif player.roomID == 8:
+                success = action.throwIntelligence(player)
+                if success in (1,2):
+                    db.updateRoomState(player.roomID,0)
+                    db.updateMovements(player,15,7,'NULL',14,'NULL','NULL')
+                else:
+                    db.updateRoomState(player.roomID,1)
+            elif player.roomID == 15:
+                success = action.throwAgility(player)
+                if success == 2:
+                    db.updateRoomState(player.roomID,0)
+                if success == 1:
+                    db.updateRoomState(player.roomID,1)
+                else:
+                    db.updateRoomState(player.roomID,2)
+                    print(db.getRoomState(player.roomID))
+                    raise SystemExit
         else:
             print(
                 "Invalid direction. You can use "
