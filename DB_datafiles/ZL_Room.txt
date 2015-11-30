@@ -11,7 +11,16 @@ ID;Description;State;PointsModifier
 10;You locate the source of the sobbing. ;0;1
 11; The room is rahter samll. But you don't even notice this, as the treasure chest in the middle of the room catches your eye. You open the chest and in it is a large sword. Clearly not of orcish , or any other underworld dweller, origin, you deduct that it had belonged to a hero who had the same quest as you. The sword is of far finer craftmanship than any you ever held. This sends toughts to your mind, tougths that question if you are ever going to make it, since a champion of the level that enabled him to wield swords of this magnitude clearly did not. But these tought's get brutely smothered as your eyes fixate on the cool new piece of matter YOU own now. You concentrate on looking at your own reflection from the blade and the gem encrusted handle, concerns of failure just a fleeting memory amongst your materialistic heat.(You get a sword) ;\N;0
 12; You run into orc guards! And they aren't happy to see you! ;0;1
-13;You hear noises of a scuffle ahead. ;0;1
-14;Stairs leading to the next level of this underground lair open up before you, an arching doorway like a gaping maw swallowing the descending steps. You may enter the next level or move either east or west. ;\N;1
-15;You feel a breeze across your face. ;0;1
-16;Entrance to second level;\N;1
+13; You hear noises of a scuffle ahead. ;0;1
+14; Stairs leading to the next level of this underground lair open up before you, an arching doorway like a gaping maw swallowing the descending steps. You may enter the next level or move either east or west. ;\N;1
+15; You feel a breeze across your face. ;0;1
+16; Entrance to second level;\N;1
+17; The hallway opens into a large hall. ;0;1
+18; You enter what is clearly a dungeon. ;0;1
+19; The last of the cells are dimly lit by a kindling bonfire left by orc guards. You use it to re-ignite your torch. You were making your way further south, when a weak voice speaks out to you: "s... swallow..." A weak man, clearly strained for being locked up in here. He continues: "is... is it a African or European swallow...?" He drifts of to babbling and giggling. Nothing more of sense can be made out of his dribbling. You may continue towards the south or north. ;\N;0
+20; The end of the hallway has a large stone mural on its wall ;0;1
+21; You are just thin enough to squeeze yourself in to the next room. ;0;1
+22; You interrupt what seems to be a card game ;0;1
+23; This part of the great halls has been transformed into a makeshift armory  ;0;1
+24; You see the trap. Rather crude 0;1;
+25; You descend deeper into Zhaltrauc's lair (TM). /N;0;
