@@ -401,8 +401,8 @@ def getPlayer():
 
         return player
     else:
-        createPlayer()
-
+        player = createPlayer()
+        return player
 
 def updatePlayer(player):
     sql = "SELECT RoomID, Points FROM ZL_Player"
