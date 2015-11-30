@@ -5,7 +5,7 @@ import functions.actions as action
 
 commands = {
     'go': 2,
-    'pick': 2,
+    'take': 2,
     'drop': 2,
     'use': 2,
     'jump': 1,
@@ -66,11 +66,11 @@ def execute(command, directions, items, player):
         else:
             look(items, command[1])
 
-    elif command[0] == "pick":
+    elif command[0] == "take":
         if len(command) == 1:
-            pick(items)
+            take(items)
         else:
-            pick(items, player, command[1])
+            take(items, player, command[1])
 
     elif command[0] == "inventory":
         print(player.inventory)
@@ -200,20 +200,20 @@ def look(items,item=None):
         print('Item "{}" not found.'.format(item))
 
 
-def pick(items, player=None, item=None):
+def take(items, player=None, item=None):
     if item == None:
         if items != None:
-            print("You can pick items below:")
+            print("You can take items below:")
             for item in items:
                 print("\t* {}".format(item))
         else:
             print("There is no items in room.")
     elif item in items:
         db.pickItem(item,player)
-        print('You picked up item "{}".'.format(item))
+        print('You took item "{}".'.format(item))
         player.inventory.append(item)
     else:
-        print('Cannot pick up item "{}".'.format(item))
+        print('Cannot take item "{}".'.format(item))
 
 
 def drop(player=None, item=None):
