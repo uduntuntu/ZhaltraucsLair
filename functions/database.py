@@ -354,6 +354,19 @@ class Player:
             self.strength = 4
 
 
+class NPC:
+    def __init__(self, NPCName, HP, Agility, Strength, Pointsmodifier,
+                 roomID):
+        self.NPCName = NPCName
+        self.roomID = roomID
+        self.HP = HP
+        self.agility = Agility
+        self.strength = Strength
+        self.pointsmodifier = Pointsmodifier
+
+
+
+
 def createPlayer():
     playerName = input("What's your name? ")
     playerClass = input("Do you want to be a Barbarian or a Thief? ").lower()
@@ -467,6 +480,21 @@ def getItemsInRoom(roomID):
             items.append(result[i][0])
 
     return items
+
+def getNPCsInRoom(roomID):
+    sql = "SELECT ZL_NPC.Name, ZL_NPC.HP, ZL_NPC.Agility, ZL_NPC.Strength, ZL_NPC.RoomID, ZL_NPC.PointModifier " \
+          "FROM ZL_NPC " \
+          "INNER JOIN ZL_Room " \
+          "ON ZL_NPC.RoomID = ZL_Room.ID " \
+          "WHERE ZL_NPC.RoomID = {}".format(roomID)
+    result = doQuery(sql)
+    npcs = []
+    if result != []:
+        for i in range(0,len(result)):
+            npc = NPC(result[i][0],result[i][1],result[i][2],result[i][3],result[i][4],result[i][5])
+            npcs.append(npc)
+
+    return npcs
 
 
 def getItemDescription(item):

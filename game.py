@@ -49,6 +49,7 @@ while True:
 
         # get items in room player can pick
         items = db.getItemsInRoom(player.roomID)
+        npcs = db.getNPCsInRoom(player.roomID)
 
         # ask a command from player
         c = input(prompt).lower().split()
