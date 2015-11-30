@@ -52,7 +52,7 @@ while True:
         npcs = db.getNPCsInRoom(player.roomID)
         print("There is following NPCs in room:")
         for npc in npcs:
-            print("\t*{}".format(npc.NPCName))
+            print("\t{} = {}".format(npc.ID, npc.NPCName))
         # ask a command from player
         c = input(prompt).lower().split()
 
