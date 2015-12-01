@@ -89,13 +89,13 @@ def attack(player, npc):
     hit = playerBD + dice(10)
     dodge = npcDS + dice(10)
 
-    if hit >= 10:
+    if hit >= 8:
         return -(hit + playerWeapon - npcArmor)
 
-    elif hit >= 7:
-        if dodge >= 10:
+    elif hit >= 5:
+        if dodge >= 8:
             return 0
-        elif dodge >= 7:
+        elif dodge >= 5:
                 return -(hit + playerWeapon - npcArmor)/2
         else:
             return -(hit + playerWeapon - npcArmor)
@@ -159,13 +159,13 @@ def dodge(player, npc):
     hit = npcBD + dice(10)
     dodge = playerDS + dice(10)
 
-    if hit >= 10:
+    if hit >= 8:
         return -(hit + npcWeapon - playerArmor)
 
-    elif hit >= 7:
-        if dodge >= 10:
+    elif hit >= 5:
+        if dodge >= 8:
             return 0
-        elif dodge >= 7:
+        elif dodge >= 5:
                 return -(hit + npcWeapon - playerArmor)/2
         else:
             return -(hit + npcWeapon - playerArmor)
