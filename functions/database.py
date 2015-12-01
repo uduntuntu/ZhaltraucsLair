@@ -511,7 +511,7 @@ def getNPCsInRoom(roomID):
                       result[i][5],
                       result[i][6]
                       )
-            npcs[i] = (npc)
+            npcs[str(i)] = (npc)
 
     return npcs
 
@@ -594,7 +594,10 @@ def getPlayerWeapon(player):
           "WHERE PlayerName = '{}'".format(player.playerName)
     result = doQuery(sql)
     if len(result) != 0:
-        return result[0][0]
+        if result[0][0] != None:
+            return result[0][0]
+        else:
+            return 0
     else:
         return 0
 
@@ -603,7 +606,10 @@ def getNPCArmor(npc):
           "WHERE NPCID = '{}'".format(npc.ID)
     result = doQuery(sql)
     if len(result) != 0:
-        return result[0][0]
+        if result[0][0] != None:
+            return result[0][0]
+        else:
+            return 0
     else:
         return 0
 

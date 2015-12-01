@@ -291,3 +291,8 @@ def fight(player=None, npcs={}, npc=None):
         print("Enemies you can attack:")
         for key, enemy in npcs.items():
             print("\t{} = {}".format(key, enemy.NPCName))
+
+    elif npc in npcs.keys():
+        action.attack(player,npcs[npc])
+    else:
+        print('Cannot fight with "{}".'.format(npc))

@@ -87,16 +87,8 @@ def attack(player, npc):
     npcArmor = db.getNPCArmor(npc)
     npcWeapon = db.getNPCWeapon(npc)
 
-    print("Player: {},{},{},{}".format(playerHP,
-                                       playerBD,
-                                       playerArmor,
-                                       playerWeapon
-                                       )
+    print("Player: HP = {}".format(playerHP)
           )
-    print("{}: {},{},{},{}".format(npc.NPCName,
-                                     npcHP,
-                                     npcBD,
-                                     npcArmor,
-                                     npcWeapon
-                                     )
-    )
+    print("{} {}: HP = {}".format(npc.NPCName,npc.ID,npcHP)
+         )
+
