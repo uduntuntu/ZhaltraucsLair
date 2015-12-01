@@ -293,6 +293,7 @@ def fight(player=None, npcs={}, npc=None):
             print("\t{} = {}".format(key, enemy.NPCName))
 
     elif npc in npcs.keys():
-        action.attack(player,npcs[npc])
+        db.modifyNPCHP(action.attack(player,npcs[npc]),npcs[npc])
+        db.modifyhp(action.dodge(player,npcs[npc]))
     else:
         print('Cannot fight with "{}".'.format(npc))

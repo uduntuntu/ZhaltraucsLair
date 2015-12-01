@@ -35,8 +35,7 @@ def throwAgility(player):
         return 0
 
 def attack(player, npc):
-    playerHP = player.HP
-
+    # Player base damage
     if player.strength >= 18:
         playerBD = 3
 
@@ -58,11 +57,79 @@ def attack(player, npc):
     else:
         playerBD = -3
 
-    playerArmor = db.getPlayerArmor(player)
     playerWeapon = db.getPlayerWeapon(player)
 
-    npcHP = npc.HP
+    # NPC dodge skills
+    if npc.agility >= 18:
+        npcDS = 3
 
+    elif npc.agility >= 16:
+        npcDS = 2
+
+    elif npc.agility >= 13:
+        npcDS = 1
+
+    elif npc.agility >= 9:
+        npcDS = 0
+
+    elif npc.agility >= 6:
+        npcDS = -1
+
+    elif npc.agility >= 4:
+        npcDS = -2
+
+    else:
+        npcDS = -3
+
+    npcArmor = db.getNPCArmor(npc)
+
+    print("Player: HP = {}".format(player.HP))
+    print("{} {}: HP = {}".format(npc.NPCName,npc.ID,npc.HP))
+
+    hit = playerBD + dice(10)
+    dodge = npcDS + dice(10)
+
+    if hit >= 10:
+        return -(hit + playerWeapon - npcArmor)
+
+    elif hit >= 7:
+        if dodge >= 10:
+            return 0
+        elif dodge >= 7:
+                return -(hit + playerWeapon - npcArmor)/2
+        else:
+            return -(hit + playerWeapon - npcArmor)
+
+    else:
+        return 0
+
+
+def dodge(player, npc):
+    # Player dodge skills
+    if player.agility >= 18:
+        playerDS = 3
+
+    elif player.agility >= 16:
+        playerDS = 2
+
+    elif player.agility >= 13:
+        playerDS = 1
+
+    elif player.agility >= 9:
+        playerDS = 0
+
+    elif player.agility >= 6:
+        playerDS = -1
+
+    elif player.agility >= 4:
+        playerDS = -2
+
+    else:
+        playerDS = -3
+
+    playerArmor = db.getPlayerArmor(player)
+
+    # NPC base damage
     if npc.strength >= 18:
         npcBD = 3
 
@@ -84,11 +151,24 @@ def attack(player, npc):
     else:
         npcBD = -3
 
-    npcArmor = db.getNPCArmor(npc)
     npcWeapon = db.getNPCWeapon(npc)
 
-    print("Player: HP = {}".format(playerHP)
-          )
-    print("{} {}: HP = {}".format(npc.NPCName,npc.ID,npcHP)
-         )
+    print("Player: HP = {}".format(player.HP))
+    print("{} {}: HP = {}".format(npc.NPCName,npc.ID,npc.HP))
 
+    hit = npcBD + dice(10)
+    dodge = playerDS + dice(10)
+
+    if hit >= 10:
+        return -(hit + npcWeapon - playerArmor)
+
+    elif hit >= 7:
+        if dodge >= 10:
+            return 0
+        elif dodge >= 7:
+                return -(hit + npcWeapon - playerArmor)/2
+        else:
+            return -(hit + npcWeapon - playerArmor)
+
+    else:
+        return 0
