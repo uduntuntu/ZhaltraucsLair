@@ -51,7 +51,7 @@ TABLES['ZL_NPC'] = (
     "   `Strength` TINYINT NOT NULL,"
     "   `RoomID` SMALLINT,"
     "   `PointModifier` TINYINT,"
-    "   `Description` VARCHAR(50),"
+    "   `Description` VARCHAR(2000),"
     "   PRIMARY KEY(`ID`)"
     ")"
 )
@@ -429,20 +429,35 @@ def getPlayer():
         return player
 
 def updatePlayer(player):
-    sql = "SELECT Name,RoomID,Points FROM ZL_Player"
+    sql = "SELECT Name,RoomID,HP,Points FROM ZL_Player"
     result = doQuery(sql)
     sql = "Select ZL_Item.Name FROM ZL_Item " \
           "WHERE ZL_Item.PlayerName = '{}'".format(result[0][0])
     inv = doQuery(sql)
     player.playerName = result[0][0]
     player.roomID = result[0][1]
-    player.points = result[0][2]
+    player.HP = result[0][2]
+    player.points = result[0][3]
     inventory = []
     for i in range(0,len(inv)):
         inventory.append(inv[i][0])
     player.inventory = inventory
 
     return player
+
+
+def updateNPC(npc):
+    sql = "SELECT HP FROM ZL_NPC WHERE ID = {}".format(npc.ID)
+    result = doQuery(sql)
+    npc.HP = result[0][0]
+
+    return npc
+
+
+def cleanDiedNPC(npc):
+    sql = "UPDATE ZL_NPC SET RoomID = NULL WHERE ID = {}".format(npc.ID)
+    doQuery(sql)
+
 
 def getDirections(roomID):
     sql = "SELECT RoomInNorth,RoomInSouth,RoomInEast,RoomInWest," \
@@ -591,7 +606,10 @@ def getPlayerArmor(player):
           "WHERE PlayerName = '{}'".format(player.playerName)
     result = doQuery(sql)
     if len(result) != 0:
-        return result[0][0]
+        if result[0][0] != None:
+            return result[0][0]
+        else:
+            return 0
     else:
         return 0
 
@@ -626,6 +644,9 @@ def getNPCWeapon(npc):
           "WHERE NPCID = '{}'".format(npc.ID)
     result = doQuery(sql)
     if len(result) != 0:
-        return result[0][0]
+        if result[0][0] != None:
+            return result[0][0]
+        else:
+            return 0
     else:
         return 0

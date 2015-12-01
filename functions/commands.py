@@ -293,7 +293,29 @@ def fight(player=None, npcs={}, npc=None):
             print("\t{} = {}".format(key, enemy.NPCName))
 
     elif npc in npcs.keys():
-        db.modifyNPCHP(action.attack(player,npcs[npc]),npcs[npc])
-        db.modifyhp(action.dodge(player,npcs[npc]))
+        # Attack turn
+        attack = action.attack(player,npcs[npc])
+        if attack != 0:
+            print("You hit {} points.".format(-attack))
+        else:
+            print("You miss!")
+        db.modifyNPCHP(attack, npcs[npc])
+        npcs[npc] = db.updateNPC(npcs[npc])
+        player = db.updatePlayer(player)
+        # Dodge turn
+        if npcs[npc].HP > 0:
+            dodge = action.dodge(player,npcs[npc])
+            if dodge != 0:
+                print("You get {} points damage.".format(-dodge))
+            else:
+                print("You succeeded to dodge!")
+            db.modifyhp(dodge)
+            npcs[npc] = db.updateNPC(npcs[npc])
+            player = db.updatePlayer(player)
+        else:
+            print("{} {} died.".format(npcs[npc].NPCName,npcs[npc].ID))
+            db.cleanDiedNPC(npcs[npc])
+            if player.roomID == 1:
+                db.updateMovements(player,2,'NULL','NULL','NULL','NULL','NULL')
     else:
         print('Cannot fight with "{}".'.format(npc))
