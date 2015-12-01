@@ -244,7 +244,7 @@ def look(items,npcs, object=None):
         if npcs !={}:
             print("There are following NPCs in room to look at:")
             for key, npc in npcs.items():
-                print("\t {}={}".format(key, npc))
+                print("\t {} = {} {}".format(key, npc.NPCName, npc.ID))
         else:
             print("There are no NPCs in room.")
 
