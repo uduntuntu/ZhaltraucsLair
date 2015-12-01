@@ -267,6 +267,7 @@ def take(items, player=None, item=None):
             print("There is no items in room.")
     elif item in items:
         db.pickItem(item,player)
+        db.modifypoints(db.getPointsFromItem(item))
         print('You took item "{}".'.format(item))
         player.inventory.append(item)
     else:

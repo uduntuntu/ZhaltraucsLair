@@ -588,7 +588,30 @@ def modifypoints(points):
     sql = "UPDATE ZL_Player SET Points = Points + {}".format(points)
     doQuery(sql)
 
-def getpoints():
+def getPointsFromPlayer():
     sql = "SELECT Points FROM ZL_Player"
     points = doQuery(sql)
+
     return points[0][0]
+
+
+def getPointsFromItem(itemName):
+    sql = "SELECT PointsModifier FROM ZL_Item WHERE Name = '{}'".format(itemName)
+    points = doQuery(sql)
+
+    return points[0][0]
+
+
+def getPointsFromRoom(ID):
+    sql = "SELECT Points FROM ZL_Room WHERE ID = {}".format(ID)
+    points = doQuery(sql)
+
+    return points[0][0]
+
+
+def getPointsFromNPC(ID):
+    sql = "SELECT Points FROM ZL_NPC WHERE ID = {}".format(ID)
+    points = doQuery(sql)
+
+    return points[0][0]
+
