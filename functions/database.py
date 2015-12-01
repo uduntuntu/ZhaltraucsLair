@@ -577,3 +577,42 @@ def gethp():
     sql = "select hp from ZL_Player"
     hp = doQuery(sql)
     return hp[0][0]
+
+
+def getPlayerArmor(player):
+    sql = "SELECT ZL_Item.DefenceModifier FROM ZL_Item " \
+          "WHERE PlayerName = '{}'".format(player.playerName)
+    result = doQuery(sql)
+    if len(result) != 0:
+        return result[0][0]
+    else:
+        return 0
+
+
+def getPlayerWeapon(player):
+    sql = "SELECT ZL_Item.AttackModifier FROM ZL_Item " \
+          "WHERE PlayerName = '{}'".format(player.playerName)
+    result = doQuery(sql)
+    if len(result) != 0:
+        return result[0][0]
+    else:
+        return 0
+
+def getNPCArmor(npc):
+    sql = "SELECT ZL_Item.DefenceModifier FROM ZL_Item " \
+          "WHERE NPCID = '{}'".format(npc.ID)
+    result = doQuery(sql)
+    if len(result) != 0:
+        return result[0][0]
+    else:
+        return 0
+
+
+def getNPCWeapon(npc):
+    sql = "SELECT ZL_Item.DefenceModifier FROM ZL_Item " \
+          "WHERE NPCID = '{}'".format(npc.ID)
+    result = doQuery(sql)
+    if len(result) != 0:
+        return result[0][0]
+    else:
+        return 0

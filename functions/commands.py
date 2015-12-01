@@ -111,8 +111,13 @@ def execute(command, directions, items, npcs, player):
                 db.updateRoomState(player.roomID,4)
                 print(db.getRoomState(player.roomID))
                 raise SystemExit
+
         else:
             print("There is no reason to jump.")
+
+    elif command[0] == "fight":
+        for npc in npcs.values():
+            print(action.attack(player,npc))
 
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
