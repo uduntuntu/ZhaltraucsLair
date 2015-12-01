@@ -511,7 +511,7 @@ def getNPCsInRoom(roomID):
                       result[i][5],
                       result[i][6]
                       )
-            npcs[i] = (npc)
+            npcs[str(i)] = (npc)
 
     return npcs
 
@@ -548,6 +548,12 @@ def useItem(item,roomID,stateToDo):
           "WHERE Name = '{}'" \
           "".format(item)
     doQuery(sql)
+
+
+def getNPCDescription(npc):
+    sql = "SELECT Description FROM ZL_NPC WHERE ID = {}".format(npc.ID)
+    result = doQuery(sql)
+    return result[0][0]
 
 
 def updateRoomState(roomID,stateToDo):

@@ -249,11 +249,10 @@ def look(items,npcs, object=None):
             print("There are no NPCs in room.")
 
     elif object in items or object in npcs.keys():
-        print(type(object))
-        if type(object) == str:
+        if object in items:
             print(db.getItemDescription(object))
- #       else:
- #           print(db.getNPCDescription(npcs[object]))
+        elif object in npcs.keys():
+            print(db.getNPCDescription(npcs[object]))
     else:
         print('Item "{}" not found.'.format(object))
 
