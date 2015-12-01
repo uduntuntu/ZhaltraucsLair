@@ -602,8 +602,8 @@ def getPointsFromItem(itemName):
     return points[0][0]
 
 
-def getPointsFromRoom(ID):
-    sql = "SELECT Points FROM ZL_Room WHERE ID = {}".format(ID)
+def getPointsFromRoom(roomID):
+    sql = "SELECT PointsModifier FROM ZL_Room WHERE ID = {}".format(roomID)
     points = doQuery(sql)
 
     return points[0][0]

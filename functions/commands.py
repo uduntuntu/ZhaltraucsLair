@@ -164,6 +164,7 @@ def go(command, directions, player):
         if command[1] in directions:
             player.roomID = directions[command[1]]
             db.setPlayerRoomID(player.roomID)
+            db.modifypoints(db.getPointsFromRoom(player.roomID))
             if player.roomID == 2 and 'torch' in player.inventory:
                 for i in (2,3,5):
                     db.updateRoomState(i,1)
