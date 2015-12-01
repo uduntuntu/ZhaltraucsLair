@@ -198,6 +198,18 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID,2)
                     print(db.getRoomState(player.roomID))
                     raise SystemExit
+
+            elif player.roomID == 24:
+                success = action.throwAgility(player)
+                if success == 2:
+                    db.updateRoomState(player.roomID,0)
+                if success == 1:
+                    db.updateRoomState(player.roomID,1)
+                    db.modifyhp(-5)
+                else:
+                    db.updateRoomState(player.roomID,2)
+                    db.modifyhp(-10)
+
         else:
             print(
                 "Invalid direction. You can use "

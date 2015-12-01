@@ -574,6 +574,15 @@ def modifyhp(HP):
 
 
 def gethp():
-    sql = "select hp from ZL_Player"
+    sql = "SELECT hp FROM ZL_Player"
     hp = doQuery(sql)
     return hp[0][0]
+
+def modifypoints(points):
+    sql = "UPDATE ZL_Player SET Points = Points + {}".format(points)
+    doQuery(sql)
+
+def getpoints():
+    sql = "SELECT Points FROM ZL_Player"
+    points = doQuery(sql)
+    return points[0][0]
