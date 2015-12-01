@@ -62,9 +62,9 @@ def execute(command, directions, items, npcs, player):
 
     elif command[0] == "look":
         if len(command) == 1:
-            look(items)
+            look(items, npcs)
         else:
-            look(items, command[1])
+            look(items, npcs, command[1])
 
     elif command[0] == "take":
         if len(command) == 1:
@@ -232,18 +232,30 @@ def help(command=None):
         print('No help for "{0:s}". It is an invalid command.'.format(command))
 
 
-def look(items,item=None):
-    if item == None:
+def look(items,npcs, object=None):
+    if object == None:
         if items != []:
-            print("There is follow items in room:")
-            for item in items:
-                print("\t* {}".format(item))
+            print("There are following items in room:")
+            for object in items:
+                print("\t* {}".format(object))
         else:
-            print("There is no items in room.")
-    elif item in items:
-        print(db.getItemDescription(item))
+            print("There are no items in room.")
+
+        if npcs !={}:
+            print("There are following NPCs in room to look at:")
+            for key, npc in npcs.items():
+                print("\t {}={}".format(key, npc))
+        else:
+            print("There are no NPCs in room.")
+
+    elif object in items or object in npcs.keys():
+        print(type(object))
+        if type(object) == str:
+            print(db.getItemDescription(object))
+ #       else:
+ #           print(db.getNPCDescription(npcs[object]))
     else:
-        print('Item "{}" not found.'.format(item))
+        print('Item "{}" not found.'.format(object))
 
 
 def take(items, player=None, item=None):
