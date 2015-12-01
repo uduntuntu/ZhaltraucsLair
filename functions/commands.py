@@ -176,8 +176,10 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID,0)
                 elif success == 1:
                     db.updateRoomState(player.roomID,1)
+                    db.modifyhp(-2)
                 else:
                     db.updateRoomState(player.roomID,2)
+                    db.modifyhp(-10)
             elif player.roomID == 8:
                 success = action.throwIntelligence(player)
                 if success in (1,2):
@@ -191,6 +193,7 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID,0)
                 if success == 1:
                     db.updateRoomState(player.roomID,1)
+                    db.modifyhp(-8)
                 else:
                     db.updateRoomState(player.roomID,2)
                     print(db.getRoomState(player.roomID))
