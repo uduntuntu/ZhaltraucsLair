@@ -102,6 +102,7 @@ def execute(command, directions, items, npcs, player):
                     db.updateRoomState(player.roomID,1)
             elif success == 1:
                 db.updateRoomState(player.roomID,3)
+                db.modifyhp(-5)
                 if 'west' in directions:
                     db.updateMovements(player,'NULL','NULL',4,'NULL','NULL','NULL')
                 else:

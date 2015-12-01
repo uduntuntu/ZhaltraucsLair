@@ -567,3 +567,13 @@ def updateMovements(player,north, south, east, west, up, down):
           "WHERE ZL_Movement.RoomID={}" \
           "".format(north, south, east, west, up, down,player.roomID)
     doQuery(sql)
+
+def modifyhp(HP):
+    sql = "UPDATE ZL_Player SET HP = HP + {}".format(HP)
+    doQuery(sql)
+
+
+def gethp():
+    sql = "select hp from ZL_Player"
+    hp = doQuery(sql)
+    return hp[0][0]

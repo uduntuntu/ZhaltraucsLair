@@ -31,7 +31,7 @@ while True:
     while context == "game":
         # validate to player that we are in correct context
         prompt = "(game) >>> "
-
+        hp=db.gethp()
         # update player object and if doesn't exist yet create it
         player = db.updatePlayer(player)
 
@@ -42,7 +42,7 @@ while True:
         else:
             roomDescription = db.getRoomDescription(player.roomID)
             print("--\n{}".format(roomDescription))
-
+        print("\n Your HP: {}".format(hp) )
 
         # get directions player can go
         directions = db.getDirections(player.roomID)
