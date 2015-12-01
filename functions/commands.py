@@ -188,7 +188,7 @@ def go(command, directions, player):
                 else:
                     db.updateRoomState(player.roomID,1)
             elif player.roomID == 15:
-                success = action.throwAgility(player)
+                success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID,0)
                 if success == 1:
@@ -200,7 +200,7 @@ def go(command, directions, player):
                     raise SystemExit
 
             elif player.roomID == 24:
-                success = action.throwAgility(player)
+                success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID,0)
                 if success == 1:
