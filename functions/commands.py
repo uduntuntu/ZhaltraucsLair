@@ -111,8 +111,15 @@ def execute(command, directions, items, npcs, player):
                 db.updateRoomState(player.roomID,4)
                 print(db.getRoomState(player.roomID))
                 raise SystemExit
+
         else:
             print("There is no reason to jump.")
+
+    elif command[0] == "fight":
+        if len(command) == 1:
+            fight(player, npcs)
+        else:
+            fight(player, npcs, command[1])
 
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
@@ -305,3 +312,15 @@ def use(player=None, item=None):
 
     else:
         print('Cannot use item "{}".'.format(item))
+
+
+def fight(player=None, npcs={}, npc=None):
+    if npc == None:
+        print("Enemies you can attack:")
+        for key, enemy in npcs.items():
+            print("\t{} = {}".format(key, enemy.NPCName))
+
+    elif npc in npcs.keys():
+        action.attack(player,npcs[npc])
+    else:
+        print('Cannot fight with "{}".'.format(npc))
