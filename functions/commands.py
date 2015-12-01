@@ -116,8 +116,10 @@ def execute(command, directions, items, npcs, player):
             print("There is no reason to jump.")
 
     elif command[0] == "fight":
-        for npc in npcs.values():
-            print(action.attack(player,npc))
+        if len(command) == 1:
+            fight(player, npcs)
+        else:
+            fight(player, npcs, command[1])
 
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
@@ -282,3 +284,10 @@ def use(player=None, item=None):
 
     else:
         print('Cannot use item "{}".'.format(item))
+
+
+def fight(player=None, npcs={}, npc=None):
+    if npc == None:
+        print("Enemies you can attack:")
+        for key, enemy in npcs.items():
+            print("\t{} = {}".format(key, enemy.NPCName))
