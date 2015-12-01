@@ -346,12 +346,12 @@ class Player:
             self.HP = 50
             self.agility = 5
             self.intelligence = 1
-            self.strength = 4
+            self.strength = 12
         elif self.playerClass == "thief":
             self.HP = 40
-            self.agility = 9
+            self.agility = 12
             self.intelligence = 8
-            self.strength = 4
+            self.strength = 5
 
 
 class NPC:
@@ -574,8 +574,15 @@ def updateMovements(player,north, south, east, west, up, down):
           "".format(north, south, east, west, up, down,player.roomID)
     doQuery(sql)
 
+
 def modifyhp(HP):
     sql = "UPDATE ZL_Player SET HP = HP + {}".format(HP)
+    doQuery(sql)
+
+
+def modifyNPCHP(HP,npc):
+    sql = "UPDATE ZL_NPC SET HP = HP + {} " \
+          "WHERE ID = {}".format(HP,npc.ID)
     doQuery(sql)
 
 
