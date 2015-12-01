@@ -51,7 +51,7 @@ TABLES['ZL_NPC'] = (
     "   `Strength` TINYINT NOT NULL,"
     "   `RoomID` SMALLINT,"
     "   `PointModifier` TINYINT,"
-    "   `Description` VARCHAR(50),"
+    "   `Description` VARCHAR(1000),"
     "   PRIMARY KEY(`ID`)"
     ")"
 )

@@ -1,21 +1,21 @@
 Name;ID;HP;Agility;Strength;RoomID;PointModifier;Description
-Rat;1;10;5;2;1;5;huge sewer rat hisses aggressively as you look at it.
-Orc;2;15;2;5;6;10;swamp green and snout nosed, nasty looking Orc.
-Orc;3;15;2;5;6;10;swamp green and snout nosed, nasty looking Orc.
-Orc;4;15;2;5;6;10;swamp green and snout nosed, nasty looking Orc.
-Sad Troll;5;1;1;1;10;5;huge, incredibly sad looking troll is blocking the entrance to the room to west.
-Orc;6;15;2;5;12;10;swamp green and snout nosed, nasty looking Orc.
-Goblin Janitor;7;15;5;3;13;5;the janitor looks aware and capable despite his old age.
-Prisoner;8;10;4;3;17;5;this beaten prisoner wears rugged and blooded clothes. His hair hangs in front of his dirty, blackened face but underneath you meet the pair of sharp ice blue eyes watching back at you.
-Orc;9;15;2;5;17;10;swamp green and snout nosed, nasty looking Orc.
-Orc;10;15;2;5;17;10;swamp green and snout nosed, nasty looking Orc.
-Spider;11;15;5;2;21;5;big, eight legged monster moves fast as you look at it. It hisses and prepares an attack.
-Spider;12;15;5;2;21;5;big, eight legged monster moves fast as you look at it. It hisses and prepares an attack.
-Spider;13;15;5;2;21;5;big, eight legged monster moves fast as you look at it. It hisses and prepares an attack.
-Orc;14;15;2;5;22;10;swamp green and snout nosed, nasty looking Orc.
-Orc;15;15;2;5;22;10;swamp green and snout nosed, nasty looking Orc.
-Orc;16;15;2;5;22;10;swamp green and snout nosed, nasty looking Orc.
-Dragon;17;99;15;30;30;20;yes, a dragon. This huge fire breathing beast loves only gold more than murdering mayhem. You feel like passing this fight.
-Cyclop;18;25;4;6;28;10;one huge bulky lidless eye stares back at you. There's something mesmerizing in it's horrible stare. The cyclop roars and prepares his attack.
-Mage;19;15;5;3;34;8;old man stands like frozen statue on the bridge blocking your way. You can feel the powerful magical aura as you approach.
-Zhaltrauc;20;50;10;10;33;20;evil lich king awoken by the creed of men. You feel the world spinning and the geometry to fail around you by the power of pure evil in front of you.
+Rat;1;10;5;2;1;5;Huge sewer rat hisses aggressively as you look at it.
+Orc;2;15;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;3;15;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;4;15;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
+Sad Troll;5;1;1;1;10;5;Huge, incredibly sad looking troll is blocking the entrance to the room to west.
+Orc;6;15;2;5;12;10;Swamp green and snout nosed, nasty looking Orc.
+Goblin Janitor;7;15;5;3;13;5;The janitor looks aware and capable despite his old age.
+Prisoner;8;10;4;3;17;5;This beaten prisoner wears rugged and blooded clothes. His hair hangs in front of his dirty, blackened face but underneath you meet the pair of sharp ice blue eyes watching back at you.
+Orc;9;15;2;5;17;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;10;15;2;5;17;10;Swamp green and snout nosed, nasty looking Orc.
+Spider;11;15;5;2;21;5;Big, eight legged monster moves fast as you look at it. It hisses and prepares an attack.
+Spider;12;15;5;2;21;5;Big, eight legged monster moves fast as you look at it. It hisses and prepares an attack.
+Spider;13;15;5;2;21;5;Big, eight legged monster moves fast as you look at it. It hisses and prepares an attack.
+Orc;14;15;2;5;22;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;15;15;2;5;22;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;16;15;2;5;22;10;Swamp green and snout nosed, nasty looking Orc.
+Dragon;17;99;15;30;30;20;Yes, a dragon. This huge fire breathing beast loves only gold more than murdering mayhem. You feel like passing this fight.
+Cyclop;18;25;4;6;28;10;One huge bulky lidless eye stares back at you. There's something mesmerizing in it's horrible stare. The cyclop roars and prepares his attack.
+Mage;19;15;5;3;34;8;Old man stands like frozen statue on the bridge blocking your way. You can feel the powerful magical aura as you approach.
+Zhaltrauc;20;50;10;10;33;20;Evil lich king awoken by the creed of men. You feel the world spinning and the geometry to fail around you by the power of pure evil in front of you.
