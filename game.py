@@ -54,10 +54,7 @@ while True:
 
         # get NPCs in room player can action (talk or fight)
         npcs = db.getNPCsInRoom(player.roomID)
-        if npcs != {}:
-            print("There is following NPCs in room:")
-            for key, npc in npcs.items():
-                print("\t{} = {} {}".format(key, npc.NPCName, npc.ID))
+
         # ask a command from player
         c = input(prompt).lower().split()
 

@@ -374,16 +374,18 @@ def fight(player=None, npcs={}, npc=None):
             if npc in npcs.keys():
                 if npcs[npc].HP <= 0:
                     print("{} {} died.".format(npcs[npc].NPCName,npcs[npc].ID))
+
                     db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
                     db.cleanDiedNPC(npcs[npc])
                     npcs = db.getNPCsInRoom(player.roomID)
-                    print(npcs)
+
                     if player.roomID == 1:
                         db.updateMovements(player,
                                            2,'NULL','NULL','NULL','NULL','NULL')
                     if player.roomID == 6 and npcs == {}:
                         db.updateMovements(player,
                                            'NULL','NULL',5,'NULL','NULL','NULL')
+                        db.updateRoomState(player.roomID,1)
     else:
         print('Cannot fight with "{}".'.format(npc))
 
