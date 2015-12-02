@@ -96,7 +96,7 @@ def attack(player, npc):
         if dodge >= 8:
             return 0
         elif dodge >= 5:
-                return -(hit + playerWeapon - npcArmor)/2
+                return -round((hit + playerWeapon - npcArmor)/2)
         else:
             return -(hit + playerWeapon - npcArmor)
 
@@ -166,7 +166,7 @@ def dodge(player, npc):
         if dodge >= 8:
             return 0
         elif dodge >= 5:
-                return -(hit + npcWeapon - playerArmor)/2
+                return -round((hit + npcWeapon - playerArmor)/2)
         else:
             return -(hit + npcWeapon - playerArmor)
 

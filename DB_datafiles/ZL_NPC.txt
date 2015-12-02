@@ -1,8 +1,8 @@
 Name;ID;HP;Agility;Strength;RoomID;PointModifier;Description
-Rat;1;10;5;2;1;5;Huge sewer rat hisses aggressively as you look at it.
-Orc;2;15;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
-Orc;3;15;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
-Orc;4;15;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
+Rat;1;5;5;2;1;5;Huge sewer rat hisses aggressively as you look at it.
+Orc;2;10;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;3;10;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;4;10;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
 Sad Troll;5;1;1;1;10;5;Huge, incredibly sad looking troll is blocking the entrance to the room to west.
 Orc;6;15;2;5;12;10;Swamp green and snout nosed, nasty looking Orc.
 Goblin Janitor;7;15;5;3;13;5;The janitor looks aware and capable despite his old age.
