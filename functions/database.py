@@ -632,7 +632,7 @@ def getPointsFromRoom(roomID):
 
 
 def getPointsFromNPC(ID):
-    sql = "SELECT Points FROM ZL_NPC WHERE ID = {}".format(ID)
+    sql = "SELECT PointModifier FROM ZL_NPC WHERE ID = {}".format(ID)
     points = doQuery(sql)
 
     return points[0][0]

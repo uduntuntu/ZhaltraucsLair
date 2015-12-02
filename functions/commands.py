@@ -353,6 +353,7 @@ def fight(player=None, npcs={}, npc=None):
         else:
             print("{} {} died.".format(npcs[npc].NPCName,npcs[npc].ID))
             db.cleanDiedNPC(npcs[npc])
+            db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
             if player.roomID == 1:
                 db.updateMovements(player,2,'NULL','NULL','NULL','NULL','NULL')
     else:
