@@ -2,6 +2,7 @@
 
 import functions.database as db
 import functions.actions as action
+import functions.conversations as conversation
 
 commands = {
     'go': 2,
@@ -120,6 +121,12 @@ def execute(command, directions, items, npcs, player):
             fight(player, npcs)
         else:
             fight(player, npcs, command[1])
+
+    elif command[0] == "talk":
+        if len(command) == 1:
+            talk(player, npcs)
+        else:
+            talk(player, npcs, command[1])
 
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
@@ -358,3 +365,17 @@ def fight(player=None, npcs={}, npc=None):
                 db.updateMovements(player,2,'NULL','NULL','NULL','NULL','NULL')
     else:
         print('Cannot fight with "{}".'.format(npc))
+
+
+def talk(player, npcs, npc=None):
+    print(type(npc))
+    if npc == None:
+        if npcs != {}:
+            print("Characters you can talk with:")
+            for key, character in npcs.items():
+                print("\t{} = {}".format(key, character.NPCName))
+        else:
+            print("There is no characters to talk with in room.")
+
+    if npc in npcs.keys():
+        quest = conversation.talk(npcs[npc])
