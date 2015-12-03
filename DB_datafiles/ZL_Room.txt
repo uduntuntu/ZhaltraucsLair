@@ -1,5 +1,5 @@
 ID;Description;State;PointsModifier
-1;Finally you are here. It's the afternoon, and the surroundings don't seem as bleak as you had expected. The forest you had treked through seemed lush and full of life, alltough you did notice it getting quieter as you made your way through. The trees came to a halt at the base of a large hill and you finally see it. The entrance to the lair. The forest around you is allmost eeriely silent now.;\N;1
+1;Finally you are here. It's the afternoon, and the surroundings don't seem as bleak as you had expected. The forest you had treked through seemed lush and full of life, alltough you did notice it getting quieter as you made your way through. The trees came to a halt at the base of a large hill and you finally see it. The entrance to the lair. The forest around you is allmost eeriely silent now. The entrance reveals nothing. A solitary torch lights the first few steps that descent into the dark abyss. You cant see anything past that. A large rat scutters at the entrance. It's nothing like the cuddly rats youd find nibbling on the breadcrumbs left unattended in the towns. It is a Cave Rat.;\N;1
 2;You can't see anything.;0;1
 3;As you make your way through the pitch black hallway;0;1
 4;The murky hallway curves here, leading west towards the pit and north. Rats scatter and run away at the sight of you.;\N;1
