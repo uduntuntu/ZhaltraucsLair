@@ -220,6 +220,7 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID, 1)
                     printRoomStateOrDescription(player)
             elif player.roomID == 13:
+                printRoomStateOrDescription(player)
                 for key, character in npcs.items():
                     if character.ID == 7:
                         npc = npcs[key]
@@ -227,9 +228,10 @@ def go(command, directions, player):
                 if quest==1:
                     for key, character in npcs.items():
                         if character.ID == 21:
-                            npc = npcs[key]
-                    fight(npc)
+                            npc = key
+                    fight(player,npcs,npc)
             elif player.roomID == 15:
+                printRoomStateOrDescription(player)
                 success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID, 0)
@@ -245,6 +247,7 @@ def go(command, directions, player):
                     raise SystemExit
 
             elif player.roomID == 24:
+                printRoomStateOrDescription(player)
                 success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID, 0)
