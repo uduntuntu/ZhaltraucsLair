@@ -21,10 +21,11 @@ ID;RoomID;Description
 1;10;You leave the troll behind, his sobbing and weeping getting more silent as you progress. You can't help but wonder what was the deal with that
 2;10;You draw your sword. The crying troll never sees it coming, and with one sturdy strike the troll goes limp. The troll body block's the door and due to the size of the creature, is now impossible to get to. You may proceed north or south.
 3;10;The troll body block's the door and due to the size of the creature, is now impossible to get to. You may proceed north or south
+4;10;The room where the Sad Troll was. There is a door to the west and the corridors continue north and south.
 0;12;You run into orc guards! And they aren't happy to see you!
 1;12;You have survived. Dead guards lie on the floor. You may continue east or south.
 2;12;Dead guards lie on the floor. You may continue east or south.
-0;13;You hear noises of a scuffle ahead. As your torch lights the way, you see a tumbling ball of two creatures roughly the same size fighting ferociously. You make out a big cave rat and a goblin. The gobling is clearly strugling to hold his own in the fight and it's only a matter of time before he wears down and faces defeat. Clearly if you dont intervene, the rat will be feasting on goblin tonight. Do you wish to intervene?
+0;13;You hear noises of a scuffle ahead. As your torch lights the way, you see a tumbling ball of two creatures roughly the same size fighting ferociously. You make out a big cave rat and a goblin. The gobling is clearly strugling to hold his own in the fight and it's only a matter of time before he wears down and faces defeat. Clearly if you dont intervene, the rat will be feasting on goblin tonight.
 1;13;The room is now empty. You may go east or west.
 2;13;The rat is still here, and it doesn't seem like it wants to chat!
 0;15;You feel a breeze across your face. Something inside you tells you that this particular breeze is not of natural origin. You duck under the breeze and a giant blade comes out of seemingly nowhere and slices the air above your head. You take a moment to asses that you infact are in one piece and thank the deities for this rare sign of mercy. You may continue west or south.
