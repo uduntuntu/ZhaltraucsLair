@@ -120,7 +120,7 @@ def talk(npc):
                 except ValueError as e:
                     print(e)
 
-        if answer8=="y" or choice8=="Y":
+        if answer8=="y" or answer8=="Y":
             print("You Attack the orc's! Battle commences!")
 
             combat()
