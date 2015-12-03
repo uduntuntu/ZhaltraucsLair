@@ -70,10 +70,6 @@ def talk(npc):
             quest = 0
             return quest
 
-    else:
-        print("Converstion with that {} is not written yet.".format(npc.NPCName))
-        return 0
-        
 # coding=cp1252
 #Room 13 scene
 
@@ -105,3 +101,7 @@ def talk(npc):
             print("You carefully skip around the gurgling goblin as the rat tears at it's throat. You clearly are of low ")
             print("empathy and even though you pretend to not care, the hopeless and fear-ridden screams of a dying humanoid")
             print("will haunt you for the rest of your life.")
+
+    else:
+        print("Converstion with that {} is not written yet.".format(npc.NPCName))
+        return 0
