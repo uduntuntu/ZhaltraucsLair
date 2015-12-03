@@ -196,6 +196,7 @@ def go(command, directions, player):
             elif player.roomID == 6 and npcs != {}:
                 db.updateMovements(player,
                                    'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL')
+                printRoomStateOrDescription(player)
             elif player.roomID == 7:
                 success = action.throwIntelligence(player)
                 if success == 2:
