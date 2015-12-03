@@ -80,7 +80,7 @@ def talk(npc):
     
         answer=input()
 
-        while answer not in (y,n,Y,N):
+        while answer not in ("y","n","Y","N"):
                 try:
                     answer=int(input("What to do? "))
                 except ValueError as e:
