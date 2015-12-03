@@ -78,14 +78,14 @@ def talk(npc):
         print()
         print("Y/N")
     
-        choice=input()
+        answer=input()
 
         while answer not in (y,n,Y,N):
                 try:
                     answer=int(input("What to do? "))
                 except ValueError as e:
                     print(e)
-        if choice=="y" or choice=="Y":
+        if answer=="y" or answer=="Y":
             print("Right as the rat is going for the goblins juggular, you kick the foul beast in the ribs, sending it ")
             print("flying accross the room accompanied with a high-pitched squeal. The goblin runs for cover and the rat ")
             print("scatters to it's feet. The bloodthirsty beast comes at you with full force!")
@@ -102,7 +102,7 @@ def talk(npc):
                 print("""of it, that might be the reason they left me to my own advices today..." """)
                 print()
                 print("""You get the Deck o' Ace's""")
-        elif choice=="n" or choice=="N":
+        elif answer=="n" or answer=="N":
             print("You carefully skip around the gurgling goblin as the rat tears at it's throat. You clearly are of low ")
             print("empathy and even though you pretend to not care, the hopeless and fear-ridden screams of a dying humanoid")
             print("will haunt you for the rest of your life.")
@@ -113,14 +113,14 @@ def talk(npc):
         print("Do you wish to free the slave?")
         print()
         print("Y/N")
-        choice8=input()
-        while answer not in (y,n,Y,N):
+        answer8=input()
+        while answer8 not in (y,n,Y,N):
                 try:
-                    answer=int(input("What to do? "))
+                    answer8=int(input("What to do? "))
                 except ValueError as e:
                     print(e)
 
-        if choice8=="y" or choice8=="Y":
+        if answer8=="y" or choice8=="Y":
             print("You Attack the orc's! Battle commences!")
 
             combat()
@@ -139,7 +139,7 @@ def talk(npc):
                 print("""adventuring maiden gives you a health potion. She then takes a sword from the orc guards and makes""")
                 print("""her way back to the first level. """)
 
-        elif choice8=="n" or choice8=="N":
+        elif answer8=="n" or answer8=="N":
             print("You hide behind a pillar and observe as the prisoner is dragged away.")
             print("You can only guess what will come of her.")
 
