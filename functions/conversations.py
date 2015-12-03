@@ -12,11 +12,11 @@ def talk(npc):
         print()
         print("2. Leave him alone.")
         answer = 0
-        try:
-            while answer not in (1,2):
+        while answer not in (1,2):
+            try:
                 answer=int(input("What to do? "))
-        except ValueError as e:
-            print(e)
+            except ValueError as e:
+                print(e)
 
         if answer==1:
             print("The troll seems suprised at your question. He hesitates for a while, and says:")
@@ -31,11 +31,12 @@ def talk(npc):
             print("little care for any meaningfull relationships.")
 
             answer = 0
-            try:
-                while answer not in (1,2):
+
+            while answer not in (1,2):
+                try:
                     answer=int(input("What to do? "))
-            except ValueError as e:
-                print(e)
+                except ValueError as e:
+                    print(e)
 
 
             if answer==1:
