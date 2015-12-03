@@ -10,6 +10,13 @@ f = open('ASCII/StartScreen_UTF-8.asc', 'r')
 print(f.read())
 f.close()
 
+roomState = db.getRoomState(player.roomID)
+if roomState is not None:
+    print("--\n{}".format(roomState))
+else:
+    roomDescription = db.getRoomDescription(player.roomID)
+    print("--\n{}".format(roomDescription))
+
 while True:
     '''
     You can end loop by selecting 5 in main context or write
@@ -36,13 +43,6 @@ while True:
         # update player object and if doesn't exist yet create it
         player = db.updatePlayer(player)
 
-        # get and print room description or state
-        roomState = db.getRoomState(player.roomID)
-        if roomState is not None:
-            print("--\n{}".format(roomState))
-        else:
-            roomDescription = db.getRoomDescription(player.roomID)
-            print("--\n{}".format(roomDescription))
         print("\n Your HP: {}".format(hp) )
         print("Your points: {}".format(points))
 
