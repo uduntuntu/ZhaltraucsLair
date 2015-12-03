@@ -56,8 +56,7 @@ def talk(npc):
                 input()
                 quest=1
                 return quest
-                db.updateMovements(player,
-                                           'NULL','NULL','NULL',11,'NULL','NULL')
+
 
             elif answer==2:
                 print("The troll just starts crying harder. You clearly don't make a good impression, and the troll")
