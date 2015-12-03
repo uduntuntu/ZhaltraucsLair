@@ -57,6 +57,7 @@ def talk(npc):
                 quest=1
                 return quest
 
+
             elif answer==2:
                 print("The troll just starts crying harder. You clearly don't make a good impression, and the troll")
                 print("assumes a fetal position and starts singing some melancholy-ridden troll song.")
