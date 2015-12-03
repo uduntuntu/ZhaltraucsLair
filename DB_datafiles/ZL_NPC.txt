@@ -5,6 +5,8 @@ Orc;3;10;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
 Orc;4;10;2;5;6;10;Swamp green and snout nosed, nasty looking Orc.
 Sad Troll;5;1;1;1;10;5;Huge, incredibly sad looking troll is blocking the entrance to the room to west.
 Orc;6;15;2;5;12;10;Swamp green and snout nosed, nasty looking Orc.
+Goblin Janitor;7;15;5;3;13;5;The janitor looks aware and capable despite his old age.
+Prisoner;8;10;4;3;17;5;This beaten prisoner wears rugged and blooded clothes. His hair hangs in front of his dirty, blackened face but underneath you meet the pair of sharp ice blue eyes watching back at you.
 Orc;9;15;2;5;17;10;Swamp green and snout nosed, nasty looking Orc.
 Orc;10;15;2;5;17;10;Swamp green and snout nosed, nasty looking Orc.
 Spider;11;15;5;2;21;5;Big, eight legged monster moves fast as you look at it. It hisses and prepares an attack.
