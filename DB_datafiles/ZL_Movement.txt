@@ -8,7 +8,7 @@ ID;RoomID;RoomInNorth;RoomInSouth;RoomInEast;RoomInWest;RoomInUp;RoomInDown
 1;7;8;4;\N;\N;\N;\N
 1;8;15;7;\N;\N;\N;\N
 1;9;10;5;\N;\N;\N;\N
-1;10;12;9;\N;11;\N;\N
+1;10;12;9;\N;\N;\N;\N
 1;11;\N;\N;10;\N;\N;\N
 1;12;\N;10;13;\N;\N;\N
 1;13;\N;\N;14;12;\N;\N

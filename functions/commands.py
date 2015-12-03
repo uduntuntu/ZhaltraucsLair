@@ -386,6 +386,11 @@ def fight(player=None, npcs={}, npc=None):
                         db.updateMovements(player,
                                            'NULL','NULL',5,'NULL','NULL','NULL')
                         db.updateRoomState(player.roomID,1)
+
+                    if player.roomID == 10:
+                        db.updateRoomState(player.roomID,2)
+
+
     else:
         print('Cannot fight with "{}".'.format(npc))
 
