@@ -225,8 +225,8 @@ def go(command, directions, player):
                 quest=conversation.talk(npc)
                 if quest==1:
                     for key, character in npcs.items():
-                    if character.ID == 21:
-                        npc = npcs[key]
+                        if character.ID == 21:
+                            npc = npcs[key]
                     fight(npc)
             elif player.roomID == 15:
                 success = action.throwIntelligence(player)
