@@ -90,7 +90,7 @@ def talk(npc):
             print("flying accross the room accompanied with a high-pitched squeal. The goblin runs for cover and the rat ")
             print("scatters to it's feet. The bloodthirsty beast comes at you with full force!")
     
-            combat(npc)
+            return 1
     
             if npc.hp<=0:
                 print("""As the dust settles , the goblin comes up to you. "I can't thank you enough for what you did there!" """)
@@ -114,7 +114,7 @@ def talk(npc):
         print()
         print("Y/N")
         answer8=input()
-        while answer8 not in (y,n,Y,N):
+        while answer8 not in ("y","n","Y","N"):
                 try:
                     answer8=int(input("What to do? "))
                 except ValueError as e:
