@@ -391,17 +391,18 @@ def fight(player=None, npcs={}, npc=None):
         for npc in npcs.keys():
             npcs = db.getNPCsInRoom(player.roomID)
             if npc in npcs.keys():
-                dodge = action.dodge(player, npcs[npc])
-                if dodge != 0:
-                    print("You get {} points damage.".format(-dodge))
-                else:
-                    print("You succeeded to dodge!")
-                db.modifyhp(dodge)
-                npcs[npc] = db.updateNPC(npcs[npc])
-                player = db.updatePlayer(player)
-                if player.HP <= 0:
-                    print("You died.")
-                    raise SystemExit
+                if npcs[npc].HP > 0:
+                    dodge = action.dodge(player, npcs[npc])
+                    if dodge != 0:
+                        print("You get {} points damage.".format(-dodge))
+                    else:
+                        print("You succeeded to dodge!")
+                    db.modifyhp(dodge)
+                    npcs[npc] = db.updateNPC(npcs[npc])
+                    player = db.updatePlayer(player)
+                    if player.HP <= 0:
+                        print("You died.")
+                        raise SystemExit
 
             if npc in npcs.keys():
                 if npcs[npc].HP <= 0:
@@ -418,11 +419,12 @@ def fight(player=None, npcs={}, npc=None):
                         db.updateMovements(player,
                                            'NULL', 'NULL', 5, 'NULL', 'NULL', 'NULL')
                         db.updateRoomState(player.roomID, 1)
+                        printRoomStateOrDescription(player)
 
                     if player.roomID == 10:
                         db.updateRoomState(player.roomID, 2)
-
                         printRoomStateOrDescription(player)
+
     else:
         print('Cannot fight with "{}".'.format(npc))
 
