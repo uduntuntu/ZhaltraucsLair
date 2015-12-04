@@ -482,16 +482,29 @@ def talk(player, npcs, npc=None):
             print("There are no characters to talk with in room.")
 
     if npc in npcs.keys():
-        quest = conversation.talk(npcs[npc])
-        if quest == 1:
-            db.updateMovements(player,
-                               12, 9, 'NULL', 11, 'NULL', 'NULL')
-            db.updateRoomState(player.roomID,4)
-            db.modifyNPCHP(-1, npcs[npc])
-            db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
-            db.cleanDiedNPC(npcs[npc])
-            npcs = db.getNPCsInRoom(player.roomID)
-            printRoomStateOrDescription(player)
+        if player.roomID == 10:
+            quest = conversation.talk(npcs[npc])
+            if quest == 1:
+                db.updateMovements(player,
+                                   12, 9, 'NULL', 11, 'NULL', 'NULL')
+                db.updateRoomState(player.roomID,4)
+                db.modifyNPCHP(-1, npcs[npc])
+                db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
+                db.cleanDiedNPC(npcs[npc])
+                npcs = db.getNPCsInRoom(player.roomID)
+                printRoomStateOrDescription(player)
+
+        if player.roomID == 17:
+            quest = conversation.talk(npcs[npc])
+            if quest == 1:
+                db.updateRoomState(player.roomID, 3)
+                npcsToClear=[]
+                for key, npc in npcs.items():
+                    npcsToClear.append(key)
+                for key in npcsToClear:
+                    db.modifypoints(db.getPointsFromNPC(npcs[key].ID))
+                    db.cleanDiedNPC(npcs[key])
+                npcs = db.getNPCsInRoom(player.roomID)
 
 
 def printRoomStateOrDescription(player):

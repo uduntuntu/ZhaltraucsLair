@@ -144,8 +144,8 @@ def talk(npc):
 
         elif answer8=="n" or answer8=="N":
             print("You hide behind a pillar and observe as the prisoner is dragged away.")
-            print("You can only guess what will come of her.")
-            quest = 0
+            print("You can only guess what will come of her. You may continue east, west or south")
+            quest = 1
             return quest
 
     else:
