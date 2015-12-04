@@ -83,7 +83,7 @@ def talk(npc):
 
         while answer not in ("y","n","Y","N"):
                 try:
-                    answer=int(input("What to do? "))
+                    answer=input("What to do? ")
                 except ValueError as e:
                     print(e)
         if answer=="y" or answer=="Y":
@@ -93,20 +93,12 @@ def talk(npc):
     
             return 1
     
-        if npc.hp<=0:
-            print("""As the dust settles , the goblin comes up to you. "I can't thank you enough for what you did there!" """)
-            print(""" "I'm a janitor here at Zhaltrauc's Lair and i'm usually accompanied by a guard in this vermin """)
-            print(""" infested first level. But today they made me go alone, with horrible consequenses. I know you aren't""")
-            print(""" supposed to be here, but after what you did, i don't care. I was a goner for sure and the orcs are""")
-            print("""to blame for neglecting me. Here, take this deck full of aces. It's what i usually use to get back at""")
-            print("""the orc's. I clean the table in the card game's they have at the second level's exit. Come to think""")
-            print("""of it, that might be the reason they left me to my own advices today..." """)
-            print()
-            print("""You get the Deck o' Ace's""")
         elif answer=="n" or answer=="N":
             print("You carefully skip around the gurgling goblin as the rat tears at it's throat. You clearly are of low ")
             print("empathy and even though you pretend to not care, the hopeless and fear-ridden screams of a dying humanoid")
             print("will haunt you for the rest of your life.")
+
+            return 0
 
 #room 17 scene
 
