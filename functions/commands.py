@@ -209,14 +209,17 @@ def go(command, directions, player):
                 if success == 2:
                     db.updateRoomState(player.roomID, 0)
                     printRoomStateOrDescription(player)
+                    db.updateRoomState(player.roomID, 3)
                 elif success == 1:
                     db.updateRoomState(player.roomID, 1)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-2)
+                    db.updateRoomState(player.roomID, 3)
                 else:
                     db.updateRoomState(player.roomID, 2)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
+                    db.updateRoomState(player.roomID, 3)
 
             elif player.roomID == 8:
                 success = action.throwIntelligence(player)
@@ -246,18 +249,18 @@ def go(command, directions, player):
                     fight(player,npcs,npc)
 
             elif player.roomID == 15:
-                printRoomStateOrDescription(player)
                 success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID, 0)
                     printRoomStateOrDescription(player)
-                if success == 1:
+                    db.updateRoomState(player.roomID, 3)
+                elif success == 1:
                     db.updateRoomState(player.roomID, 1)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-8)
+                    db.updateRoomState(player.roomID, 3)
                 else:
                     db.updateRoomState(player.roomID, 2)
-                    printRoomStateOrDescription(player)
                     print(db.getRoomState(player.roomID))
                     raise SystemExit
 
