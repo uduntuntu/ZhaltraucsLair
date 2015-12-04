@@ -15,7 +15,7 @@ ID;RoomID;Description
 1;7;You make your way deeper into the dark and dank hallways of the lair. You are trying to stay vigil, but trying to be vary of what lies ahead makes you lose focus on what lies on the ground. You trigger a pressure plate, and you hear the trap's mechanism spring. You manage to dodge most of the arrows that fly at your body, all but one that gives you a nasty cut on the shoulder. You may proceed to north or south. You lose 2 HP.
 2;7;You trot along the dark hallway. You are focused on the coming dangers and try to imagine what the depth's have in store for you and WHOOP! you have been hit by a wolley of arrows from a trap you just sprung. Maybe pay more attention next time? You may proceed to north or south. You lose 10 HP.
 3;7;The sprung arrow trap. You may proceed north or south.
-0;8;A breeze of air hits your face. You follow the source of the breeze and find the wall to hide a passage behind a hanging bed of moss. You follow it to the other side and see something that looks like a entrance to a lower level.
+0;8;A breeze of air hits your face. You follow the source of the breeze and find the wall to hide a secret passage to west behind a hanging bed of moss.
 1;8;A regular part of the hallway. Nothing strange here. Moss covers the walls. You may continue to north or to south.
 0;10;You locate the source of the sobbing. An enormous troll sits slumped in front of a door on the western wall, crying into his hands. He notices you but continues to weep, ignoring you. He clearly has bigger problems. The hallway continues to north and south.
 1;10;You leave the troll behind, his sobbing and weeping getting more silent as you progress. You can't help but wonder what was the deal with that
