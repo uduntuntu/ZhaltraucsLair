@@ -175,28 +175,35 @@ def doMenu(selection=0):
 
 def go(command, directions, player):
     if command[0] == "go" and len(command) == 1:
-        print("You can go: ")
-        for direction in directions.keys():
-            print("\t* {}".format(direction))
+        if directions != {}:
+            print("You can go: ")
+            for direction in directions.keys():
+                print("\t* {}".format(direction))
+
+        else:
+            print ("You can't go anywhere, try to do something else.")
 
     elif command[0] == "go" and len(command) == 2:
         if command[1] in directions:
             player.roomID = directions[command[1]]
             db.setPlayerRoomID(player.roomID)
-
             npcs = db.getNPCsInRoom(player.roomID)
             db.modifypoints(db.getPointsFromRoom(player.roomID))
+
             if player.roomID == 2 and 'torch' in player.inventory:
                 for i in (2, 3, 5):
                     db.updateRoomState(i, 1)
                 printRoomStateOrDescription(player)
+
             elif player.roomID in (3, 5) and 'torch' not in player.inventory:
                 print(db.getRoomState(player.roomID))
                 raise SystemExit
+
             elif player.roomID == 6 and npcs != {}:
                 db.updateMovements(player,
                                    'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL')
                 printRoomStateOrDescription(player)
+
             elif player.roomID == 7:
                 success = action.throwIntelligence(player)
                 if success == 2:
@@ -210,6 +217,7 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID, 2)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
+
             elif player.roomID == 8:
                 success = action.throwIntelligence(player)
                 if success in (1, 2):
@@ -219,6 +227,7 @@ def go(command, directions, player):
                 else:
                     db.updateRoomState(player.roomID, 1)
                     printRoomStateOrDescription(player)
+
             elif player.roomID == 13:
                 printRoomStateOrDescription(player)
                 for key, character in npcs.items():
@@ -230,6 +239,7 @@ def go(command, directions, player):
                         if character.ID == 21:
                             npc = key
                     fight(player,npcs,npc)
+
             elif player.roomID == 15:
                 printRoomStateOrDescription(player)
                 success = action.throwIntelligence(player)
@@ -260,6 +270,7 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID, 2)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
+
             else:
                 # print room state after room is actually changed
                 printRoomStateOrDescription(player)
@@ -373,9 +384,13 @@ def use(player=None, item=None):
 
 def fight(player=None, npcs={}, npc=None):
     if npc == None:
-        print("Enemies you can attack:")
-        for key, enemy in npcs.items():
-            print("\t{} = {}".format(key, enemy.NPCName))
+        if npcs != {}:
+            print("Enemies you can attack:")
+            for key, enemy in npcs.items():
+                print("\t{} = {}".format(key, enemy.NPCName))
+
+        else:
+            "There are no enemies to attack."
 
     elif npc in npcs.keys():
         enemyIsAlive = True
@@ -432,7 +447,10 @@ def fight(player=None, npcs={}, npc=None):
                         if player.roomID == 10:
                             db.updateRoomState(player.roomID, 2)
                             printRoomStateOrDescription(player)
+
                 input('Press "Enter"')
+
+        fight(player,npcs)
 
     else:
         print('Cannot fight with "{}".'.format(npc))
@@ -445,7 +463,7 @@ def talk(player, npcs, npc=None):
             for key, character in npcs.items():
                 print("\t{} = {}".format(key, character.NPCName))
         else:
-            print("There is no characters to talk with in room.")
+            print("There are no characters to talk with in room.")
 
     if npc in npcs.keys():
         quest = conversation.talk(npcs[npc])
