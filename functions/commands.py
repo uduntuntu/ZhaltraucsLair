@@ -378,55 +378,59 @@ def fight(player=None, npcs={}, npc=None):
             print("\t{} = {}".format(key, enemy.NPCName))
 
     elif npc in npcs.keys():
-        # Attack turn
-        attack = action.attack(player, npcs[npc])
-        if attack != 0:
-            print("You hit {} points.".format(-attack))
-        else:
-            print("You miss!")
-        db.modifyNPCHP(attack, npcs[npc])
-        npcs[npc] = db.updateNPC(npcs[npc])
-        player = db.updatePlayer(player)
-        # Dodge turn
-        for npc in npcs.keys():
-            npcs = db.getNPCsInRoom(player.roomID)
-            if npc in npcs.keys():
-                if npcs[npc].HP > 0:
-                    dodge = action.dodge(player, npcs[npc])
-                    if dodge != 0:
-                        print("You get {} points damage.".format(-dodge))
-                    else:
-                        print("You succeeded to dodge!")
-                    db.modifyhp(dodge)
-                    npcs[npc] = db.updateNPC(npcs[npc])
-                    player = db.updatePlayer(player)
-                    if player.HP <= 0:
-                        print("You died.")
-                        raise SystemExit
+        enemyIsAlive = True
+        while enemyIsAlive:
+            # Attack turn
+            attack = action.attack(player, npcs[npc])
+            if attack != 0:
+                print("You hit {} points.".format(-attack))
+            else:
+                print("You miss!")
+            db.modifyNPCHP(attack, npcs[npc])
+            npcs[npc] = db.updateNPC(npcs[npc])
+            player = db.updatePlayer(player)
+            # Dodge turn
+            for npc in npcs.keys():
+                npcs = db.getNPCsInRoom(player.roomID)
+                if npc in npcs.keys():
+                    if npcs[npc].HP > 0:
+                        dodge = action.dodge(player, npcs[npc])
+                        if dodge != 0:
+                            print("You get {} points damage.".format(-dodge))
+                        else:
+                            print("You succeeded to dodge!")
+                        db.modifyhp(dodge)
+                        npcs[npc] = db.updateNPC(npcs[npc])
+                        player = db.updatePlayer(player)
+                        if player.HP <= 0:
+                            print("You died.")
+                            raise SystemExit
 
-            if npc in npcs.keys():
-                if npcs[npc].HP <= 0:
-                    print("{} {} died.".format(npcs[npc].NPCName, npcs[npc].ID))
+                if npc in npcs.keys():
+                    if npcs[npc].HP <= 0:
+                        print("{} {} died.".format(npcs[npc].NPCName, npcs[npc].ID))
 
-                    db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
-                    db.cleanDiedNPC(npcs[npc])
-                    npcs = db.getNPCsInRoom(player.roomID)
+                        db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
+                        db.cleanDiedNPC(npcs[npc])
+                        npcs = db.getNPCsInRoom(player.roomID)
 
-                    if player.roomID == 1:
-                        db.updateMovements(player,
-                                           2, 'NULL', 'NULL', 'NULL', 'NULL', 'NULL')
-                    if player.roomID == 6 and npcs == {}:
-                        db.updateMovements(player,
-                                           'NULL', 'NULL', 5, 'NULL', 'NULL', 'NULL')
-                        db.updateRoomState(player.roomID, 1)
-                        printRoomStateOrDescription(player)
+                        enemyIsAlive = False
+                        if player.roomID == 1:
+                            db.updateMovements(player,
+                                               2, 'NULL', 'NULL', 'NULL', 'NULL', 'NULL')
+                        if player.roomID == 6 and npcs == {}:
+                            db.updateMovements(player,
+                                               'NULL', 'NULL', 5, 'NULL', 'NULL', 'NULL')
+                            db.updateRoomState(player.roomID, 1)
+                            printRoomStateOrDescription(player)
 
-                    if player.roomID == 10:
-                        db.updateRoomState(player.roomID, 2)
-                        printRoomStateOrDescription(player)
+                        if player.roomID == 10:
+                            db.updateRoomState(player.roomID, 2)
+                            printRoomStateOrDescription(player)
 
     else:
         print('Cannot fight with "{}".'.format(npc))
+        2
 
 
 def talk(player, npcs, npc=None):
