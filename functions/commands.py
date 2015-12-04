@@ -440,13 +440,21 @@ def fight(player=None, npcs={}, npc=None):
                                                'NULL', 'NULL', 5, 'NULL', 'NULL', 'NULL')
                             db.updateRoomState(player.roomID, 1)
                             printRoomStateOrDescription(player)
-                        else:
                             db.updateRoomState(player.roomID, 2)
 
 
                         if player.roomID == 10:
                             db.updateRoomState(player.roomID, 2)
                             printRoomStateOrDescription(player)
+
+                        if player.roomID == 12:
+                            db.updateMovements(player,
+                                               'NULL', 10, 13, 'NULL', 'NULL', 'NULL')
+                            db.updateRoomState(player.roomID, 1)
+                            printRoomStateOrDescription(player)
+                            db.updateRoomState(player.roomID, 2)
+
+
 
                 input('Press "Enter"')
 
