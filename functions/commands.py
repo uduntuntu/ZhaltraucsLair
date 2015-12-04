@@ -389,6 +389,7 @@ def fight(player=None, npcs={}, npc=None):
             db.modifyNPCHP(attack, npcs[npc])
             npcs[npc] = db.updateNPC(npcs[npc])
             player = db.updatePlayer(player)
+            input('Press "Enter"')
             # Dodge turn
             for npc in npcs.keys():
                 npcs = db.getNPCsInRoom(player.roomID)
@@ -418,6 +419,7 @@ def fight(player=None, npcs={}, npc=None):
                         if player.roomID == 1:
                             db.updateMovements(player,
                                                2, 'NULL', 'NULL', 'NULL', 'NULL', 'NULL')
+
                         if player.roomID == 6 and npcs == {}:
                             db.updateMovements(player,
                                                'NULL', 'NULL', 5, 'NULL', 'NULL', 'NULL')
@@ -427,10 +429,10 @@ def fight(player=None, npcs={}, npc=None):
                         if player.roomID == 10:
                             db.updateRoomState(player.roomID, 2)
                             printRoomStateOrDescription(player)
+                input('Press "Enter"')
 
     else:
         print('Cannot fight with "{}".'.format(npc))
-        2
 
 
 def talk(player, npcs, npc=None):
