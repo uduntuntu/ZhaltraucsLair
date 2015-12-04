@@ -151,3 +151,52 @@ def talk(npc):
     else:
         print("Converstion with that {} is not written yet.".format(npc.NPCName))
         return 0
+
+    #room 34
+
+    if npc.ID==19:
+    
+        a=0
+        
+        match=False
+        
+        answerStrings2=["kill","Kill","zhaltrauc","Zhaltrauc","kill zhaltrauc","kill Zhaltrauc","Kill zhaltrauc","Kill Zhaltrauc","Defeat zhaltrauc","Defeat Zhaltrauc","defeat zhaltrauc","Defeat Zhaltrauc"]
+        answerStrings3=["african","Aafrican","european","European","african?","Aafrican?","european?","European?"]
+        
+        while a<3:
+        
+            print("What is your name?")
+            nameAnswer=input()
+            if nameAnswer == player.playername:
+                a+=1
+            else:
+                print("You are sent flying, like a leaf in the wind, into the gorge. You have answered wrongly. Oh, and you died.")
+                break
+            print("What is your quest?")
+            questAnswer=input()
+            for item in answerStrings2:
+                if item in questAnswer:
+                    match=True
+                if match==True:
+                    a+=1
+                if a==1:
+                    print("You are sent flying, like a leaf in the wind, into the gorge. You have answered wrongly. Oh, and you died.")
+                    break
+        
+        
+            print("What is the air-speed velocity of an unladen swallow?")
+            swallowAnswer=input()
+            for item in answerStrings3:
+                if item in swallowAnswer:
+                    match=False
+                if match==False:
+                    a+=1
+                    if a>=3:
+                        print(""""What?  I don't know that!  Auuuuuuuugh!" the bridge keeper screams as he flies into the gorge""")
+                        print("and dies. You are free to traverse the bridge and enter the doorway south.")
+                        break
+                else:
+                        print("You are sent flying, like a leaf in the wind, into the gorge. You have answered wrongly. Oh, and you died.")
+                        break
+        
+        
