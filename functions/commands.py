@@ -242,14 +242,21 @@ def go(command, directions, player):
                     for key, character in npcs.items():
                         if character.ID == 7:
                             npc = npcs[key]
-                    quest=conversation.talk(npc)
+                    quest = conversation.talk(npc)
                     db.cleanDiedNPC(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
-                    if quest==1:
+                    if quest == 1:
                         for key, character in npcs.items():
                             if character.ID == 21:
                                 npc = key
                         fight(player,npcs,npc)
+                        db.updateRoomState(player.roomID,3)
+                        printRoomStateOrDescription(player)
+                        db.updateRoomState(player.roomID,1)
+                        printRoomStateOrDescription(player)
+                    if quest == 0:
+                        db.updateRoomState(player.roomID,2)
+                        printRoomStateOrDescription(player)
 
             elif player.roomID == 15:
                 success = action.throwIntelligence(player)
