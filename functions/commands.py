@@ -251,6 +251,21 @@ def go(command, directions, player):
                                 npc = key
                         fight(player,npcs,npc)
 
+
+            elif player.roomID == 17:
+                printRoomStateOrDescription(player)
+                if npcs != {}:
+                    for key, character in npcs.items():
+                        if character.ID == 8:
+                            npc = npcs[key]
+                    quest=conversation.talk(npc)
+                    npcs = db.getNPCsInRoom(player.roomID)
+                    if quest==1:
+                        for key, character in npcs.items():
+                            if character.ID == 9:
+                                npc = key
+                        fight(player,npcs,npc)
+
             elif player.roomID == 15:
                 success = action.throwIntelligence(player)
                 if success == 2:
@@ -502,6 +517,14 @@ def talk(player, npcs, npc=None):
             if quest == 1:
                 db.updateRoomState(player.roomID, 3)
                 npcsToClear=[]
+                for key, npc in npcs.items():
+                    npcsToClear.append(key)
+                for key in npcsToClear:
+                    db.modifypoints(db.getPointsFromNPC(npcs[key].ID))
+                    db.cleanDiedNPC(npcs[key])
+                npcs = db.getNPCsInRoom(player.roomID)
+            if quest == 0:
+                db.updateRoomState(player.roomID, 3)
                 for key, npc in npcs.items():
                     npcsToClear.append(key)
                 for key in npcsToClear:
