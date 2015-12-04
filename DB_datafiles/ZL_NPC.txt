@@ -20,3 +20,4 @@ Cyclop;18;25;4;6;28;10;One huge bulky lidless eye stares back at you. There's so
 Mage;19;15;5;3;34;8;Old man stands like frozen statue on the bridge blocking your way. You can feel the powerful magical aura as you approach.
 Zhaltrauc;20;50;10;10;33;20;Evil lich king awoken by the creed of men. You feel the world spinning and the geometry to fail around you by the power of pure evil in front of you.
 Rat;21;5;5;2;13;5;Huge sewer rat hisses aggressively as you look at it.
+Orc;22;15;2;5;12;10;Swamp green and snout nosed, nasty looking Orc.
