@@ -14,7 +14,7 @@ ID;Description;State;PointsModifier
 13; You hear noises of a scuffle ahead. ;0;1
 14; Stairs leading to the next level of this underground lair open up before you, an arching doorway like a gaping maw swallowing the descending steps. You may enter the next level or move either east or west. ;\N;1
 15; You feel a breeze across your face. ;0;1
-16; Entrance to second level;\N;1
+16;You enter the second level. Immediatly you notice a change in the architecture. Gone are the crudely carved tunnels of the first level and in their place are large hallways with arching ceilings, large pillars and monolithic sculptures, depicting stout, bearded men. It looks familliar yet not what youd expect from a lich king. You may continue north or go back upstairs through south.;\N;1
 17; The hallway opens into a large hall. ;0;1
 18; You enter what is clearly a dungeon. ;0;1
 19; The last of the cells are dimly lit by a kindling bonfire left by orc guards. You use it to re-ignite your torch. You were making your way further south, when a weak voice speaks out to you: "s... swallow..." A weak man, clearly strained for being locked up in here. He continues: "is... is it a African or European swallow...?" He drifts of to babbling and giggling. Nothing more of sense can be made out of his dribbling. You may continue towards the south or north. ;\N;0
