@@ -93,16 +93,16 @@ def talk(npc):
     
             return 1
     
-            if npc.hp<=0:
-                print("""As the dust settles , the goblin comes up to you. "I can't thank you enough for what you did there!" """)
-                print(""" "I'm a janitor here at Zhaltrauc's Lair and i'm usually accompanied by a guard in this vermin """)
-                print(""" infested first level. But today they made me go alone, with horrible consequenses. I know you aren't""")
-                print(""" supposed to be here, but after what you did, i don't care. I was a goner for sure and the orcs are""")
-                print("""to blame for neglecting me. Here, take this deck full of aces. It's what i usually use to get back at""")
-                print("""the orc's. I clean the table in the card game's they have at the second level's exit. Come to think""")
-                print("""of it, that might be the reason they left me to my own advices today..." """)
-                print()
-                print("""You get the Deck o' Ace's""")
+        if npc.hp<=0:
+            print("""As the dust settles , the goblin comes up to you. "I can't thank you enough for what you did there!" """)
+            print(""" "I'm a janitor here at Zhaltrauc's Lair and i'm usually accompanied by a guard in this vermin """)
+            print(""" infested first level. But today they made me go alone, with horrible consequenses. I know you aren't""")
+            print(""" supposed to be here, but after what you did, i don't care. I was a goner for sure and the orcs are""")
+            print("""to blame for neglecting me. Here, take this deck full of aces. It's what i usually use to get back at""")
+            print("""the orc's. I clean the table in the card game's they have at the second level's exit. Come to think""")
+            print("""of it, that might be the reason they left me to my own advices today..." """)
+            print()
+            print("""You get the Deck o' Ace's""")
         elif answer=="n" or answer=="N":
             print("You carefully skip around the gurgling goblin as the rat tears at it's throat. You clearly are of low ")
             print("empathy and even though you pretend to not care, the hopeless and fear-ridden screams of a dying humanoid")
@@ -124,7 +124,6 @@ def talk(npc):
         if answer8=="y" or answer8=="Y":
             print("You Attack the orc's! Battle commences!")
 
-            combat()
 
             if npc.hp<=0:
                 print("""The prisoner approaches you, relief visible in her face. "I tought i'd never see another day , thank""")
@@ -139,11 +138,15 @@ def talk(npc):
                 print("""the blinding light that the magical gem emanates. I wish for you to exceed. Farewell!" The """)
                 print("""adventuring maiden gives you a health potion. She then takes a sword from the orc guards and makes""")
                 print("""her way back to the first level. """)
+                quest = 0
+                return quest
+
 
         elif answer8=="n" or answer8=="N":
             print("You hide behind a pillar and observe as the prisoner is dragged away.")
             print("You can only guess what will come of her.")
-
+            quest = 0
+            return quest
 
     else:
         print("Converstion with that {} is not written yet.".format(npc.NPCName))

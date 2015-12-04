@@ -156,7 +156,7 @@ def dodge(player, npc):
     print("Player: HP = {}".format(player.HP))
     print("{} {}: HP = {}".format(npc.NPCName,npc.ID,npc.HP))
 
-    hit = npcBD + dice(10)
+    hit = npcBD + dice(8)
     dodge = playerDS + dice(10)
 
     if hit >= 8:

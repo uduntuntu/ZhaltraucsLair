@@ -196,6 +196,7 @@ def go(command, directions, player):
             elif player.roomID == 6 and npcs != {}:
                 db.updateMovements(player,
                                    'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL')
+                printRoomStateOrDescription(player)
             elif player.roomID == 7:
                 success = action.throwIntelligence(player)
                 if success == 2:
@@ -219,6 +220,7 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID, 1)
                     printRoomStateOrDescription(player)
             elif player.roomID == 13:
+                printRoomStateOrDescription(player)
                 for key, character in npcs.items():
                     if character.ID == 7:
                         npc = npcs[key]
@@ -226,9 +228,10 @@ def go(command, directions, player):
                 if quest==1:
                     for key, character in npcs.items():
                         if character.ID == 21:
-                            npc = npcs[key]
-                    fight(npc)
+                            npc = key
+                    fight(player,npcs,npc)
             elif player.roomID == 15:
+                printRoomStateOrDescription(player)
                 success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID, 0)
@@ -244,6 +247,7 @@ def go(command, directions, player):
                     raise SystemExit
 
             elif player.roomID == 24:
+                printRoomStateOrDescription(player)
                 success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID, 0)
@@ -387,17 +391,18 @@ def fight(player=None, npcs={}, npc=None):
         for npc in npcs.keys():
             npcs = db.getNPCsInRoom(player.roomID)
             if npc in npcs.keys():
-                dodge = action.dodge(player, npcs[npc])
-                if dodge != 0:
-                    print("You get {} points damage.".format(-dodge))
-                else:
-                    print("You succeeded to dodge!")
-                db.modifyhp(dodge)
-                npcs[npc] = db.updateNPC(npcs[npc])
-                player = db.updatePlayer(player)
-                if player.HP <= 0:
-                    print("You died.")
-                    raise SystemExit
+                if npcs[npc].HP > 0:
+                    dodge = action.dodge(player, npcs[npc])
+                    if dodge != 0:
+                        print("You get {} points damage.".format(-dodge))
+                    else:
+                        print("You succeeded to dodge!")
+                    db.modifyhp(dodge)
+                    npcs[npc] = db.updateNPC(npcs[npc])
+                    player = db.updatePlayer(player)
+                    if player.HP <= 0:
+                        print("You died.")
+                        raise SystemExit
 
             if npc in npcs.keys():
                 if npcs[npc].HP <= 0:
@@ -414,11 +419,12 @@ def fight(player=None, npcs={}, npc=None):
                         db.updateMovements(player,
                                            'NULL', 'NULL', 5, 'NULL', 'NULL', 'NULL')
                         db.updateRoomState(player.roomID, 1)
+                        printRoomStateOrDescription(player)
 
                     if player.roomID == 10:
                         db.updateRoomState(player.roomID, 2)
-
                         printRoomStateOrDescription(player)
+
     else:
         print('Cannot fight with "{}".'.format(npc))
 
