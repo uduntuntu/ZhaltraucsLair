@@ -118,22 +118,6 @@ def talk(npc):
             return 1
 
 
-        if npc.hp<=0:
-            print("""The prisoner approaches you, relief visible in her face. "I tought i'd never see another day , thank""")
-            print("""you stranger. Like you, i was on my way to destroy Zhaltrauc. I just couldn't stand watching the """)
-            print("""realm suffer as he started to grow in power. But apparently i was not as prepared as i tougth. I do,""")
-            print("""however, have a valuable piece of information. Zhaltrauc himself is an old evil spirit of aking """)
-            print("""thrown down from his throne by the people he reigned over. He assumed the form of a lich king and""")
-            print("""stole the sacred Light Stone from my father's, the king of my land, castle. It's what he uses to """)
-            print("""channel the evil powers and wouldn't have lasted this long without it. The stone is used for good """)
-            print("""but in the wrong hands... but i digress. Beware of the stone! He keeps it on his crown and will""")
-            print("""youse it against you! You will go blind and be unable to fight. You need to find a way to fight""")
-            print("""the blinding light that the magical gem emanates. I wish for you to exceed. Farewell!" The """)
-            print("""adventuring maiden gives you a health potion. She then takes a sword from the orc guards and makes""")
-            print("""her way back to the first level. """)
-            quest = 0
-            return quest
-
 
         elif answer8=="n" or answer8=="N":
             print("You hide behind a pillar and observe as the prisoner is dragged away.")

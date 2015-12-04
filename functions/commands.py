@@ -265,13 +265,19 @@ def go(command, directions, player):
                     for key, character in npcs.items():
                         if character.ID == 8:
                             npc = npcs[key]
-                    quest=conversation.talk(npc)
+                    quest = conversation.talk(npc)
+                    db.cleanDiedNPC(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
                     if quest==1:
+
                         for key, character in npcs.items():
                             if character.ID == 9:
                                 npc = key
-                        fight(player,npcs,npc)
+                        fight(player,npcs)
+                        db.updateRoomState(player.roomID, 4)
+                        printRoomStateOrDescription(player)
+                        db.updateRoomState(player.roomID, 3)
+                        printRoomStateOrDescription(player)
 
             elif player.roomID == 15:
                 success = action.throwIntelligence(player)
@@ -518,26 +524,6 @@ def talk(player, npcs, npc=None):
                 db.cleanDiedNPC(npcs[npc])
                 npcs = db.getNPCsInRoom(player.roomID)
                 printRoomStateOrDescription(player)
-
-        if player.roomID == 17:
-            quest = conversation.talk(npcs[npc])
-            if quest == 1:
-                db.updateRoomState(player.roomID, 3)
-                npcsToClear=[]
-                for key, npc in npcs.items():
-                    npcsToClear.append(key)
-                for key in npcsToClear:
-                    db.modifypoints(db.getPointsFromNPC(npcs[key].ID))
-                    db.cleanDiedNPC(npcs[key])
-                npcs = db.getNPCsInRoom(player.roomID)
-            if quest == 0:
-                db.updateRoomState(player.roomID, 3)
-                for key, npc in npcs.items():
-                    npcsToClear.append(key)
-                for key in npcsToClear:
-                    db.modifypoints(db.getPointsFromNPC(npcs[key].ID))
-                    db.cleanDiedNPC(npcs[key])
-                npcs = db.getNPCsInRoom(player.roomID)
 
 
 def printRoomStateOrDescription(player):
