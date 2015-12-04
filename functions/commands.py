@@ -228,6 +228,11 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID, 1)
                     printRoomStateOrDescription(player)
 
+            elif player.roomID == 11:
+                printRoomStateOrDescription(player)
+                items = db.getItemsInRoom(player.roomID)
+                if "sword" in items:
+                    take(items,player,"sword")
             elif player.roomID == 13:
                 printRoomStateOrDescription(player)
                 for key, character in npcs.items():
