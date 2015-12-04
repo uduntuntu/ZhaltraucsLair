@@ -238,15 +238,18 @@ def go(command, directions, player):
                     take(items,player,"sword")
             elif player.roomID == 13:
                 printRoomStateOrDescription(player)
-                for key, character in npcs.items():
-                    if character.ID == 7:
-                        npc = npcs[key]
-                quest=conversation.talk(npc)
-                if quest==1:
+                if npcs != {}:
                     for key, character in npcs.items():
-                        if character.ID == 21:
-                            npc = key
-                    fight(player,npcs,npc)
+                        if character.ID == 7:
+                            npc = npcs[key]
+                    quest=conversation.talk(npc)
+                    db.cleanDiedNPC(npc)
+                    npcs = db.getNPCsInRoom(player.roomID)
+                    if quest==1:
+                        for key, character in npcs.items():
+                            if character.ID == 21:
+                                npc = key
+                        fight(player,npcs,npc)
 
             elif player.roomID == 15:
                 success = action.throwIntelligence(player)
@@ -398,7 +401,7 @@ def fight(player=None, npcs={}, npc=None):
                 print("\t{} = {}".format(key, enemy.NPCName))
 
         else:
-            "There are no enemies to attack."
+            print("There are no enemies to attack.")
 
     elif npc in npcs.keys():
         enemyIsAlive = True
