@@ -32,4 +32,4 @@ ID;RoomID;RoomInNorth;RoomInSouth;RoomInEast;RoomInWest;RoomInUp;RoomInDown
 3;31;\N;34;32;27;\N;\N
 3;32;31;33;\N;\N;\N;\N
 3;33;34;\N;32;\N;\N;\N
-3;34;31;33;\N;\N;\N;\N
+3;34;31;\N;\N;\N;\N;\N

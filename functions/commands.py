@@ -529,11 +529,17 @@ def talk(player, npcs, npc=None):
                 db.updateMovements(player,
                                    12, 9, 'NULL', 11, 'NULL', 'NULL')
                 db.updateRoomState(player.roomID,4)
-                db.modifyNPCHP(-1, npcs[npc])
                 db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
                 db.cleanNPCFromRoom(npcs[npc])
                 npcs = db.getNPCsInRoom(player.roomID)
                 printRoomStateOrDescription(player)
+
+        if player.roomID == 34:
+            quest = conversation.talk(npcs[npc],player)
+            if quest == 1:
+                db.updateMovements(player,
+                                   31, 33, 'NULL', 'NULL', 'NULL', 'NULL')
+                db.updateRoomState(player.roomID,1)
 
 
 def printRoomStateOrDescription(player):
