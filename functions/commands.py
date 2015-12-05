@@ -184,6 +184,11 @@ def go(command, directions, player):
             print ("You can't go anywhere, try to do something else.")
 
     elif command[0] == "go" and len(command) == 2:
+        #cheat for testing game
+        j = []
+        for i in range(1,35):
+            j.append(str(i))
+
         if command[1] in directions:
             player.roomID = directions[command[1]]
             db.setPlayerRoomID(player.roomID)
@@ -313,6 +318,11 @@ def go(command, directions, player):
             else:
                 # print room state after room is actually changed
                 printRoomStateOrDescription(player)
+
+        elif command[1] in j:
+            player.roomID = int(command[1])
+            db.setPlayerRoomID(player.roomID)
+            printRoomStateOrDescription(player)
 
         else:
             print(
