@@ -2,8 +2,10 @@
 import random
 import functions.database as db
 
+
 def dice(slices):
-    return random.randint(1,slices)
+    return random.randint(1, slices)
+
 
 def jump(player):
     throw = dice(10)
@@ -33,6 +35,7 @@ def throwAgility(player):
         return 1
     else:
         return 0
+
 
 def attack(player, npc):
     # Player base damage
@@ -83,24 +86,33 @@ def attack(player, npc):
 
     npcArmor = db.getNPCArmor(npc)
 
-    print("Player: HP = {}".format(player.HP))
-    print("{} {}: HP = {}".format(npc.NPCName,npc.ID,npc.HP))
+    # Stats assigned, let's start to attack
+    print("{}'s turn to attack.".format(player.playerName))
 
     hit = playerBD + dice(10)
     dodge = npcDS + dice(10)
 
     if hit >= 8:
+        print("{} hits successfully!".format(player.playerName))
         return -(hit + playerWeapon - npcArmor)
 
     elif hit >= 5:
         if dodge >= 8:
+            print("{} hits well but {} dodges!".format(player.playerName,
+                                                       npc.NPCName))
             return 0
         elif dodge >= 5:
-                return -round((hit + playerWeapon - npcArmor)/2)
+            print("{} hits well but {} can dodge a little bit.".format(
+                player.playerName, npc.NPCName
+            )
+            )
+            return -round((hit + playerWeapon - npcArmor) / 2)
         else:
+            print("{} hits well.".format(player.playerName))
             return -(hit + playerWeapon - npcArmor)
 
     else:
+        print ("{} misses.".format(player.playerName))
         return 0
 
 
@@ -153,22 +165,30 @@ def dodge(player, npc):
 
     npcWeapon = db.getNPCWeapon(npc)
 
-    print("Player: HP = {}".format(player.HP))
-    print("{} {}: HP = {}".format(npc.NPCName,npc.ID,npc.HP))
-
-    hit = npcBD + dice(8)
+    #stats assigned, let's start to counter-attack
+    print("{} {}'s turn to attack.".format(npc.NPCName, npc.ID))
+    hit = npcBD + dice(10)
     dodge = playerDS + dice(10)
 
     if hit >= 8:
+        print("{} hits successfully.".format(npc.NPCName))
         return -(hit + npcWeapon - playerArmor)
 
     elif hit >= 5:
         if dodge >= 8:
+            print("{} hits well but {} dodges!".format(npc.NPCName,
+                                                       player.playerName))
             return 0
         elif dodge >= 5:
-                return -round((hit + npcWeapon - playerArmor)/2)
+            print("{} hits well but {} can dodge a little bit!".format(
+                npc.NPCName,player.playerName
+            )
+            )
+            return -round((hit + npcWeapon - playerArmor) / 2)
         else:
+            print("{} hits well.".format(npc.NPCName))
             return -(hit + npcWeapon - playerArmor)
 
     else:
+        print("{} misses.".format(npc.NPCName))
         return 0
