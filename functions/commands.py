@@ -243,7 +243,7 @@ def go(command, directions, player):
                         if character.ID == 7:
                             npc = npcs[key]
                     quest = conversation.talk(npc)
-                    db.cleanDiedNPC(npc)
+                    db.cleanNPCFromRoom(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
                     if quest == 1:
                         for key, character in npcs.items():
@@ -266,7 +266,7 @@ def go(command, directions, player):
                         if character.ID == 8:
                             npc = npcs[key]
                     quest = conversation.talk(npc)
-                    db.cleanDiedNPC(npc)
+                    db.cleanNPCFromRoom(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
                     if quest==1:
 
@@ -466,7 +466,7 @@ def fight(player=None, npcs={}, npc=None):
                         print("{} {} died.".format(npcs[npc].NPCName, npcs[npc].ID))
 
                         db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
-                        db.cleanDiedNPC(npcs[npc])
+                        db.cleanNPCFromRoom(npcs[npc])
                         npcs = db.getNPCsInRoom(player.roomID)
 
                         enemyIsAlive = False
@@ -521,7 +521,7 @@ def talk(player, npcs, npc=None):
                 db.updateRoomState(player.roomID,4)
                 db.modifyNPCHP(-1, npcs[npc])
                 db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
-                db.cleanDiedNPC(npcs[npc])
+                db.cleanNPCFromRoom(npcs[npc])
                 npcs = db.getNPCsInRoom(player.roomID)
                 printRoomStateOrDescription(player)
 

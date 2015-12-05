@@ -454,7 +454,7 @@ def updateNPC(npc):
     return npc
 
 
-def cleanDiedNPC(npc):
+def cleanNPCFromRoom(npc):
     sql = "UPDATE ZL_NPC SET RoomID = NULL WHERE ID = {}".format(npc.ID)
     doQuery(sql)
 
