@@ -322,7 +322,7 @@ def go(command, directions, player):
                         printRoomStateOrDescription(player)
 
             elif player.roomID == 19 and command[1] == "south" and "torch" in player.inventory:
-                roomstate = db.getRoomState(18)
+                roomstate = db.getRoomStateID(18)
                 if roomstate == 0:
                     player.roomID = 18
                     db.setPlayerRoomID(player.roomID)
