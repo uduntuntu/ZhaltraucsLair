@@ -121,7 +121,7 @@ def talk(npc, player=None):
 
             return 0
 
-            # room 17 scene
+    # room 17 scene
 
     if npc.ID == 8:
         print("Do you wish to free the slave?")
@@ -130,7 +130,7 @@ def talk(npc, player=None):
         answer8 = input()
         while answer8 not in ("y", "n", "Y", "N"):
             try:
-                answer8 = int(input("What to do? "))
+                answer8 = input("What to do? ")
             except ValueError as e:
                 print(e)
 
@@ -145,8 +145,7 @@ def talk(npc, player=None):
                 "You hide behind a pillar and observe as the prisoner is dragged away.")
             print(
                 "You can only guess what will come of her. You may continue east, west or south")
-            quest = 1
-            return quest
+            return 0
 
     # room 34
 

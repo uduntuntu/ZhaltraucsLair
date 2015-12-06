@@ -302,17 +302,25 @@ def go(command, directions, player):
                     for key, character in npcs.items():
                         if character.ID == 8:
                             npc = npcs[key]
-                    db.dropNPCItem(npc)
                     quest = conversation.talk(npc)
-                    db.cleanNPCFromRoom(npc)
-                    npcs = db.getNPCsInRoom(player.roomID)
                     if quest == 1:
+                        db.dropNPCItem(npc)
+                        db.cleanNPCFromRoom(npc)
+                        npcs = db.getNPCsInRoom(player.roomID)
                         fight(player, npcs)
                         db.updateRoomState(player.roomID, 4)
                         printRoomStateOrDescription(player)
                         items = db.getItemsInRoom(player.roomID)
                         if "healthpotion" in items:
                             take(items, player, "healthpotion")
+                        db.updateRoomState(player.roomID, 3)
+                        printRoomStateOrDescription(player)
+                    elif quest == 0:
+                        keys = []
+                        for key, npc in npcs.items():
+                            keys.append(key)
+                        for key in keys:
+                            db.cleanNPCFromRoom(npcs[key])
                         db.updateRoomState(player.roomID, 3)
                         printRoomStateOrDescription(player)
 
@@ -406,7 +414,7 @@ def take(items, player=None, item=None):
         else:
             print("There is no items in room.")
     elif item in items:
-        db.pickItem(item, player)
+        db.takeItem(item, player)
         db.modifypoints(db.getPointsFromItem(item))
         print('You took item "{}".'.format(item))
         player.inventory.append(item)
@@ -426,6 +434,9 @@ def drop(player=None, item=None):
         db.dropItem(item, player)
         print('You dropped item "{}".'.format(item))
         player.inventory.remove(item)
+        if player.roomID == 18:
+            db.updateRoomState(player.roomID,1)
+            printRoomStateOrDescription(player)
     else:
         print('Cannot drop item "{}".'.format(item))
 
@@ -439,8 +450,20 @@ def use(player=None, item=None):
         else:
             print("There is no items in inventory to use.")
 
+    elif item == "torch" and player.roomID == 21:
+        db.updateRoomState(player.roomID, 2)
+        printRoomStateOrDescription(player)
+        npcs = db.getNPCsInRoom(player.roomID)
+        keys = []
+        for key in npcs.keys():
+            keys.append(key)
+        for key in keys:
+            db.cleanNPCFromRoom(npcs[key])
+        db.updateMovements(player,'NULL','NULL',20,22,'NULL','NULL')
+        db.updateRoomState(22,6)
+
     elif item in player.inventory:
-        print("Using item {} doesn't make sense.")
+        print('''Using item "{}" doesn't make sense.'''.format(item))
 
     else:
         print('Cannot use item "{}".'.format(item))
@@ -537,7 +560,7 @@ def talk(player, npcs, npc=None):
                 npcs = db.getNPCsInRoom(player.roomID)
                 printRoomStateOrDescription(player)
 
-        if player.roomID == 34:
+        elif player.roomID == 34:
             quest = conversation.talk(npcs[npc], player)
             if quest == 1:
                 db.updateMovements(player,

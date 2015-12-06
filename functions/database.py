@@ -547,17 +547,19 @@ def getItemDescription(item):
         return ('Item "{}" doesn\'t have a description'.format(item))
 
 
-def pickItem(item,player):
+def takeItem(item, player):
     sql = "UPDATE ZL_Item SET PlayerName='{}', " \
           "RoomID = NULL " \
-          "WHERE ZL_Item.Name = '{}'".format(player.playerName,item)
+          "WHERE ZL_Item.Name = '{}' AND " \
+          "ZL_Item.RoomID = {}".format(player.playerName,item,player.roomID)
     doQuery(sql)
 
 
 def dropItem(item,player):
     sql = "UPDATE ZL_Item SET PlayerName=NULL," \
-          "RoomID = {} WHERE ZL_Item.Name='{}'" \
-          "".format(player.roomID,item)
+          "RoomID = {} WHERE ZL_Item.Name='{}' AND " \
+          "PlayerName = '{}'" \
+          "".format(player.roomID,item,player.playerName)
     doQuery(sql)
 
 
