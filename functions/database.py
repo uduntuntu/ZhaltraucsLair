@@ -333,6 +333,16 @@ def getRoomState(playerRoom):
         return None
 
 
+def getRoomStateID(playerRoom):
+    sql = "SELECT ZL_Room.State FROM ZL_Room WHERE ZL_Room.ID = {}" \
+          "".format(playerRoom)
+    result = doQuery(sql)
+    if len(result) == 1:
+        return result[0][0]
+    else:
+        return None
+
+
 class Player:
     def __init__(self, playerName, playerClass,
                  roomID=1, points=0, inventory=[]):
@@ -537,6 +547,18 @@ def getNPCsInRoom(roomID):
     return npcs
 
 
+def getNPCDescription(npc):
+    sql = "SELECT Description FROM ZL_NPC WHERE ID = {}".format(npc.ID)
+    result = doQuery(sql)
+    return result[0][0]
+
+
+def bringNPCToRoom(roomID, ID):
+    sql = "UPDATE ZL_NPC SET RoomID = {} WHERE RoomID IS NULL AND ID = {}" \
+          "".format(roomID, ID)
+    doQuery(sql)
+
+
 def getItemDescription(item):
     sql = "SELECT ZL_Item.Description FROM ZL_Item " \
               "WHERE ZL_Item.Name = '{}'".format(item)
@@ -571,12 +593,6 @@ def useItem(item,roomID,stateToDo):
           "WHERE Name = '{}'" \
           "".format(item)
     doQuery(sql)
-
-
-def getNPCDescription(npc):
-    sql = "SELECT Description FROM ZL_NPC WHERE ID = {}".format(npc.ID)
-    result = doQuery(sql)
-    return result[0][0]
 
 
 def updateRoomState(roomID,stateToDo):

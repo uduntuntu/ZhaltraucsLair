@@ -193,9 +193,9 @@ def go(command, directions, player):
 
     elif command[0] == "go" and len(command) == 2:
         # cheat for testing game
-        j = []
+        roomID = []
         for i in range(1, 35):
-            j.append(str(i))
+            roomID.append(str(i))
 
         if command[1] in directions:
             player.roomID = directions[command[1]]
@@ -213,9 +213,6 @@ def go(command, directions, player):
                 raise SystemExit
 
             elif player.roomID == 6 and npcs != {}:
-                db.updateMovements(player,
-                                   'NULL', 'NULL', 'NULL', 'NULL', 'NULL',
-                                   'NULL')
                 printRoomStateOrDescription(player)
                 fight(player,npcs)
 
@@ -324,6 +321,22 @@ def go(command, directions, player):
                         db.updateRoomState(player.roomID, 3)
                         printRoomStateOrDescription(player)
 
+            elif player.roomID == 19 and command[1] == "south" and "torch" in player.inventory:
+                roomstate = db.getRoomState(18)
+                if roomstate == 0:
+                    player.roomID = 18
+                    db.setPlayerRoomID(player.roomID)
+                    db.updateRoomState(player.roomID,2)
+                    for i in (23,24):
+                        db.bringNPCToRoom(player.roomID,i)
+                    npcs = db.getNPCsInRoom(player.roomID)
+                    printRoomStateOrDescription(player)
+                    fight(player,npcs)
+                    db.updateRoomState(player.roomID,3)
+                    printRoomStateOrDescription(player)
+                else:
+                    printRoomStateOrDescription(player)
+
             elif player.roomID == 24:
                 success = action.throwIntelligence(player)
                 if success == 2:
@@ -342,7 +355,8 @@ def go(command, directions, player):
                 # print room state after room is actually changed
                 printRoomStateOrDescription(player)
 
-        elif command[1] in j:
+        # cheat for testing game
+        elif command[1] in roomID:
             player.roomID = int(command[1])
             db.setPlayerRoomID(player.roomID)
             printRoomStateOrDescription(player)
@@ -418,6 +432,9 @@ def take(items, player=None, item=None):
         db.modifypoints(db.getPointsFromItem(item))
         print('You took item "{}".'.format(item))
         player.inventory.append(item)
+        if item == "torch" and player.roomID == 18:
+            db.updateRoomState(player.roomID,0)
+            printRoomStateOrDescription(player)
     else:
         print('Cannot take item "{}".'.format(item))
 
@@ -441,7 +458,7 @@ def drop(player=None, item=None):
         print('Cannot drop item "{}".'.format(item))
 
 
-def use(player=None, item=None):
+def use(player, item=None):
     if item == None:
         if player.inventory != []:
             print("You can use items below:")
@@ -450,7 +467,7 @@ def use(player=None, item=None):
         else:
             print("There is no items in inventory to use.")
 
-    elif item == "torch" and player.roomID == 21:
+    elif item == "torch" and item in player.inventory and player.roomID == 21:
         db.updateRoomState(player.roomID, 2)
         printRoomStateOrDescription(player)
         npcs = db.getNPCsInRoom(player.roomID)
@@ -461,6 +478,10 @@ def use(player=None, item=None):
             db.cleanNPCFromRoom(npcs[key])
         db.updateMovements(player,'NULL','NULL',20,22,'NULL','NULL')
         db.updateRoomState(22,6)
+
+    elif item == "healthpotion" and item in player.inventory:
+        db.modifyhp(15)
+        player = db.updatePlayer(player)
 
     elif item in player.inventory:
         print('''Using item "{}" doesn't make sense.'''.format(item))

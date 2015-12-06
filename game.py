@@ -43,7 +43,7 @@ while True:
         # update player object and if doesn't exist yet create it
         player = db.updatePlayer(player)
 
-        print("\n Your HP: {}".format(hp) )
+        print("\nYour HP: {}".format(hp) )
         print("Your points: {}".format(points))
 
         # get directions player can go
