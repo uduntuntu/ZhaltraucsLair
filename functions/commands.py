@@ -217,21 +217,25 @@ def go(command, directions, player):
                 fight(player,npcs)
 
             elif player.roomID == 7:
-                success = action.throwIntelligence(player)
-                if success == 2:
-                    db.updateRoomState(player.roomID, 0)
-                    printRoomStateOrDescription(player)
-                    db.updateRoomState(player.roomID, 3)
-                elif success == 1:
-                    db.updateRoomState(player.roomID, 1)
-                    printRoomStateOrDescription(player)
-                    db.modifyhp(-2)
-                    db.updateRoomState(player.roomID, 3)
+                if db.getRoomStateID(player.roomID) != 3:
+                    success = action.throwIntelligence(player)
+                    if success == 2:
+                        db.updateRoomState(player.roomID, 0)
+                        printRoomStateOrDescription(player)
+                        db.updateRoomState(player.roomID, 3)
+                    elif success == 1:
+                        db.updateRoomState(player.roomID, 1)
+                        printRoomStateOrDescription(player)
+                        db.modifyhp(-2)
+                        db.updateRoomState(player.roomID, 3)
+                    else:
+                        db.updateRoomState(player.roomID, 2)
+                        printRoomStateOrDescription(player)
+                        db.modifyhp(-10)
+                        db.updateRoomState(player.roomID, 3)
+
                 else:
-                    db.updateRoomState(player.roomID, 2)
                     printRoomStateOrDescription(player)
-                    db.modifyhp(-10)
-                    db.updateRoomState(player.roomID, 3)
 
             elif player.roomID == 8:
                 success = action.throwIntelligence(player)
@@ -278,20 +282,24 @@ def go(command, directions, player):
                         printRoomStateOrDescription(player)
 
             elif player.roomID == 15:
-                success = action.throwIntelligence(player)
-                if success == 2:
-                    db.updateRoomState(player.roomID, 0)
-                    printRoomStateOrDescription(player)
-                    db.updateRoomState(player.roomID, 3)
-                elif success == 1:
-                    db.updateRoomState(player.roomID, 1)
-                    printRoomStateOrDescription(player)
-                    db.modifyhp(-8)
-                    db.updateRoomState(player.roomID, 3)
+                if db.getRoomStateID(player.roomID) != 3:
+                    success = action.throwIntelligence(player)
+                    if success == 2:
+                        db.updateRoomState(player.roomID, 0)
+                        printRoomStateOrDescription(player)
+                        db.updateRoomState(player.roomID, 3)
+                    elif success == 1:
+                        db.updateRoomState(player.roomID, 1)
+                        printRoomStateOrDescription(player)
+                        db.modifyhp(-8)
+                        db.updateRoomState(player.roomID, 3)
+                    else:
+                        db.updateRoomState(player.roomID, 2)
+                        print(db.getRoomState(player.roomID))
+                        raise SystemExit
+
                 else:
-                    db.updateRoomState(player.roomID, 2)
-                    print(db.getRoomState(player.roomID))
-                    raise SystemExit
+                    printRoomStateOrDescription(player)
 
             elif player.roomID == 17:
                 printRoomStateOrDescription(player)
