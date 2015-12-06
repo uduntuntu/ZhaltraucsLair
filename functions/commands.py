@@ -217,6 +217,7 @@ def go(command, directions, player):
                                    'NULL', 'NULL', 'NULL', 'NULL', 'NULL',
                                    'NULL')
                 printRoomStateOrDescription(player)
+                fight(player,npcs)
 
             elif player.roomID == 7:
                 success = action.throwIntelligence(player)
@@ -251,6 +252,11 @@ def go(command, directions, player):
                 items = db.getItemsInRoom(player.roomID)
                 if "sword" in items:
                     take(items, player, "sword")
+
+            elif player.roomID == 12:
+                printRoomStateOrDescription(player)
+                fight(player,npcs)
+
             elif player.roomID == 13:
                 printRoomStateOrDescription(player)
                 if npcs != {}:
@@ -261,10 +267,7 @@ def go(command, directions, player):
                     db.cleanNPCFromRoom(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
                     if quest == 1:
-                        for key, character in npcs.items():
-                            if character.ID == 21:
-                                npc = key
-                        fight(player, npcs, npc)
+                        fight(player, npcs)
                         db.updateRoomState(player.roomID, 3)
                         printRoomStateOrDescription(player)
                         db.updateRoomState(player.roomID, 1)
@@ -284,9 +287,6 @@ def go(command, directions, player):
                     db.cleanNPCFromRoom(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
                     if quest == 1:
-                        for key, character in npcs.items():
-                            if character.ID == 9:
-                                npc = key
                         fight(player, npcs)
                         db.updateRoomState(player.roomID, 4)
                         printRoomStateOrDescription(player)
@@ -442,13 +442,9 @@ def use(player=None, item=None):
 
 def fight(player=None, npcs={}, npc=None):
     if npc == None:
-        if npcs != {}:
-            print("Enemies you can attack:")
-            for key, enemy in npcs.items():
-                print("\t{} = {}".format(key, enemy.NPCName))
-
-        else:
-            print("There are no enemies to attack.")
+        while npcs != {}:
+            for i in range(0,len(npcs)):
+                npcs = fight(player,npcs,'0')
 
     elif npc in npcs.keys():
         enemyIsAlive = True
@@ -509,11 +505,10 @@ def fight(player=None, npcs={}, npc=None):
 
                 input('Press "Enter"')
 
-        fight(player, npcs)
-
     else:
         print('Cannot fight with "{}".'.format(npc))
 
+    return npcs
 
 def talk(player, npcs, npc=None):
     if npc == None:
