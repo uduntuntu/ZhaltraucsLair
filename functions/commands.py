@@ -482,6 +482,8 @@ def use(player, item=None):
     elif item == "healthpotion" and item in player.inventory:
         db.modifyhp(15)
         player = db.updatePlayer(player)
+        player.inventory.remove(item)
+        db.useItem(item)
 
     elif item in player.inventory:
         print('''Using item "{}" doesn't make sense.'''.format(item))
