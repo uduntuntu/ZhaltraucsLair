@@ -459,6 +459,12 @@ def cleanNPCFromRoom(npc):
     doQuery(sql)
 
 
+def dropNPCItem(npc):
+    sql = "UPDATE ZL_Item SET RoomID={} WHERE NPCID={}".format(npc.roomID,
+                                                               npc.ID)
+    doQuery(sql)
+
+
 def getDirections(roomID):
     sql = "SELECT RoomInNorth,RoomInSouth,RoomInEast,RoomInWest," \
           "RoomInUp,RoomInDown FROM ZL_Movement WHERE RoomID = {}" \
@@ -507,8 +513,8 @@ def getNPCsInRoom(roomID):
           " ZL_NPC.HP, " \
           "ZL_NPC.Agility, " \
           "ZL_NPC.Strength, " \
-          "ZL_NPC.RoomID, " \
           "ZL_NPC.PointModifier, " \
+          "ZL_NPC.RoomID, "  \
           "ZL_NPC.ID " \
           "FROM ZL_NPC " \
           "INNER JOIN ZL_Room " \

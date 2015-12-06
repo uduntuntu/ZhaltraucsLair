@@ -264,33 +264,20 @@ def go(command, directions, player):
                         if character.ID == 7:
                             npc = npcs[key]
                     quest = conversation.talk(npc)
+                    db.dropNPCItem(npc)
                     db.cleanNPCFromRoom(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
                     if quest == 1:
                         fight(player, npcs)
                         db.updateRoomState(player.roomID, 3)
                         printRoomStateOrDescription(player)
+                        items = db.getItemsInRoom(player.roomID)
+                        if "carddeck" in items:
+                            take(items, player, "carddeck")
                         db.updateRoomState(player.roomID, 1)
                         printRoomStateOrDescription(player)
                     if quest == 0:
                         db.updateRoomState(player.roomID, 2)
-                        printRoomStateOrDescription(player)
-
-
-            elif player.roomID == 17:
-                printRoomStateOrDescription(player)
-                if npcs != {}:
-                    for key, character in npcs.items():
-                        if character.ID == 8:
-                            npc = npcs[key]
-                    quest = conversation.talk(npc)
-                    db.cleanNPCFromRoom(npc)
-                    npcs = db.getNPCsInRoom(player.roomID)
-                    if quest == 1:
-                        fight(player, npcs)
-                        db.updateRoomState(player.roomID, 4)
-                        printRoomStateOrDescription(player)
-                        db.updateRoomState(player.roomID, 3)
                         printRoomStateOrDescription(player)
 
             elif player.roomID == 15:
@@ -309,13 +296,32 @@ def go(command, directions, player):
                     print(db.getRoomState(player.roomID))
                     raise SystemExit
 
-            elif player.roomID == 24:
+            elif player.roomID == 17:
                 printRoomStateOrDescription(player)
+                if npcs != {}:
+                    for key, character in npcs.items():
+                        if character.ID == 8:
+                            npc = npcs[key]
+                    db.dropNPCItem(npc)
+                    quest = conversation.talk(npc)
+                    db.cleanNPCFromRoom(npc)
+                    npcs = db.getNPCsInRoom(player.roomID)
+                    if quest == 1:
+                        fight(player, npcs)
+                        db.updateRoomState(player.roomID, 4)
+                        printRoomStateOrDescription(player)
+                        items = db.getItemsInRoom(player.roomID)
+                        if "healthpotion" in items:
+                            take(items, player, "healthpotion")
+                        db.updateRoomState(player.roomID, 3)
+                        printRoomStateOrDescription(player)
+
+            elif player.roomID == 24:
                 success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID, 0)
                     printRoomStateOrDescription(player)
-                if success == 1:
+                elif success == 1:
                     db.updateRoomState(player.roomID, 1)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-5)
@@ -537,6 +543,10 @@ def talk(player, npcs, npc=None):
                 db.updateMovements(player,
                                    31, 33, 'NULL', 'NULL', 'NULL', 'NULL')
                 db.updateRoomState(player.roomID, 1)
+
+        else:
+            print("Conversation with {} has not written yet.".format(
+                npcs[npc].NPCName))
 
 
 def printRoomStateOrDescription(player):

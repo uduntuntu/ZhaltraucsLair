@@ -167,7 +167,7 @@ def dodge(player, npc):
 
     #stats assigned, let's start to counter-attack
     print("{} {}'s turn to attack.".format(npc.NPCName, npc.ID))
-    hit = npcBD + dice(10)
+    hit = npcBD + dice(8)
     dodge = playerDS + dice(10)
 
     if hit >= 8:
