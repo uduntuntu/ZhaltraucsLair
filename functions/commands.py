@@ -208,9 +208,6 @@ def go(command, directions, player):
                     db.updateRoomState(i, 1)
                 printRoomStateOrDescription(player)
 
-            elif player.roomID == 23 and 'armor' in player.inventory:
-                db.updateRoomState(player.roomID, 2)
-
             elif player.roomID in (3, 5) and 'torch' not in player.inventory:
                 print(db.getRoomState(player.roomID))
                 raise SystemExit
@@ -361,10 +358,54 @@ def go(command, directions, player):
                 db.updateRoomState(player.roomID,0)
                 printRoomStateOrDescription(player)
 
-            elif player.roomID == 22 and npcs =={}:
-                db.updateRoomState(22, 7)
-                printRoomStateOrDescription(player)
+            elif player.roomID == 22 \
+                    and npcs != {} \
+                    and "armor" in player.inventory \
+                    and "carddeck" in player.inventory:
+                if db.getRoomStateID(player.roomID) != 7:
+                    db.updateRoomState(22, 2)
+                    printRoomStateOrDescription(player)
+                    db.updateRoomState(22, 3)
+                    printRoomStateOrDescription(player)
+                    db.updateRoomState(22, 7)
+                    items = db.getItemsInRoom(player.roomID)
+                    if "gold" in items:
+                        take(items, player, "gold")
+                        print("You now have a huge pile of gold in your inventory")
 
+                else:
+                    printRoomStateOrDescription(player)
+
+            elif player.roomID == 22 \
+                    and npcs != {} \
+                    and "armor" in player.inventory:
+                if db.getRoomStateID(player.roomID) != 7:
+                    db.updateRoomState(22, 2)
+                    printRoomStateOrDescription(player)
+                    success = action.throwIntelligence(player)
+                    if success == 2:
+                        db.updateRoomState(player.roomID, 3)
+                        printRoomStateOrDescription(player)
+                        db.updateRoomState(22, 7)
+                        items = db.getItemsInRoom(player.roomID)
+                        if "gold" in items:
+                            take(items, player, "gold")
+                            print("You now have a huge pile of gold in your inventory")
+
+                    elif success != 2:
+                        db.updateRoomState(player.roomID, 4)
+                        printRoomStateOrDescription(player)
+                        fight(player,npcs)
+                        db.updateRoomState(player.roomID, 5)
+                        printRoomStateOrDescription(player)
+                        db.updateRoomState(22, 7)
+                        items = db.getItemsInRoom(player.roomID)
+                        if "gold" in items:
+                            take(items, player, "gold")
+                            print("You now have a huge pile of gold in your inventory")
+
+                else:
+                    printRoomStateOrDescription(player)
 
             elif player.roomID == 22 and npcs != {}:
                 db.updateRoomState(22, 0)
@@ -378,43 +419,13 @@ def go(command, directions, player):
                     take(items, player, "gold")
                     print("You now have a huge pile of gold in your inventory")
 
-            elif player.roomID == 22 and npcs != {} and "armor" and "carddeck" in player.inventory:
-                db.updateRoomState(22, 2)
-                printRoomStateOrDescription(player)
-                db.updateRoomState(22, 3)
-                printRoomStateOrDescription(player)
+            elif player.roomID == 22 and npcs =={}:
                 db.updateRoomState(22, 7)
-                items = db.getItemsInRoom(player.roomID)
-                if "gold" in items:
-                    take(items, player, "gold")
-                    print("You now have a huge pile of gold in your inventory")
-
-            elif player.roomID == 22 and npcs != {} and "armor" in player.inventory:
-                db.updateRoomState(22, 2)
                 printRoomStateOrDescription(player)
-                success = action.throwIntelligence(player)
-                if success == 2:
-                    db.updateRoomState(player.roomID, 3)
-                    printRoomStateOrDescription(player)
-                    db.updateRoomState(22, 7)
-                    items = db.getItemsInRoom(player.roomID)
-                    if "gold" in items:
-                        take(items, player, "gold")
-                        print("You now have a huge pile of gold in your inventory")
 
-                elif success != 2:
-                    db.updateRoomState(player.roomID, 4)
-                    printRoomStateOrDescription(player)
-                    fight(player,npcs)
-                    db.updateRoomState(player.roomID, 5)
-                    printRoomStateOrDescription(player)
-                    db.updateRoomState(22, 7)
-                    items = db.getItemsInRoom(player.roomID)
-                    if "gold" in items:
-                        take(items, player, "gold")
-                        print("You now have a huge pile of gold in your inventory")
-
-
+            elif player.roomID == 23 and 'armor' in player.inventory:
+                db.updateRoomState(player.roomID, 2)
+                printRoomStateOrDescription(player)
 
             elif player.roomID == 24:
                 success = action.throwIntelligence(player)
