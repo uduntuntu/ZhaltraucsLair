@@ -321,11 +321,11 @@ def getRoomDescription(playerRoom):
 
 
 def getRoomState(playerRoom):
-    sql = "SELECT ZL_RoomState.Description, ZL_Room.ID " \
-          "FROM ZL_RoomState INNER JOIN ZL_Room " \
+    sql = "SELECT ZL_RoomState.Description FROM ZL_Room " \
+          "INNER JOIN ZL_RoomState " \
           "ON ZL_Room.State = ZL_RoomState.ID " \
-          "WHERE ZL_RoomState.RoomID = {} " \
-          "AND ZL_Room.ID = {}".format(playerRoom,playerRoom)
+          "AND  ZL_Room.ID = ZL_RoomState.RoomID " \
+          "WHERE ZL_Room.ID = {}".format(playerRoom)
     result = doQuery(sql)
     if len(result) == 1:
         return result[0][0]
