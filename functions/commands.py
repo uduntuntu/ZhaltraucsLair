@@ -361,35 +361,54 @@ def go(command, directions, player):
                 db.updateRoomState(player.roomID,0)
                 printRoomStateOrDescription(player)
 
+            elif player.roomID == 22 and npcs =={}:
+                db.updateRoomState(22, 7)
+                printRoomStateOrDescription(player)
 
-            elif player.roomID == 22 and "armor" and "carddeck" in player.inventory:
-                db.updateRoomState(22, 2)
+
+            elif player.roomID == 22 and npcs != {}:
+                db.updateRoomState(22, 0)
                 printRoomStateOrDescription(player)
-                db.updateRoomState(22, 3)
+                fight(player,npcs)
+                db.updateRoomState(player.roomID, 5)
                 printRoomStateOrDescription(player)
+                db.updateRoomState(22, 7)
                 items = db.getItemsInRoom(player.roomID)
                 if "gold" in items:
                     take(items, player, "gold")
                     print("You now have a huge pile of gold in your inventory")
 
-            elif player.roomID == 22 and "armor" in player.inventory:
+            elif player.roomID == 22 and npcs != {} and "armor" and "carddeck" in player.inventory:
+                db.updateRoomState(22, 2)
+                printRoomStateOrDescription(player)
+                db.updateRoomState(22, 3)
+                printRoomStateOrDescription(player)
+                db.updateRoomState(22, 7)
+                items = db.getItemsInRoom(player.roomID)
+                if "gold" in items:
+                    take(items, player, "gold")
+                    print("You now have a huge pile of gold in your inventory")
+
+            elif player.roomID == 22 and npcs != {} and "armor" in player.inventory:
                 db.updateRoomState(22, 2)
                 printRoomStateOrDescription(player)
                 success = action.throwIntelligence(player)
                 if success == 2:
                     db.updateRoomState(player.roomID, 3)
                     printRoomStateOrDescription(player)
+                    db.updateRoomState(22, 7)
                     items = db.getItemsInRoom(player.roomID)
                     if "gold" in items:
                         take(items, player, "gold")
                         print("You now have a huge pile of gold in your inventory")
 
-                elif success == 0:
+                elif success != 2:
                     db.updateRoomState(player.roomID, 4)
                     printRoomStateOrDescription(player)
                     fight(player,npcs)
                     db.updateRoomState(player.roomID, 5)
                     printRoomStateOrDescription(player)
+                    db.updateRoomState(22, 7)
                     items = db.getItemsInRoom(player.roomID)
                     if "gold" in items:
                         take(items, player, "gold")
