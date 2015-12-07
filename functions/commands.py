@@ -332,7 +332,9 @@ def go(command, directions, player):
                         db.updateRoomState(player.roomID, 3)
                         printRoomStateOrDescription(player)
 
-            elif player.roomID == 19 and command[1] == "south" and "torch" in player.inventory:
+            elif player.roomID == 19 \
+                    and command[1] == "south" \
+                    and "torch" in player.inventory:
                 roomstate = db.getRoomStateID(18)
                 if roomstate == 0:
                     player.roomID = 18
@@ -347,6 +349,17 @@ def go(command, directions, player):
                     printRoomStateOrDescription(player)
                 else:
                     printRoomStateOrDescription(player)
+
+            elif player.roomID == 21 \
+                    and command[1] == "west" \
+                    and player.playerClass == "barbarian":
+                player.roomID = 20
+                db.setPlayerRoomID(player.roomID)
+                db.updateRoomState(player.roomID,1)
+                db.updateMovements(player,19,'NULL','NULL','NULL','NULL','NULL')
+                printRoomStateOrDescription(player)
+                db.updateRoomState(player.roomID,0)
+                printRoomStateOrDescription(player)
 
 
             elif player.roomID == 22 and "armor" and "carddeck" in player.inventory:
