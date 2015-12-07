@@ -273,7 +273,7 @@ def go(command, directions, player):
                         for key, character in npcs.items():
                             if character.ID == 9:
                                 npc = key
-                        fight(player,npcs)
+                        fight(player,npcs,npc)
                         db.updateRoomState(player.roomID, 4)
                         printRoomStateOrDescription(player)
                         db.updateRoomState(player.roomID, 3)
