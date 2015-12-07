@@ -21,3 +21,5 @@ Mage;19;15;5;3;34;8;Old man stands like frozen statue on the bridge blocking you
 Zhaltrauc;20;50;10;10;33;20;Evil lich king awoken by the creed of men. You feel the world spinning and the geometry to fail around you by the power of pure evil in front of you.
 Rat;21;5;5;2;13;5;Huge sewer rat hisses aggressively as you look at it.
 Orc;22;15;2;5;12;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;23;15;2;5;\N;10;Swamp green and snout nosed, nasty looking Orc.
+Orc;24;15;2;5;\N;10;Swamp green and snout nosed, nasty looking Orc.

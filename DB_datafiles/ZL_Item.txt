@@ -1,9 +1,10 @@
 ID;Name;RoomID;Description;PointsModifier;AttackModifier;DefenceModifier;NPCID;PlayerName
 1;torch;1;A friendly flaming torch.;15;\N;\N;\N;\N
-2;carddeck;13;Every card in this deck seems to be an ace. Fair play.;5;\N;\N;7;\N
+2;carddeck;\N;Every card in this deck seems to be an ace. Fair play.;5;\N;\N;7;\N
 3;gold;22;Lots and lots of gold. You feel rich.;5;\N;\N;\N;\N
-4;healthpotion;\N;Red, mist like content of this small flask whirls around. Drinking this will recover vast amount of health.;3;\N;\N;\N;\N
+4;healthpotion;\N;Red, mist like content of this small flask whirls around. Drinking this will recover vast amount of health.;3;\N;\N;8;\N
 5;sleepingpotion;30;This blue glowing liquid has a strong antiseptic scent in it.;3;\N;\N;17;\N
 6;sword;11;Carbon steel like black blade glitters slightly in the darkness.;5;2;1;\N;\N
 7;armor;23;Heavy, metal plated, orcish mail armor. This armor will grant it's wielder significant defence boost.;5;\N;5;\N;\N
 8;shield;30;You immediately realise this is no ordinary shield. It doesn't seem to weight at all and it's geometrical existence seems somehow wrong...;5;\N;5;17;\N
+9;torch;19;A friendly flaming torch.;15;\N;\N;\N;\N
