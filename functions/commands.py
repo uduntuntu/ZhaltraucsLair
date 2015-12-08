@@ -517,6 +517,12 @@ def take(items, player=None, item=None):
                 print("\t* {}".format(item))
         else:
             print("There is no items in room.")
+
+    elif item == 'armor':
+        db.updateRoomState(player.roomID, 1)
+        print(printRoomStateOrDescription(player))
+        db.updateRoomState(player.roomID, 2)
+
     elif item in items:
         db.takeItem(item, player)
         db.modifypoints(db.getPointsFromItem(item))
@@ -525,6 +531,7 @@ def take(items, player=None, item=None):
         if item == "torch" and player.roomID == 18:
             db.updateRoomState(player.roomID,0)
             printRoomStateOrDescription(player)
+
 
     else:
         print('Cannot take item "{}".'.format(item))
