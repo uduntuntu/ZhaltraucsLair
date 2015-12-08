@@ -93,16 +93,16 @@ def attack(player, npc):
     dodge = npcDS + dice(10)
 
     if hit >= 8:
-        print("{} hits successfully!".format(player.playerName))
+        print("{} strikes successfully!".format(player.playerName))
         return -(hit + playerWeapon - npcArmor)
 
     elif hit >= 5:
         if dodge >= 8:
-            print("{} hits well but {} dodges!".format(player.playerName,
+            print("{} strikes but {} dodges out of the way!".format(player.playerName,
                                                        npc.NPCName))
             return 0
         elif dodge >= 5:
-            print("{} hits well but {} can dodge a little bit.".format(
+            print("{} strikes but the {} manages to dodge the main force of the attack.".format(
                 player.playerName, npc.NPCName
             )
             )
@@ -171,16 +171,16 @@ def dodge(player, npc):
     dodge = playerDS + dice(10)
 
     if hit >= 8:
-        print("{} hits successfully.".format(npc.NPCName))
+        print("{} scores a successfull hit.".format(npc.NPCName))
         return -(hit + npcWeapon - playerArmor)
 
     elif hit >= 5:
         if dodge >= 8:
-            print("{} hits well but {} dodges!".format(npc.NPCName,
+            print("{} strikes but {} manages to dodge it!".format(npc.NPCName,
                                                        player.playerName))
             return 0
         elif dodge >= 5:
-            print("{} hits well but {} can dodge a little bit!".format(
+            print("{} sritkes but {} is able to deflect most of the hit! ".format(
                 npc.NPCName,player.playerName
             )
             )
