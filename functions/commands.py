@@ -651,6 +651,36 @@ def fight(player=None, npcs={}, npc=None):
         printRoomStateOrDescription(player)
         raise SystemExit
 
+    elif npcs[npc].NPCName == "Zhaltrauc":
+        shieldIsActive = False
+        useShield = input("Zhaltrauc's gem started to glow. What to do? ")
+        if useShield.lower() == "use shield":
+            shieldIsActive=True
+
+        # Attack turn
+        if shieldIsActive:
+            attack = action.attack(player, npcs[npc])
+            db.modifyNPCHP(attack, npcs[npc])
+            npcs[npc] = db.updateNPC(npcs[npc])
+            player = db.updatePlayer(player)
+            if npcs[npc].HP <= 0:
+                        print("{} {} died.".format(npcs[npc].NPCName,
+                                                   npcs[npc].ID))
+
+                        db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
+                        db.cleanNPCFromRoom(npcs[npc])
+                        npcs = db.getNPCsInRoom(player.roomID)
+        # Dodge turn
+        if not shieldIsActive:
+            if npcs[npc].HP > 0:
+                dodge = action.dodge(player, npcs[npc])
+                db.modifyhp(dodge)
+                npcs[npc] = db.updateNPC(npcs[npc])
+                player = db.updatePlayer(player)
+                if player.HP <= 0:
+                    print("You died.")
+                    raise SystemExit
+
     elif npc in npcs.keys():
         enemyIsAlive = True
         while enemyIsAlive:
