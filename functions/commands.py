@@ -611,7 +611,6 @@ def use(player, item=None):
 
 
 def fight(player=None, npcs={}, npc=None):
-    shieldIsActive = False
 
     if npc == None:
         while npcs != {}:
@@ -619,24 +618,34 @@ def fight(player=None, npcs={}, npc=None):
                 npcs = fight(player,npcs,'0')
 
     elif npcs[npc].NPCName == "Zhaltrauc":
+        shieldIsActive = False
+        useShield = input("Zhaltrauc's gem started to glow. What to do? ")
+        if useShield.lower() == "use shield":
+            shieldIsActive=True
 
+        # Attack turn
         if shieldIsActive:
-            # Attack turn
             attack = action.attack(player, npcs[npc])
             db.modifyNPCHP(attack, npcs[npc])
             npcs[npc] = db.updateNPC(npcs[npc])
             player = db.updatePlayer(player)
-            # Dodge turn
-        if input("Zhaltrauc's gem started to glove. What to do? ").lower() == "use shield":
-            shieldIsActive = True
-        if npcs[npc].HP > 0:
-            dodge = action.dodge(player, npcs[npc])
-            db.modifyhp(dodge)
-            npcs[npc] = db.updateNPC(npcs[npc])
-            player = db.updatePlayer(player)
-            if player.HP <= 0:
-                print("You died.")
-                raise SystemExit
+            if npcs[npc].HP <= 0:
+                        print("{} {} died.".format(npcs[npc].NPCName,
+                                                   npcs[npc].ID))
+
+                        db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
+                        db.cleanNPCFromRoom(npcs[npc])
+                        npcs = db.getNPCsInRoom(player.roomID)
+        # Dodge turn
+        if not shieldIsActive:
+            if npcs[npc].HP > 0:
+                dodge = action.dodge(player, npcs[npc])
+                db.modifyhp(dodge)
+                npcs[npc] = db.updateNPC(npcs[npc])
+                player = db.updatePlayer(player)
+                if player.HP <= 0:
+                    print("You died.")
+                    raise SystemExit
 
     elif npc in npcs.keys():
         enemyIsAlive = True
