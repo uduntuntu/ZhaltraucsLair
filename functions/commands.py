@@ -538,6 +538,10 @@ def take(items, player=None, item=None):
         db.updateRoomState(player.roomID, 1)
         print(printRoomStateOrDescription(player))
         db.updateRoomState(player.roomID, 2)
+        db.takeItem(item, player)
+        db.modifypoints(db.getPointsFromItem(item))
+
+
 
     elif item in items:
         db.takeItem(item, player)
@@ -548,6 +552,11 @@ def take(items, player=None, item=None):
             db.updateRoomState(player.roomID,0)
             printRoomStateOrDescription(player)
 
+
+        elif player.roomID == 30 and item=="gold" and item in player.inventory:
+            db.updateRoomState(player.roomID, 5)
+            printRoomStateOrDescription(player)
+            raise SystemExit
 
     else:
         print('Cannot take item "{}".'.format(item))
@@ -585,6 +594,7 @@ def drop(player=None, item=None):
                 take(items,player,"sleepingpotion")
             db.updateRoomState(player.roomID,3)
             printRoomStateOrDescription(player)
+            db.updateRoomState(player.roomID,4)
 
     else:
         print('Cannot drop item "{}".'.format(item))
@@ -630,6 +640,16 @@ def fight(player=None, npcs={}, npc=None):
         while npcs != {}:
             for i in range(0,len(npcs)):
                 npcs = fight(player,npcs,'0')
+
+    elif npcs[npc].NPCName=='Dragon':
+        db.updateRoomState(player.roomID, 2)
+        printRoomStateOrDescription(player)
+        raise SystemExit
+
+    elif npcs[npc].NPCName=='Spider':
+        db.updateRoomState(player.roomID, 1)
+        printRoomStateOrDescription(player)
+        raise SystemExit
 
     elif npc in npcs.keys():
         enemyIsAlive = True
