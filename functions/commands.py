@@ -265,7 +265,7 @@ def go(command, directions, player):
                         if character.ID == 7:
                             npc = npcs[key]
                     quest = conversation.talk(npc)
-                    db.dropNPCItem(npc)
+                    db.dropNPCItem(npc,"carddeck")
                     db.cleanNPCFromRoom(npc)
                     npcs = db.getNPCsInRoom(player.roomID)
                     if quest == 1:
@@ -309,7 +309,7 @@ def go(command, directions, player):
                             npc = npcs[key]
                     quest = conversation.talk(npc)
                     if quest == 1:
-                        db.dropNPCItem(npc)
+                        db.dropNPCItem(npc,"healthpotion")
                         db.cleanNPCFromRoom(npc)
                         npcs = db.getNPCsInRoom(player.roomID)
                         fight(player, npcs)
@@ -356,6 +356,14 @@ def go(command, directions, player):
                 db.updateMovements(player,19,'NULL','NULL','NULL','NULL','NULL')
                 printRoomStateOrDescription(player)
                 db.updateRoomState(player.roomID,0)
+                printRoomStateOrDescription(player)
+
+            elif player.roomID == 21 \
+                    and command[1] == "east" \
+                    and player.playerClass == "barbarian":
+                player.roomID = 22
+                db.setPlayerRoomID(player.roomID)
+                db.updateMovements(player,23,'NULL','NULL','NULL','NULL',25)
                 printRoomStateOrDescription(player)
 
             elif player.roomID == 22 \
@@ -542,9 +550,27 @@ def drop(player=None, item=None):
         db.dropItem(item, player)
         print('You dropped item "{}".'.format(item))
         player.inventory.remove(item)
-        if player.roomID == 18:
+        if player.roomID == 18 and item == "torch":
             db.updateRoomState(player.roomID,1)
             printRoomStateOrDescription(player)
+
+        elif player.roomID == 30 and item == "gold":
+            db.updateRoomState(player.roomID,1)
+            npcs = db.getNPCsInRoom(player.roomID)
+            for key, character in npcs.items():
+                if character.ID == 17:
+                    npc = npcs[key]
+            if player.playerClass == "barbarian":
+                db.dropNPCItem(npc,"shield")
+                items = db.getItemsInRoom(player.roomID)
+                take(items,player,"shield")
+            else:
+                db.dropNPCItem(npc,"sleepingpotion")
+                items = db.getItemsInRoom(player.roomID)
+                take(items,player,"sleepingpotion")
+            db.updateRoomState(player.roomID,3)
+            printRoomStateOrDescription(player)
+
     else:
         print('Cannot drop item "{}".'.format(item))
 

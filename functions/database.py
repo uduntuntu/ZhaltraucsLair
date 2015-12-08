@@ -469,9 +469,9 @@ def cleanNPCFromRoom(npc):
     doQuery(sql)
 
 
-def dropNPCItem(npc):
-    sql = "UPDATE ZL_Item SET RoomID={} WHERE NPCID={}".format(npc.roomID,
-                                                               npc.ID)
+def dropNPCItem(npc, item):
+    sql = "UPDATE ZL_Item SET RoomID={} WHERE NPCID={} " \
+          "AND Name = '{}'".format(npc.roomID,npc.ID,item)
     doQuery(sql)
 
 
