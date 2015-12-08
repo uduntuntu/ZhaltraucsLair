@@ -611,10 +611,32 @@ def use(player, item=None):
 
 
 def fight(player=None, npcs={}, npc=None):
+    shieldIsActive = False
+
     if npc == None:
         while npcs != {}:
             for i in range(0,len(npcs)):
                 npcs = fight(player,npcs,'0')
+
+    elif npcs[npc].NPCName == "Zhaltrauc":
+
+        if shieldIsActive:
+            # Attack turn
+            attack = action.attack(player, npcs[npc])
+            db.modifyNPCHP(attack, npcs[npc])
+            npcs[npc] = db.updateNPC(npcs[npc])
+            player = db.updatePlayer(player)
+            # Dodge turn
+        if input("Zhaltrauc's gem started to glove. What to do? ").lower() == "use shield":
+            shieldIsActive = True
+        if npcs[npc].HP > 0:
+            dodge = action.dodge(player, npcs[npc])
+            db.modifyhp(dodge)
+            npcs[npc] = db.updateNPC(npcs[npc])
+            player = db.updatePlayer(player)
+            if player.HP <= 0:
+                print("You died.")
+                raise SystemExit
 
     elif npc in npcs.keys():
         enemyIsAlive = True
