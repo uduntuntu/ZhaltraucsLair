@@ -18,7 +18,8 @@ commands = {
     'menu': 1,
     'inventory': 1,
     'look': 2,
-    'quit': 1
+    'quit': 1,
+    'give': 2
 }
 
 menu = {
@@ -139,6 +140,13 @@ def execute(command, directions, items, npcs, player):
             talk(player, npcs)
         else:
             talk(player, npcs, command[1])
+
+    elif command[0] == "give":
+        if len(command) == 1:
+            give(player)
+        else:
+            give(player, command[1])
+
 
     elif command[0] in commands:
         print('Command "{0:s}" is not implemented yet.'.format(command[0]))
@@ -702,3 +710,22 @@ def printRoomStateOrDescription(player):
     else:
         roomDescription = db.getRoomDescription(player.roomID)
         print("--\n{}".format(roomDescription))
+
+def give(player, item=None):
+    npcs = db.getNPCsInRoom
+    if item == None:
+        if player.inventory != []:
+            print("You can give items below:")
+            for item in player.inventory:
+                print("\t* {}".format(item))
+        else:
+            print("You don't have any items to give!")
+
+    elif item in player.inventory and npcs != {}:
+        drop(player, item)
+
+    elif item in player.inventory:
+        print("There is no one to give anything.")
+
+    else:
+        print("You don't have item {}".format(item))
