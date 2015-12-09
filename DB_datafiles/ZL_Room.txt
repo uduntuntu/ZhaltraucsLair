@@ -30,6 +30,6 @@ ID;Description;State;PointsModifier
 29; You walk east into the cave. The smell of suplhur is vivid in the air. you see a larger part of cavern ahead of you and hear what sounds like loud, heavy breathing. You have exits to the east and west. ;\N;0
 30; You yelp involuntarily ;0;1
 31; More dwarven structures. ;0;1
-32; You scamper through the small hole. Dwarven housing surrounds you. The sttlemen seems crude, making the previous observations of the settlement being temporary more likely to be true. Nothing of interest is here, the original occupants long gone. You rummage the tiny paths between the housing in search of a path. The cane around you tightens, untill you are on your hands and knees. But ahead of you is a hole small enough for you to squeeze through. The hole you came in to lies west, the other one is south. ;\N;0
+32; You scamper through the small hole. Dwarven housing surrounds you. The sttlemen seems crude, making the previous observations of the settlement being temporary more likely to be true. Nothing of interest is here, the original occupants long gone. You rummage the tiny paths between the housing in search of a path. The cane around you tightens, untill you are on your hands and knees. But ahead of you is a hole small enough for you to squeeze through. The hole you came in to lies now north, the other one is south. ;\N;0
 33; You enter a round room. ;0;1
 34; A large cavernous room lies in front of you. ;0;1

@@ -499,6 +499,11 @@ def go(command, directions, player):
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
 
+            elif player.roomID == 33 and npcs != {}:
+                printRoomStateOrDescription(player)
+                npcs = db.getNPCsInRoom(player.roomID)
+                fight(player,npcs)
+
             else:
                 # print room state after room is actually changed
                 printRoomStateOrDescription(player)
@@ -630,10 +635,12 @@ def drop(player=None, item=None):
                 db.dropNPCItem(npc,"shield")
                 items = db.getItemsInRoom(player.roomID)
                 take(items,player,"shield")
+
             else:
                 db.dropNPCItem(npc,"sleepingpotion")
                 items = db.getItemsInRoom(player.roomID)
                 take(items,player,"sleepingpotion")
+
             db.updateRoomState(player.roomID,3)
             printRoomStateOrDescription(player)
             db.updateRoomState(player.roomID,4)
@@ -643,6 +650,7 @@ def drop(player=None, item=None):
 
 
 def use(player, item=None):
+    roomState = db.getRoomState(player.roomID)
     if item == None:
         if player.inventory != []:
             print("You can use items below:")
@@ -662,6 +670,20 @@ def use(player, item=None):
             db.cleanNPCFromRoom(npcs[key])
         db.updateMovements(player,'NULL','NULL',20,22,'NULL','NULL')
         db.updateRoomState(22,6)
+
+
+    elif item == "sleepingpotion" and item in player.inventory and player.roomID == 33 and roomState==2:
+        db.updateRoomState(player.roomID, 3)
+        player.inventory.remove(item)
+        printRoomStateOrDescription(player)
+        npcs = db.getNPCsInRoom(player.roomID)
+        keys = []
+        for key in npcs.keys():
+            keys.append(key)
+        for key in keys:
+            db.cleanNPCFromRoom(npcs[key])
+        else:
+            print("You can't do that right now.")
 
 
     elif item == "healthpotion" and item in player.inventory:
@@ -699,7 +721,7 @@ def fight(player=None, npcs={}, npc=None):
 
     elif npcs[npc].NPCName == "Zhaltrauc":
         shieldIsActive = False
-        useShield = input("The gem on Zhaltrauc's crown begins to glow!.")
+        useShield = input("The gem on Zhaltrauc's crown begins to glow!")
         if useShield.lower() == "use shield":
             shieldIsActive=True
             print("Zhaltrauc shoot's a beam of light from his gem. You lift your shield just in time and deflect the shot, blinding Zhaltrauc!")
