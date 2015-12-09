@@ -860,6 +860,7 @@ def push(player, item=None):
             printRoomStateOrDescription(player)
             db.updateMovements(player,
                                26,28,31,'NULL','NULL','NULL')
+            db.updateRoomState(player.roomID,6)
 
         else:
             db.updateRoomState(player.roomID,5)
