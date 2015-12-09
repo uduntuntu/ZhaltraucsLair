@@ -498,6 +498,10 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID, 2)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
+            elif player.roomID == 33 \
+                    and command[1] == "south":
+                db.updateRoomState(player.roomID, 2)
+                printRoomStateOrDescription(player)
 
             elif player.roomID == 33 and npcs != {}:
                 printRoomStateOrDescription(player)
@@ -650,7 +654,7 @@ def drop(player=None, item=None):
 
 
 def use(player, item=None):
-    roomState = db.getRoomState(player.roomID)
+    roomState = db.getRoomStateID(player.roomID)
     if item == None:
         if player.inventory != []:
             print("You can use items below:")
@@ -671,7 +675,6 @@ def use(player, item=None):
         db.updateMovements(player,'NULL','NULL',20,22,'NULL','NULL')
         db.updateRoomState(22,6)
 
-
     elif item == "sleepingpotion" and item in player.inventory and player.roomID == 33 and roomState==2:
         db.updateRoomState(player.roomID, 3)
         player.inventory.remove(item)
@@ -682,9 +685,7 @@ def use(player, item=None):
             keys.append(key)
         for key in keys:
             db.cleanNPCFromRoom(npcs[key])
-        else:
-            print("You can't do that right now.")
-
+        raise SystemExit
 
     elif item == "healthpotion" and item in player.inventory:
         db.modifyhp(15)
