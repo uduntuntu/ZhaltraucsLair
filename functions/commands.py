@@ -499,7 +499,8 @@ def go(command, directions, player):
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
             elif player.roomID == 33 \
-                    and command[1] == "south":
+                    and command[1] == "south" \
+                    and player.playerClass == "thief":
                 db.updateRoomState(player.roomID, 2)
                 printRoomStateOrDescription(player)
 
@@ -736,12 +737,16 @@ def fight(player=None, npcs={}, npc=None):
             npcs[npc] = db.updateNPC(npcs[npc])
             player = db.updatePlayer(player)
             if npcs[npc].HP <= 0:
-                        print("{} {} died.".format(npcs[npc].NPCName,
-                                                   npcs[npc].ID))
+                print("{} {} died.".format(npcs[npc].NPCName,
+                                           npcs[npc].ID))
 
-                        db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
-                        db.cleanNPCFromRoom(npcs[npc])
-                        npcs = db.getNPCsInRoom(player.roomID)
+                db.modifypoints(db.getPointsFromNPC(npcs[npc].ID))
+                db.cleanNPCFromRoom(npcs[npc])
+                npcs = db.getNPCsInRoom(player.roomID)
+                db.updateRoomState(player.roomID,1)
+                printRoomStateOrDescription(player)
+                raise SystemExit
+
         # Dodge turn
         if not shieldIsActive:
             if npcs[npc].HP > 0:
