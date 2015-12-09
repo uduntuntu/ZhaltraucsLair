@@ -98,14 +98,14 @@ def execute(command, directions, items, npcs, player):
                     db.updateMovements(player,
                                        'NULL', 'NULL', 4, 'NULL', 'NULL',
                                        'NULL')
-                    print(db.getRoomState(player.roomID))
+                    printRoomStateOrDescription(player)
                     db.updateRoomState(player.roomID, 1)
 
                 else:
                     db.updateMovements(player,
                                        'NULL', 'NULL', 'NULL', 2, 'NULL',
                                        'NULL')
-                    print(db.getRoomState(player.roomID))
+                    printRoomStateOrDescription(player)
                     db.updateRoomState(player.roomID, 1)
 
             elif success == 1:
@@ -123,7 +123,43 @@ def execute(command, directions, items, npcs, player):
 
             else:
                 db.updateRoomState(player.roomID, 4)
-                print(db.getRoomState(player.roomID))
+                printRoomStateOrDescription(player)
+                raise SystemExit
+
+        elif player.roomID == 27:
+            success = action.jump(player)
+            if success == 2:
+                db.updateRoomState(player.roomID, 1)
+                if 'north' in directions:
+                    db.updateMovements(player,
+                                       'NULL',28,31,'NULL','NULL','NULL')
+                    printRoomStateOrDescription(player)
+                    db.updateRoomState(player.roomID, 0)
+
+                else:
+                    db.updateMovements(player,
+                                       26, 'NULL', 'NULL', 'NULL', 'NULL',
+                                       'NULL')
+                    printRoomStateOrDescription(player)
+                    db.updateRoomState(player.roomID, 0)
+
+            elif success == 1:
+                db.updateRoomState(player.roomID, 2)
+                db.modifyhp(-5)
+                if 'north' in directions:
+                    db.updateMovements(player,
+                                       'NULL',28,31,'NULL','NULL','NULL')
+                    print(db.getRoomState(player.roomID))
+                    db.updateRoomState(player.roomID, 0)
+
+                else:
+                    db.updateMovements(player,
+                                       26, 'NULL', 'NULL', 'NULL', 'NULL',
+                                       'NULL')
+                    printRoomStateOrDescription(player)
+            else:
+                db.updateRoomState(player.roomID, 3)
+                printRoomStateOrDescription(player)
                 raise SystemExit
 
         else:
@@ -146,6 +182,12 @@ def execute(command, directions, items, npcs, player):
             give(player)
         else:
             give(player, command[1])
+
+    elif command[0] == "push":
+        if len(command) == 1:
+            push(player)
+        else:
+            push(player, command[1])
 
 
     elif command[0] in commands:
@@ -395,7 +437,7 @@ def go(command, directions, player):
             elif player.roomID == 22 \
                     and npcs != {} \
                     and "armor" in player.inventory:
-                if db.getRoomStateID(player.roomID) != 7:
+                if db.getRoomStateID(player.roomID) not in (6,7):
                     db.updateRoomState(22, 2)
                     printRoomStateOrDescription(player)
                     success = action.throwIntelligence(player)
@@ -627,6 +669,10 @@ def use(player, item=None):
         player = db.updatePlayer(player)
         player.inventory.remove(item)
         db.useItem(item)
+        print("You drink the health potion. You feel reinvigorated as the "
+              "healing potion surges through your body, mending the wounds "
+              "and restoring your beaten physique."
+              )
 
     elif item in player.inventory:
         print('''Using item "{}" doesn't make sense.'''.format(item))
@@ -781,15 +827,6 @@ def talk(player, npcs, npc=None):
                 npcs[npc].NPCName))
 
 
-def printRoomStateOrDescription(player):
-    # get and print room description or state
-    roomState = db.getRoomState(player.roomID)
-    if roomState is not None:
-        print("--\n{}".format(roomState))
-    else:
-        roomDescription = db.getRoomDescription(player.roomID)
-        print("--\n{}".format(roomDescription))
-
 def give(player, item=None):
     npcs = db.getNPCsInRoom
     if item == None:
@@ -808,3 +845,33 @@ def give(player, item=None):
 
     else:
         print("You don't have item {}".format(item))
+
+
+def push(player, item=None):
+    if item == None:
+        if player.roomID == 27:
+            print("You can push a pillar.")
+        else:
+            print("You cannot push anything in this room.")
+
+    elif player.roomID == 27 and item == "pillar":
+        if player.playerClass == "barbarian":
+            db.updateRoomState(player.roomID,4)
+            printRoomStateOrDescription(player)
+            db.updateMovements(player,
+                               26,28,31,'NULL','NULL','NULL')
+
+        else:
+            db.updateRoomState(player.roomID,5)
+            printRoomStateOrDescription(player)
+            db.updateRoomState(player.roomID,0)
+            printRoomStateOrDescription(player)
+
+def printRoomStateOrDescription(player):
+    # get and print room description or state
+    roomState = db.getRoomState(player.roomID)
+    if roomState is not None:
+        print("--\n{}".format(roomState))
+    else:
+        roomDescription = db.getRoomDescription(player.roomID)
+        print("--\n{}".format(roomDescription))

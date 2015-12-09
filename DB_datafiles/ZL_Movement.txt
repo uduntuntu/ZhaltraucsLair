@@ -25,7 +25,7 @@ ID;RoomID;RoomInNorth;RoomInSouth;RoomInEast;RoomInWest;RoomInUp;RoomInDown
 2;24;\N;23;17;\N;\N;\N
 3;25;\N;26;\N;\N;22;\N
 3;26;25;27;29;\N;\N;\N
-3;27;26;28;31;\N;\N;\N
+3;27;26;\N;\N;\N;\N;\N
 3;28;27;\N;\N;\N;\N;\N
 3;29;\N;\N;30;26;\N;\N
 3;30;\N;\N;\N;29;\N;\N

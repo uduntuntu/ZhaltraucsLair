@@ -27,16 +27,6 @@ def throwIntelligence(player):
         return 0
 
 
-def throwAgility(player):
-    throw = dice(10)
-    if player.agility + throw >= 12:
-        return 2
-    elif player.agility + throw >= 10:
-        return 1
-    else:
-        return 0
-
-
 def attack(player, npc):
     # Player base damage
     if player.strength >= 18:
