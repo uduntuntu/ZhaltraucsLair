@@ -498,6 +498,16 @@ def go(command, directions, player):
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
 
+            elif player.roomID == 32 \
+                    and command[1] == "east" \
+                    and player.playerClass == "barbarian":
+                player.roomID = 31
+                db.setPlayerRoomID(player.roomID)
+                db.updateRoomState(player.roomID,1)
+                db.updateMovements(player,'NULL',34,'NULL',27,'NULL','NULL')
+                printRoomStateOrDescription(player)
+                db.updateRoomState(player.roomID,0)
+                printRoomStateOrDescription(player)
 
             elif player.roomID == 33 \
                     and command[1] == "south" \
@@ -727,7 +737,9 @@ def fight(player=None, npcs={}, npc=None):
         useShield = input("The gem on Zhaltrauc's crown begins to glow!")
         if useShield.lower() == "use shield" and "shield" in player.inventory:
             shieldIsActive=True
-            print("Zhaltrauc shoot's a beam of light from his gem. You lift your shield just in time and deflect the shot, blinding Zhaltrauc!")
+            print("Zhaltrauc shoot's a beam of light from his gem. You lift "
+                  "your shield just in time and deflect the shot, blinding "
+                  "Zhaltrauc!")
         else:
             print("Blinding light flashes from Zhaltrauc's gem! You are blinded by the light!")
 
