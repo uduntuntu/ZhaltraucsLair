@@ -26,7 +26,7 @@ ID;Description;State;PointsModifier
 25; You descend deeper into Zhaltrauc's lair (TM). ;\N;0
 26; the entrance opens up into a large cavern. The heat is almost unbearable now. rivers of lava flow around you and steam spouts from the ground. You have the choice to move east and south. ;\N;0
 27; This part of the cave is split in the middle by a large river of lava. ;0;1
-28; A cyclops? ;\N;0
+28; You wander into a darker part of the cavern where large stalagtites form a opening. The far side of the room is in complete darkness. ;0;1
 29; You walk east into the cave. The smell of suplhur is vivid in the air. you see a larger part of cavern ahead of you and hear what sounds like loud, heavy breathing. You have exits to the east and west. ;\N;0
 30; You yelp involuntarily ;0;1
 31; More dwarven structures. ;0;1
