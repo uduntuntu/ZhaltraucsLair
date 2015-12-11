@@ -498,6 +498,12 @@ def go(command, directions, player):
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
 
+            elif player.roomID == 28:
+                printRoomStateOrDescription(player)
+                npcs = db.getNPCsInRoom(player.roomID)
+                if npcs != {}:
+                    fight(player,npcs)
+
             elif player.roomID == 32 \
                     and command[1] == "east" \
                     and player.playerClass == "barbarian":
