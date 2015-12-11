@@ -135,7 +135,6 @@ def execute(command, directions, items, npcs, player):
                                        'NULL',28,31,'NULL','NULL','NULL')
                     printRoomStateOrDescription(player)
                     db.updateRoomState(player.roomID, 0)
-
                 else:
                     db.updateMovements(player,
                                        26, 'NULL', 'NULL', 'NULL', 'NULL',
@@ -498,6 +497,8 @@ def go(command, directions, player):
                     db.updateRoomState(player.roomID, 2)
                     printRoomStateOrDescription(player)
                     db.modifyhp(-10)
+
+
             elif player.roomID == 33 \
                     and command[1] == "south" \
                     and player.playerClass == "thief":
