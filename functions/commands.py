@@ -724,7 +724,7 @@ def fight(player=None, npcs={}, npc=None):
     elif npcs[npc].NPCName == "Zhaltrauc":
         shieldIsActive = False
         useShield = input("The gem on Zhaltrauc's crown begins to glow!")
-        if useShield.lower() == "use shield":
+        if useShield.lower() == "use shield" and "shield" in player.inventory:
             shieldIsActive=True
             print("Zhaltrauc shoot's a beam of light from his gem. You lift your shield just in time and deflect the shot, blinding Zhaltrauc!")
         else:
