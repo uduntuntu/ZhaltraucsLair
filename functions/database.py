@@ -439,7 +439,7 @@ def getPlayer():
         return player
 
 def updatePlayer(player):
-    sql = "SELECT Name,RoomID,HP,Points FROM ZL_Player"
+    sql = "SELECT Name,RoomID,HP,Points,Class FROM ZL_Player"
     result = doQuery(sql)
     sql = "Select ZL_Item.Name FROM ZL_Item " \
           "WHERE ZL_Item.PlayerName = '{}'".format(result[0][0])
@@ -448,6 +448,7 @@ def updatePlayer(player):
     player.roomID = result[0][1]
     player.HP = result[0][2]
     player.points = result[0][3]
+    player.playerClass = result[0][4]
     inventory = []
     for i in range(0,len(inv)):
         inventory.append(inv[i][0])
