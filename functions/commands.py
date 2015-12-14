@@ -506,6 +506,8 @@ def go(command, directions, player):
                 npcs = db.getNPCsInRoom(player.roomID)
                 if npcs != {}:
                     fight(player,npcs)
+                    db.updateRoomState(player.roomID, 1)
+
 
             elif player.roomID == 32 \
                     and command[1] == "east" \
