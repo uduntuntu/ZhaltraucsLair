@@ -465,16 +465,19 @@ def go(command, directions, player):
                     printRoomStateOrDescription(player)
 
             elif player.roomID == 22 and npcs != {}:
-                db.updateRoomState(22, 0)
-                printRoomStateOrDescription(player)
-                fight(player,npcs)
-                db.updateRoomState(player.roomID, 5)
-                printRoomStateOrDescription(player)
-                db.updateRoomState(22, 7)
-                items = db.getItemsInRoom(player.roomID)
-                if "gold" in items:
-                    take(items, player, "gold")
-                    print("You now have a huge pile of gold in your inventory")
+                if db.getRoomStateID(player.roomID) not in (6,7):
+                    db.updateRoomState(22, 0)
+                    printRoomStateOrDescription(player)
+                    fight(player,npcs)
+                    db.updateRoomState(player.roomID, 5)
+                    printRoomStateOrDescription(player)
+                    db.updateRoomState(22, 7)
+                    items = db.getItemsInRoom(player.roomID)
+                    if "gold" in items:
+                        take(items, player, "gold")
+                        print("You now have a huge pile of gold in your inventory")
+                else:
+                    printRoomStateOrDescription(player)
 
             elif player.roomID == 22 and npcs =={}:
                 db.updateRoomState(22, 7)
