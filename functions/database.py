@@ -5,7 +5,7 @@ import mysql.connector
 from mysql.connector import errorcode
 
 with open("config.yaml", 'r') as ymlfile:
-    cfg = yaml.load(ymlfile)
+    cfg = yaml.full_load(ymlfile)
 
 TABLES = {}
 
@@ -265,7 +265,8 @@ def populateTables():
         cnx = mysql.connector.connect(user=cfg['MariaDB']['user'],
                                       password=cfg['MariaDB']['passwd'],
                                       host=cfg['MariaDB']['host'],
-                                      database=cfg['MariaDB']['db'])
+                                      database=cfg['MariaDB']['db'],
+                                      allow_local_infile=True)
         cur = cnx.cursor()
 
         sql = "LOAD DATA LOCAL INFILE '{}' INTO TABLE {} " \
